@@ -56,6 +56,8 @@ namespace Core.Gameplay.SlotMachine
         [ShowInInspector, ReadOnly]
         private Indicator[] m_indicators;
 
+        private bool m_firstSpin = true;
+
         private float m_lastSpinTime;
         private int m_spinCount;
         private bool m_isLocked;
@@ -157,6 +159,17 @@ namespace Core.Gameplay.SlotMachine
             }
         }
 
+        private bool WheelsStopped()
+        {
+            for (int i = 0; i < this.m_slotWheels.Length; i++)
+            {
+                if (!this.m_slotWheels[i].IsLocked)
+                    return false;
+            }
+
+            return true;
+        }
+
         private void ResetWheels()
         {
             for (int i = 0; i < this.m_slotWheels.Length; i++)
@@ -165,9 +178,9 @@ namespace Core.Gameplay.SlotMachine
             }
         }
 
-        private void UpdateIndicators()
+        private void UpdateIndicators(int index)
         {
-            this.m_indicators[this.m_spinCount - 1].Activate();
+            this.m_indicators[index].Activate();
         }
 
         private void ResetInidicators()
@@ -175,6 +188,14 @@ namespace Core.Gameplay.SlotMachine
             for (int i = 0; i < this.m_indicators.Length; i++)
             {
                 this.m_indicators[i].Restore();
+            }
+        }
+
+        private void TakeData()
+        {
+            for(int i = 0; i < this.m_slotWheels.Length; i++)
+            {
+                // take index
             }
         }
 
@@ -187,15 +208,44 @@ namespace Core.Gameplay.SlotMachine
         /// </summary>
         public void Interact()
         {
+            if (this.m_firstSpin)
+            {
+                this.m_firstSpin = false;
+                Restore();
+            }
+
             if (this.m_isLocked
                 || Time.time - this.m_lastSpinTime < this.m_slotMachine.Delay
                 || this.m_spinCount >= this.m_slotMachine.SpinCount)
                 return;
 
-            Spin();
-            this.m_spinCount++;
-            UpdateIndicators();
+            if (WheelsStopped())
+            {
+                for (int i = this.m_spinCount - 1; i < this.m_indicators.Length; i++)
+                {
+                    UpdateIndicators(i);
+                }
+
+                this.m_spinCount = this.m_slotMachine.SpinCount;
+            }
+            else
+            {
+                Spin();
+                this.m_spinCount++;
+                UpdateIndicators(this.m_spinCount - 1);
+            }
+
             this.m_isLocked = this.m_spinCount >= this.m_slotMachine.SpinCount;
+
+            if (this.m_isLocked)
+            {
+                for (int i = 0; i < this.m_slotWheels.Length; i++)
+                {
+                    this.m_slotWheels[i].LockWheel(true);
+                }
+
+                TakeData();
+            }
         }
 
         /// <summary>

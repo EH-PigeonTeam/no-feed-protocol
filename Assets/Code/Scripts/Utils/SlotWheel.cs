@@ -14,21 +14,34 @@ namespace Core.Gameplay.SlotMachine
         {
             base.OnPointerClick(eventData);
 
+            if(!this.interactable)
+                return;
+
             ToggleWheel();
         }
 
         private void ToggleWheel()
         {
+            SetWheel(!this.m_wheelObject.activeSelf);
+        }
+
+        public void SetWheel(bool state)
+        {
             if (this.m_wheelObject == null)
                 return;
 
-            bool newState = !this.m_wheelObject.activeSelf;
-            this.m_wheelObject.SetActive(newState);
+            this.m_wheelObject.SetActive(state);
+        }
+
+        public void LockWheel(bool state)
+        {
+            SetWheel(state);
+            this.interactable = !state;
         }
 
         public void Restore()
         {
-            this.m_wheelObject.SetActive(false);
+            LockWheel(false);
         }
     }
 
