@@ -28,3 +28,8 @@ MonoBehaviour:
       sceneAsset: {fileID: 102900000, guid: 0d94fd3987599744180f137cb0678ca4, type: 3}
       sceneName: CharactersSelection
     m_loadMode: 1
+  - m_sceneName: Run
+    m_scene:
+      sceneAsset: {fileID: 102900000, guid: 7c5a8b4faac0a2f44914fcf3e27d25f7, type: 3}
+      sceneName: Run
+    m_loadMode: 1

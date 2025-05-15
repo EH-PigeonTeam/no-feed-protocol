@@ -2,7 +2,7 @@
 using UnityEditor.UI;
 using UnityEditor;
 
-[CustomEditor(typeof(ButtonAudio))]
+[CustomEditor(typeof(ButtonAudio), true)]
 public class ButtonAudioEditor : ButtonEditor
 {
     private SerializedProperty m_onHover;

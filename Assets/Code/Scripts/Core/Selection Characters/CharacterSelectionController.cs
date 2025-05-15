@@ -4,12 +4,15 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using Core.Players;
 using DG.Tweening;
+using Code.Systems.Locator;
 
 namespace Core.Selection_Characters
 {
     [HideMonoScript]
     public class CharacterSelectionController : MonoBehaviour
     {
+        #region Exposed Members ------------------------------------------
+
         [BoxGroup("Character Selection")]
         [Tooltip("The list of characters")]
         [SerializeField, InlineEditor, HideLabel]
@@ -30,15 +33,33 @@ namespace Core.Selection_Characters
         [SerializeField, Required, AssetsOnly]
         private GameObject m_buttonPrefab;
 
+        #endregion
+
+        #region Private Members ------------------------------------------
+
         private readonly List<ButtonAudioToggle> m_topButtons = new();
         private readonly List<ButtonAudioToggle> m_bottomButtons = new();
 
         private ButtonAudioToggle m_lastSelectedTop;
         private ButtonAudioToggle m_lastSelectedBottom;
 
+        #endregion
+
+        #region Init ----------------------------------------------------
+
         private void Start()
         {
             GenerateButtons();
+        }
+
+        private void OnEnable()
+        {
+            ServiceLocator.Register<CharacterSelectionController>(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.Unregister<CharacterSelectionController>();
         }
 
         private void GenerateButtons()
@@ -100,5 +121,14 @@ namespace Core.Selection_Characters
                 this.m_lastSelectedBottom = selected;
             }
         }
+
+        #endregion
+
+        #region Public Methods -------------------------------------------
+
+        public bool HasTwoCharacterSelected() => this.m_lastSelectedTop != null && this.m_lastSelectedBottom != null;
+
+        #endregion
+
     }
 }
