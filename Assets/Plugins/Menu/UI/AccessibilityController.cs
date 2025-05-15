@@ -23,7 +23,7 @@ namespace PsychoGarden.UI
         [FoldoutGroup("References")]
         [Tooltip("The volume where the colorblind mode is applied")]
         [SerializeField]
-        private Volume m_postProcessingVolume;
+        private VolumeProfile m_postProcessingVolume;
 
         private ChannelMixer m_channelMixer;
 
@@ -53,7 +53,7 @@ namespace PsychoGarden.UI
                 return;
             }
 
-            this.m_postProcessingVolume.profile.TryGet<ChannelMixer>(out this.m_channelMixer);
+            this.m_postProcessingVolume.TryGet<ChannelMixer>(out this.m_channelMixer);
 
             if (this.m_channelMixer == null)
             {

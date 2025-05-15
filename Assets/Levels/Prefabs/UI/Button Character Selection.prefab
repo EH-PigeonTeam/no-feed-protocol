@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4086698151868427090}
   - component: {fileID: 4424363106885803032}
   - component: {fileID: 6993971435814318847}
-  - component: {fileID: 1652389205718375587}
+  - component: {fileID: 5839913466369896137}
   m_Layer: 5
   m_Name: Button Character Selection
   m_TagString: Untagged
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1652389205718375587
+--- !u!114 &5839913466369896137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4405601650116816125}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2934f011aee51f41aaed0b2abbb9a74, type: 3}
+  m_Script: {fileID: 11500000, guid: 5edd0d7e7af21f84aabb44e7d315a89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -173,7 +173,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -198,6 +198,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  m_onHoverSound: 
+  m_onClickSound: 
   m_hoverVisual: {fileID: 7196749615106944085}
   m_activeVisual: {fileID: 289200394411930813}
   m_disabledVisual: {fileID: 5225633306887674155}

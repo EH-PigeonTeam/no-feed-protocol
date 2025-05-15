@@ -222,11 +222,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7451258426942251306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2934f011aee51f41aaed0b2abbb9a74, type: 3}
+  m_Script: {fileID: 11500000, guid: 954e16e074bb2a34187d3d7753833cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 3
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -257,5 +257,5 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  onHoverAudio: 
-  onClickAudio: ButtonClick
+  m_onHoverSound: 
+  m_onClickSound: 

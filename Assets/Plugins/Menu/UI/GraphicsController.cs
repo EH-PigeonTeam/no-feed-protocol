@@ -43,7 +43,7 @@ namespace PsychoGarden.UI
         [FoldoutGroup("References")]
         [Tooltip("The volume")]
         [SerializeField]
-        private Volume m_volume;
+        private VolumeProfile m_volume;
 
         private const string SAVE_KEY = "GraphicsSettingsData";
 
@@ -51,7 +51,7 @@ namespace PsychoGarden.UI
         private FullScreenMode m_screenMode = FullScreenMode.FullScreenWindow;
         private int m_selectedQualityIndex;
         private int m_targetFrameRate = 60;
-        private float m_brightness = 0.5f;
+        private float m_brightness = 0.75f;
 
         #endregion
 
@@ -143,9 +143,9 @@ namespace PsychoGarden.UI
 
         private void ApplyBrightness()
         {
-            if (this.m_volume != null && this.m_volume.profile.TryGet<UnityEngine.Rendering.Universal.ColorAdjustments>(out var colorAdjustments))
+            if (this.m_volume != null && this.m_volume.TryGet<UnityEngine.Rendering.Universal.ColorAdjustments>(out var colorAdjustments))
             {
-                colorAdjustments.postExposure.value = Mathf.Lerp(-1f, 1f, this.m_brightness);
+                colorAdjustments.postExposure.value = Mathf.Lerp(-7f, 1f, this.m_brightness);
             }
         }
 

@@ -30,11 +30,11 @@ namespace Core.Selection_Characters
         [SerializeField, Required, AssetsOnly]
         private GameObject m_buttonPrefab;
 
-        private readonly List<ButtonExtended> m_topButtons = new();
-        private readonly List<ButtonExtended> m_bottomButtons = new();
+        private readonly List<ButtonAudioToggle> m_topButtons = new();
+        private readonly List<ButtonAudioToggle> m_bottomButtons = new();
 
-        private ButtonExtended m_lastSelectedTop;
-        private ButtonExtended m_lastSelectedBottom;
+        private ButtonAudioToggle m_lastSelectedTop;
+        private ButtonAudioToggle m_lastSelectedBottom;
 
         private void Start()
         {
@@ -49,7 +49,7 @@ namespace Core.Selection_Characters
 
                 // --- Top ---
                 GameObject topGO = Instantiate(this.m_buttonPrefab, this.m_sectionTop.ButtonsParent);
-                var topButton = topGO.GetComponent<ButtonExtended>();
+                var topButton = topGO.GetComponent<ButtonAudioToggle>();
                 topGO.GetComponent<Image>().sprite = character.Icon;
                 int topIndex = i; // necessary to avoid closure bugs
                 topButton.onClick.AddListener(() => OnCharacterButtonClicked(topIndex, true));
@@ -57,7 +57,7 @@ namespace Core.Selection_Characters
 
                 // --- Bottom ---
                 GameObject bottomGO = Instantiate(this.m_buttonPrefab, this.m_sectionBottom.ButtonsParent);
-                var bottomButton = bottomGO.GetComponent<ButtonExtended>();
+                var bottomButton = bottomGO.GetComponent<ButtonAudioToggle>();
                 bottomGO.GetComponent<Image>().sprite = character.Icon;
                 int bottomIndex = i;
                 bottomButton.onClick.AddListener(() => OnCharacterButtonClicked(bottomIndex, false));
@@ -83,7 +83,7 @@ namespace Core.Selection_Characters
                     this.m_lastSelectedTop.Deactivate();
 
                 // Activate current
-                ButtonExtended selected = this.m_topButtons[index] as ButtonExtended;
+                ButtonAudioToggle selected = this.m_topButtons[index] as ButtonAudioToggle;
                 selected.Activate();
                 this.m_lastSelectedTop = selected;
             }
@@ -95,7 +95,7 @@ namespace Core.Selection_Characters
                 if (this.m_lastSelectedBottom != null)
                     this.m_lastSelectedBottom.Deactivate();
 
-                ButtonExtended selected = this.m_bottomButtons[index] as ButtonExtended;
+                ButtonAudioToggle selected = this.m_bottomButtons[index] as ButtonAudioToggle;
                 selected.Activate();
                 this.m_lastSelectedBottom = selected;
             }

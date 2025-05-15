@@ -24,7 +24,9 @@ namespace Code.Systems.LoadingScene
 
         public void Validate()
         {
+#if UNITY_EDITOR
             m_scene.Validate();
+#endif
         }
 
         public string Name => m_sceneName;

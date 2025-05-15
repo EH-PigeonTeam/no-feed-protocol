@@ -13,15 +13,13 @@ namespace Code.Systems.LoadingScene
     {
         [BoxGroup("Settings")]
         [Tooltip("Canvas shown during loading")]
-        [SerializeField]
-        private GameObject m_loadingCanvas;
+        [SerializeField, SceneObjectsOnly]
+        private CanvasGroupController m_canvasGroupController;
 
         [BoxGroup("Settings")]
         [Tooltip("Fake loading time")]
         [SerializeField, Range(0f, 10f)]
         private float m_loadingTime;
-
-        private CanvasGroupController m_canvasGroupController;
 
         private bool m_fadeIn = true;
         private bool m_fadeOut = true;
@@ -30,11 +28,6 @@ namespace Code.Systems.LoadingScene
         private void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
-
-            if (this.m_loadingCanvas != null)
-            {
-                this.m_canvasGroupController = this.m_loadingCanvas.GetComponentInChildren<CanvasGroupController>();
-            }
         }
 
         private void OnEnable()
@@ -65,12 +58,12 @@ namespace Code.Systems.LoadingScene
 
         private IEnumerator LoadRoutine(string sceneName, LoadSceneMode mode)
         {
-            if (this.m_loadingCanvas != null && this.m_fadeIn)
+            if (this.m_canvasGroupController != null && this.m_fadeIn)
             {
-                this.m_loadingCanvas.SetActive(true);
+                this.m_canvasGroupController.Show();
             }
 
-            yield return null;
+            yield return new WaitForSeconds(this.m_canvasGroupController.TransitionDuration);
 
             // Unload all scenes except Bootstrap
             for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
@@ -95,6 +88,8 @@ namespace Code.Systems.LoadingScene
                 yield return new WaitForSeconds(this.m_loadingTime); // Fake loading
             }
 
+            op.allowSceneActivation = true;
+
             if (this.m_fadeOut)
             {
                 if (this.m_canvasGroupController != null)
@@ -108,8 +103,6 @@ namespace Code.Systems.LoadingScene
             {
                 yield return new WaitForSeconds(0.25f);
             }
-
-            op.allowSceneActivation = true;
 
             // reset
             this.m_fadeIn = true;

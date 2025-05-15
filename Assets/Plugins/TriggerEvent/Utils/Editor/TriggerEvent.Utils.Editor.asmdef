@@ -1,8 +1,12 @@
 {
-    "name": "TriggerEvent.Utils",
+    "name": "TriggerEvent.Utils.Editor",
     "rootNamespace": "",
-    "references": [],
-    "includePlatforms": [],
+    "references": [
+        "GUID:609ab754e5d43a245baca9a401c9506e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

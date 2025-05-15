@@ -51,8 +51,10 @@ namespace Code.Systems.LoadingScene.VFX
             this.m_canvasGroup = this.GetComponent<CanvasGroup>();
         }
 
-        private void OnEnable()
+        public void Show()
         {
+            this.gameObject.SetActive(true);
+
             this.m_fadeTween?.Kill();
 
             if (this.m_useFadeIn)
@@ -81,20 +83,14 @@ namespace Code.Systems.LoadingScene.VFX
                     .SetUpdate(true)
                     .OnComplete(() =>
                     {
-                        if (this.transform.parent != null)
-                        {
-                            this.transform.parent.gameObject.SetActive(false);
-                        }
+                        this.gameObject.SetActive(false);
                     });
             }
             else
             {
                 this.m_canvasGroup.alpha = 0;
 
-                if (this.transform.parent != null)
-                {
-                    this.transform.parent.gameObject.SetActive(false);
-                }
+                this.gameObject.SetActive(false);
             }
         }
 

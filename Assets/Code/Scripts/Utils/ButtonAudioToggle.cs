@@ -1,11 +1,8 @@
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
 using UnityEngine;
-using UnityEditor.UI;
-using UnityEditor;
-using UnityEngine.UI;
 
 [DisallowMultipleComponent]
-public class ButtonExtended : Button
+public class ButtonAudioToggle : ButtonAudio
 {
     [Header("State Visuals")]
     [SerializeField] private GameObject m_hoverVisual;
@@ -13,11 +10,11 @@ public class ButtonExtended : Button
     [SerializeField] private GameObject m_disabledVisual;
 
     [Header("Button Logic")]
-    [SerializeField] private ButtonExtended m_oppositeButton;
+    [SerializeField] private ButtonAudioToggle m_oppositeButton;
 
     private bool m_isActivated;
 
-    public void SetOppositeButton(ButtonExtended oppositeButton)
+    public void SetOppositeButton(ButtonAudioToggle oppositeButton)
     {
         this.m_oppositeButton = oppositeButton;
     }
@@ -130,41 +127,4 @@ public class ButtonExtended : Button
     }
 
     public bool IsActivated => this.m_isActivated;
-}
-
-
-[CustomEditor(typeof(ButtonExtended))]
-public class ButtonExtendedEditor : ButtonEditor
-{
-    private SerializedProperty m_hoverVisual;
-    private SerializedProperty m_activeVisual;
-    private SerializedProperty m_disabledVisual;
-
-    private SerializedProperty m_oppositeButton;
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        m_hoverVisual = serializedObject.FindProperty("m_hoverVisual");
-        m_activeVisual = serializedObject.FindProperty("m_activeVisual");
-        m_disabledVisual = serializedObject.FindProperty("m_disabledVisual");
-
-        m_oppositeButton = serializedObject.FindProperty("m_oppositeButton");
-    }
-
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        serializedObject.Update();
-
-        EditorGUILayout.PropertyField(m_hoverVisual, new GUIContent("Hover Visual"));
-        EditorGUILayout.PropertyField(m_activeVisual, new GUIContent("Active Visual"));
-        EditorGUILayout.PropertyField(m_disabledVisual, new GUIContent("Disabled Visual"));
-
-        EditorGUILayout.PropertyField(m_oppositeButton, new GUIContent("Opposite Button"));
-
-        serializedObject.ApplyModifiedProperties();
-    }
 }

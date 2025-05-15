@@ -29,7 +29,7 @@ namespace Code.Systems.Audio
         [SerializeField, Required]
         private AudioSource m_audioSourceSFX;
 
-        private void Awake()
+        private void Start()
         {
             this.m_audioSourceMusic.playOnAwake = true;
             this.m_audioSourceMusic.loop = true;
@@ -101,11 +101,20 @@ namespace Code.Systems.Audio
 
         #region Internal Methods -------------------------------------------------------
 
+        //private AudioClip m_currentMusicClip;
+
         internal void PlaySound(AudioClip audioClip, float volume, AudioGroupType audioGroup)
         {
             if (audioClip != null)
             {
                 AudioSource audioSource = (audioGroup == AudioGroupType.Music) ? this.m_audioSourceMusic : this.m_audioSourceSFX;
+
+                //if ((audioSource.clip == audioClip || m_currentMusicClip == audioClip) && audioSource.isPlaying)
+                //{
+                //    Debug.Log("AudioManager: music already playing, skip replay");
+                //    return;
+                //}
+
                 audioSource.SetScheduledEndTime(0); // Stop playback immediately
                 audioSource.volume = volume;
                 audioSource.clip = audioClip;
@@ -117,4 +126,3 @@ namespace Code.Systems.Audio
 
     }
 }
-
