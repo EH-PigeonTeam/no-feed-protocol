@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Characters
   m_EditorClassIdentifier: 
   m_characters:
-  - m_name: A
-    m_icon: {fileID: 21300000, guid: 9391454a46a108240ac69911fadf6cec, type: 3}
+  - m_name: Sapper
+    m_icon: {fileID: 467157201, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
+    m_icon2: {fileID: 1103041419, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     m_anim:
       Idle: {fileID: 0}
@@ -26,8 +27,9 @@ MonoBehaviour:
     m_attackPoints: 80
     m_shield: 200
     m_actionPoints: 4
-  - m_name: B
-    m_icon: {fileID: 21300000, guid: dde941cf875ab444d841916ced4988ba, type: 3}
+  - m_name: Shock Trooper
+    m_icon: {fileID: 1955355303, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
+    m_icon2: {fileID: -162991495, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     m_anim:
       Idle: {fileID: 0}
@@ -39,8 +41,9 @@ MonoBehaviour:
     m_attackPoints: 20
     m_shield: 75
     m_actionPoints: 7
-  - m_name: C
-    m_icon: {fileID: 21300000, guid: 40a26b2496f4be74792ef2d529985e43, type: 3}
+  - m_name: Engineer
+    m_icon: {fileID: 86781572, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
+    m_icon2: {fileID: 934649307, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: ccccccccccccccccccccccccccccccccccccccccccccc
     m_anim:
       Idle: {fileID: 0}
@@ -52,8 +55,9 @@ MonoBehaviour:
     m_attackPoints: 90
     m_shield: 170
     m_actionPoints: 2
-  - m_name: D
-    m_icon: {fileID: 21300000, guid: e58dee5ffe0c3504ab416fec1e66f28d, type: 3}
+  - m_name: Medic
+    m_icon: {fileID: -862002870, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
+    m_icon2: {fileID: -2093050633, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: ddddddddddddddddddddddddddddd
     m_anim:
       Idle: {fileID: 0}

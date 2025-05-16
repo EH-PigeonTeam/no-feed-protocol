@@ -14,7 +14,7 @@ namespace Code.Systems.LoadingScene
         [BoxGroup("Settings")]
         [Tooltip("Canvas shown during loading")]
         [SerializeField, SceneObjectsOnly]
-        private CanvasGroupController m_canvasGroupController;
+        private ImageFadeController m_transitionController;
 
         [BoxGroup("Settings")]
         [Tooltip("Fake loading time")]
@@ -58,12 +58,12 @@ namespace Code.Systems.LoadingScene
 
         private IEnumerator LoadRoutine(string sceneName, LoadSceneMode mode)
         {
-            if (this.m_canvasGroupController != null && this.m_fadeIn)
+            if (this.m_transitionController != null && this.m_fadeIn)
             {
-                this.m_canvasGroupController.Show();
+                bool done = false;
+                this.m_transitionController.PlayEntryTransition(() => done = true);
+                yield return new WaitUntil(() => done);
             }
-
-            yield return new WaitForSeconds(this.m_canvasGroupController.TransitionDuration);
 
             // Unload all scenes except Bootstrap
             for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
@@ -85,26 +85,25 @@ namespace Code.Systems.LoadingScene
 
             if (this.m_enableFakeTime)
             {
+                Debug.Log("Fake loading time");
                 yield return new WaitForSeconds(this.m_loadingTime); // Fake loading
+                Debug.Log("Fake loading time done");
             }
 
             op.allowSceneActivation = true;
 
-            if (this.m_fadeOut)
+            if (this.m_fadeOut && this.m_transitionController != null)
             {
-                if (this.m_canvasGroupController != null)
-                {
-                    this.m_canvasGroupController.Hide();
-                }
-
-                yield return new WaitForSeconds(this.m_canvasGroupController.TransitionDuration);
+                bool done = false;
+                this.m_transitionController.PlayExitTransition(() => done = true);
+                yield return new WaitUntil(() => done);
             }
             else
             {
                 yield return new WaitForSeconds(0.25f);
             }
 
-            // reset
+            // Reset
             this.m_fadeIn = true;
             this.m_fadeOut = true;
             this.m_enableFakeTime = true;

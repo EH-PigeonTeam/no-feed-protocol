@@ -1,13 +1,19 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class ButtonAudioToggle : ButtonAudio
 {
     [Header("State Visuals")]
+    [SerializeField] private Image m_targetVisual;
     [SerializeField] private GameObject m_hoverVisual;
     [SerializeField] private GameObject m_activeVisual;
     [SerializeField] private GameObject m_disabledVisual;
+
+    [Header("Sprite")]
+    [SerializeField] private Sprite m_activeSprite;
+    [SerializeField] private Sprite m_inactiveSprite;
 
     [Header("Button Logic")]
     [SerializeField] private ButtonAudioToggle m_oppositeButton;
@@ -53,6 +59,14 @@ public class ButtonAudioToggle : ButtonAudio
         Activate();
     }
 
+    public void Init()
+    {
+        if (m_targetVisual != null)
+        {
+            m_targetVisual.sprite = m_inactiveSprite;
+        }
+    }
+
     /// <summary>
     /// Enters the Activate state: deactivates the others, shows the active visual, and disables the opposite.
     /// </summary>
@@ -60,6 +74,8 @@ public class ButtonAudioToggle : ButtonAudio
     {
         if (this.m_isActivated)
             return;
+
+        this.m_targetVisual.sprite = this.m_activeSprite;
 
         // Disable the opposite, if it exists
         if (this.m_oppositeButton != null)
@@ -81,6 +97,8 @@ public class ButtonAudioToggle : ButtonAudio
         if (!this.m_isActivated)
             return;
 
+        this.m_targetVisual.sprite = this.m_inactiveSprite;
+
         this.m_isActivated = false;
         this.interactable = true;
 
@@ -100,6 +118,9 @@ public class ButtonAudioToggle : ButtonAudio
     {
         this.interactable = false;
         this.m_isActivated = false;
+
+        this.m_targetVisual.sprite = this.m_inactiveSprite;
+
         UpdateVisuals();
     }
 
@@ -127,4 +148,6 @@ public class ButtonAudioToggle : ButtonAudio
     }
 
     public bool IsActivated => this.m_isActivated;
+    public Sprite SetActiveSprite(Sprite sprite) => this.m_activeSprite = sprite;
+    public Sprite SetInactiveSprite(Sprite sprite) => this.m_inactiveSprite = sprite;
 }

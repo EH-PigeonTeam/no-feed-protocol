@@ -30,6 +30,11 @@ namespace Core.Players
 
         [FoldoutGroup("@m_name")]
         [Tooltip("")]
+        [SerializeField, PreviewField(100)]
+        private Sprite m_icon2;
+
+        [FoldoutGroup("@m_name")]
+        [Tooltip("")]
         [SerializeField, TextArea(4, 10)]
         private string m_description;
 
@@ -70,6 +75,7 @@ namespace Core.Players
 
         public string Name => m_name;
         public Sprite Icon => m_icon;
+        public Sprite Icon2 => m_icon2;
         public string Description => m_description;
         public CharacterAnim Anim => m_anim;
         public int MaxHealth => m_maxHealth;

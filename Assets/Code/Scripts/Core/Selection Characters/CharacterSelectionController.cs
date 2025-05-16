@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using Core.Players;
-using DG.Tweening;
 using Code.Systems.Locator;
 
 namespace Core.Selection_Characters
@@ -19,26 +17,28 @@ namespace Core.Selection_Characters
         private CharactersData m_charactersData;
 
         [BoxGroup("Character Selection")]
-        [Tooltip("Top section container")]
-        [SerializeField, Required, SceneObjectsOnly]
+        [Tooltip("The list of characters")]
+        [SerializeField]
         private CharacterSection m_sectionTop;
 
         [BoxGroup("Character Selection")]
-        [Tooltip("Bottom section container")]
-        [SerializeField, Required, SceneObjectsOnly]
+        [Tooltip("The list of characters")]
+        [SerializeField]
         private CharacterSection m_sectionBottom;
-
-        [BoxGroup("Character Selection")]
-        [Tooltip("Button prefab to instantiate")]
-        [SerializeField, Required, AssetsOnly]
-        private GameObject m_buttonPrefab;
 
         #endregion
 
         #region Private Members ------------------------------------------
 
-        private readonly List<ButtonAudioToggle> m_topButtons = new();
-        private readonly List<ButtonAudioToggle> m_bottomButtons = new();
+        [FoldoutGroup("Character Selection Top")]
+        [Tooltip("")]
+        [SerializeField]
+        private List<ButtonAudioToggle> m_topButtons = new();
+
+        [FoldoutGroup("Character Selection Bottom")]
+        [Tooltip("")]
+        [SerializeField]
+        private List<ButtonAudioToggle> m_bottomButtons = new();
 
         private ButtonAudioToggle m_lastSelectedTop;
         private ButtonAudioToggle m_lastSelectedBottom;
@@ -49,7 +49,7 @@ namespace Core.Selection_Characters
 
         private void Start()
         {
-            GenerateButtons();
+            Init();
         }
 
         private void OnEnable()
@@ -62,36 +62,32 @@ namespace Core.Selection_Characters
             ServiceLocator.Unregister<CharacterSelectionController>();
         }
 
-        private void GenerateButtons()
+        private void Init()
         {
             for (int i = 0; i < this.m_charactersData.Characters.Length; i++)
             {
                 var character = this.m_charactersData[i];
 
-                // --- Top ---
-                GameObject topGO = Instantiate(this.m_buttonPrefab, this.m_sectionTop.ButtonsParent);
-                var topButton = topGO.GetComponent<ButtonAudioToggle>();
-                topGO.GetComponent<Image>().sprite = character.Icon;
-                int topIndex = i; // necessary to avoid closure bugs
-                topButton.onClick.AddListener(() => OnCharacterButtonClicked(topIndex, true));
-                this.m_topButtons.Add(topButton);
+                // set image
+                m_topButtons[i].SetActiveSprite(character.Icon);
+                m_bottomButtons[i].SetActiveSprite(character.Icon);
 
-                // --- Bottom ---
-                GameObject bottomGO = Instantiate(this.m_buttonPrefab, this.m_sectionBottom.ButtonsParent);
-                var bottomButton = bottomGO.GetComponent<ButtonAudioToggle>();
-                bottomGO.GetComponent<Image>().sprite = character.Icon;
-                int bottomIndex = i;
-                bottomButton.onClick.AddListener(() => OnCharacterButtonClicked(bottomIndex, false));
-                this.m_bottomButtons.Add(bottomButton);
+                m_topButtons[i].SetInactiveSprite(character.Icon2);
+                m_bottomButtons[i].SetInactiveSprite(character.Icon2);
 
-                // --- Set Opposite ---
-                topButton.SetOppositeButton(bottomButton);
-                bottomButton.SetOppositeButton(topButton);
+                m_topButtons[i].Init();
+                m_bottomButtons[i].Init();
+
+                int index = i;
+                m_topButtons[i].onClick.AddListener(() => OnCharacterButtonClicked(index, true));
+                m_bottomButtons[i].onClick.AddListener(() => OnCharacterButtonClicked(index, false));
             }
         }
 
         public void OnCharacterButtonClicked(int index, bool isTop)
         {
+            Debug.Log("Character selected: " + index);
+
             var character = this.m_charactersData[index];
 
             if (isTop)
