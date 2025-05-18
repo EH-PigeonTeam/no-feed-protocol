@@ -14,6 +14,9 @@ namespace Code.Scripts.Systems.LoadingScene.VFX
         [SerializeField]
         private string sceneName;
 
+        [Button("Load Scene")]
+        private void LoadScene() => ServiceLocator.Get<SceneManager>().LoadScene(sceneName);
+
         private VideoPlayer videoPlayer;
 
         private void Awake()

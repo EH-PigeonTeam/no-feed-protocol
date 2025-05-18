@@ -21,11 +21,13 @@ namespace NoFeelProtocol.Runtime.Data.Characters
 
         #region OnValidate --------------------------------------------------
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             foreach (var character in m_characters)
                 character.OnValidate();
         }
+#endif
 
         #endregion
 
@@ -33,7 +35,7 @@ namespace NoFeelProtocol.Runtime.Data.Characters
 
         public CharacterData[] Characters => this.m_characters;
         public CharacterData this[int index] => this.m_characters[index];
-        
+
         /// <summary>
         /// Finds a character by its unique ID.
         /// </summary>

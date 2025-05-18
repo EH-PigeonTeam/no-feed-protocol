@@ -8,7 +8,7 @@ namespace Code.Systems.LoadingScene
     public class SceneData
     {
         [FoldoutGroup("@m_sceneName")]
-        [Tooltip("The name of the scene")]
+        [Tooltip("The name of the scene to load")]
         [SerializeField]
         private string m_sceneName;
 
@@ -18,19 +18,32 @@ namespace Code.Systems.LoadingScene
         private SceneReference m_scene;
 
         [FoldoutGroup("@m_sceneName")]
-        [Tooltip("The load mode")]
+        [Tooltip("Is this scene persistent?")]
+        [SerializeField]
+        private bool m_isPersistent;
+
+        [FoldoutGroup("@m_sceneName")]
+        [Tooltip("The load mode to use when loading the scene")]
         [SerializeField]
         private LoadSceneMode m_loadMode;
 
-        public void Validate()
+        public SceneData(string sceneName, LoadSceneMode loadMode, bool isPersistent)
         {
-#if UNITY_EDITOR
-            m_scene.Validate();
-#endif
+            m_sceneName = sceneName;
+            m_loadMode = loadMode;
+            m_isPersistent = isPersistent;
         }
 
         public string Name => m_sceneName;
-        public string SceneName => m_scene.SceneName;
+        public string SceneName => m_scene?.SceneName ?? m_sceneName;
         public LoadSceneMode LoadMode => m_loadMode;
+        public bool IsPersistent => m_isPersistent;
+
+#if UNITY_EDITOR
+        public void Validate()
+        {
+            m_scene.Validate();
+        }
+#endif
     }
 }

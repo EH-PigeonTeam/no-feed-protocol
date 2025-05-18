@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using Code.Systems.Locator;
-using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace Code.Systems.LoadingScene
 {
@@ -15,16 +16,19 @@ namespace Code.Systems.LoadingScene
         private string m_firstScene;
 
         [BoxGroup("Scene Settings")]
-        [Tooltip("The audio clips to play")]
+        [Tooltip("The scene metadata")]
         [SerializeField, InlineEditor, Required]
         private SceneResources m_sceneData;
+
+        [ShowInInspector, ReadOnly]
+        private readonly HashSet<string> m_persistentScenes = new();
+        private const string CoreSystemsScene = "CoreSystems";
 
         private void Start()
         {
             ServiceLocator.Get<ILoadSceneManager>().Fade(false, true);
             ServiceLocator.Get<ILoadSceneManager>().FakeLoadingTime(false);
-
-            LoadScene(this.m_firstScene);
+            LoadScene(m_firstScene);
         }
 
         private void OnEnable()
@@ -37,53 +41,96 @@ namespace Code.Systems.LoadingScene
             ServiceLocator.Unregister<SceneManager>();
         }
 
-
         #region Public Methods ---------------------------------------------------------
-
-        public void LoadScene(string sceneName, LoadSceneMode mode = LoadSceneMode.Additive)
-        {
-            ChangeScene(sceneName, mode);
-        }
 
         public void LoadScene(string sceneName)
         {
-            SceneData sceneData = this.m_sceneData.GetScene(sceneName);
-
+            SceneData sceneData = m_sceneData.GetScene(sceneName);
             if (sceneData == null)
             {
-                Debug.LogErrorFormat("Scene {0} not found", sceneName);
+                Debug.LogError($"Scene '{sceneName}' not found in SceneResources.");
                 return;
             }
 
-            ChangeScene(sceneData.SceneName, sceneData.LoadMode);
+            ChangeScene(sceneData);
         }
 
         public void LoadScene(int index)
         {
-            SceneData sceneData = this.m_sceneData.GetScene(index);
-
+            SceneData sceneData = m_sceneData.GetScene(index);
             if (sceneData == null)
             {
-                Debug.LogErrorFormat("Scene {0} not found", index);
+                Debug.LogError($"Scene index '{index}' not found in SceneResources.");
                 return;
             }
 
-            ChangeScene(sceneData.SceneName, sceneData.LoadMode);
+            ChangeScene(sceneData);
+        }
+
+        public void LoadScene(string sceneName, LoadSceneMode mode)
+        {
+            ChangeScene(new SceneData(sceneName, mode, false));
+        }
+
+        public void LoadScenes(string[] sceneNames)
+        {
+            List<SceneData> sceneDatas = new();
+
+            foreach (string name in sceneNames)
+            {
+                var data = m_sceneData.GetScene(name);
+                if (data == null)
+                {
+                    Debug.LogError($"Scene '{name}' not found in SceneResources.");
+                    return;
+                }
+
+                sceneDatas.Add(data);
+            }
+
+            SceneData mainScene = sceneDatas.Find(s => s.LoadMode == LoadSceneMode.Single);
+
+            if (mainScene != null)
+            {
+                m_persistentScenes.Clear();
+                m_persistentScenes.Add(CoreSystemsScene);
+            }
+
+            foreach (var scene in sceneDatas)
+            {
+                if (scene.IsPersistent)
+                {
+                    m_persistentScenes.Add(scene.SceneName);
+                    m_persistentScenes.Add(CoreSystemsScene);
+                }
+            }
+
+            ServiceLocator.Get<ILoadSceneManager>()
+                .LoadScenes(sceneDatas, mainScene, m_persistentScenes);
         }
 
         #endregion
 
         #region Internal Methods -------------------------------------------------------
 
-        internal void ChangeScene(string name, LoadSceneMode mode)
+        internal void ChangeScene(SceneData sceneData)
         {
-            if (name != null && name.Length > 0)
+            if (sceneData.LoadMode == LoadSceneMode.Single)
             {
-                ServiceLocator.Get<ILoadSceneManager>().LoadScene(name, mode);
+                m_persistentScenes.Clear();
+
+                ServiceLocator.Get<ILoadSceneManager>()
+                    .LoadScene(sceneData.SceneName, LoadSceneMode.Single, new[] { CoreSystemsScene });
+
+                m_persistentScenes.Add(sceneData.Name);
+            }
+            else
+            {
+                ServiceLocator.Get<ILoadSceneManager>()
+                    .LoadScene(sceneData.SceneName, LoadSceneMode.Additive, m_persistentScenes);
             }
         }
 
         #endregion
-
     }
 }

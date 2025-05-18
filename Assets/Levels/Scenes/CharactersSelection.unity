@@ -1100,10 +1100,10 @@ MonoBehaviour:
   m_onFinish:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 688880479}
-        m_TargetAssemblyTypeName: Code.Systems.LoadingScene.LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneByName
-        m_Mode: 5
+      - m_Target: {fileID: 688880481}
+        m_TargetAssemblyTypeName: Code.Systems.LoadingScene.LoadScenes, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2492,7 +2492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 688880480}
-  - component: {fileID: 688880479}
+  - component: {fileID: 688880481}
   m_Layer: 0
   m_Name: Load new scene
   m_TagString: Untagged
@@ -2500,18 +2500,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &688880479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 688880478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45e5f5dd28221a44a5a075b89b9b7ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &688880480
 Transform:
   m_ObjectHideFlags: 0
@@ -2527,6 +2515,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &688880481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688880478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae02873d41a7874abd5f0e91e0304ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sceneNames:
+  - RunUI
+  - Map
 --- !u!1001 &911783541
 PrefabInstance:
   m_ObjectHideFlags: 0

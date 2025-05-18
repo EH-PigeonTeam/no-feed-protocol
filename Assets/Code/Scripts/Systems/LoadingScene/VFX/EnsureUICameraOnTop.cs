@@ -1,4 +1,3 @@
-using Code.Systems.LoadingScene;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -8,6 +7,11 @@ namespace Code.Systems.LoadingScene.VFX
     [HideMonoScript]
     public class EnsureUICameraOnTop : MonoBehaviour
     {
+        [BoxGroup("Settings")]
+        [Tooltip("")]
+        [SerializeField, Min(1)]
+        private int m_priority = 1;
+
         private Camera m_baseCamera;
         private Camera m_uiCamera;
 
@@ -34,7 +38,7 @@ namespace Code.Systems.LoadingScene.VFX
 
             if (stack.Contains(this.m_uiCamera))
             {
-                if (stack[^1] != this.m_uiCamera)
+                if (stack[^this.m_priority] != this.m_uiCamera)
                 {
                     stack.Remove(this.m_uiCamera);
                     stack.Add(this.m_uiCamera);

@@ -17,19 +17,29 @@ MonoBehaviour:
     m_scene:
       sceneAsset: {fileID: 102900000, guid: b161d9f8d94057142b144419b71e95d4, type: 3}
       sceneName: Logo
-    m_loadMode: 1
+    m_isPersistent: 0
+    m_loadMode: 0
   - m_sceneName: Menu
     m_scene:
       sceneAsset: {fileID: 102900000, guid: 914d790998e57e845a545e403afbd13c, type: 3}
       sceneName: MainMenu
-    m_loadMode: 1
-  - m_sceneName: Test
+    m_isPersistent: 0
+    m_loadMode: 0
+  - m_sceneName: CharacterSelection
     m_scene:
       sceneAsset: {fileID: 102900000, guid: 0d94fd3987599744180f137cb0678ca4, type: 3}
       sceneName: CharactersSelection
-    m_loadMode: 1
-  - m_sceneName: Run
+    m_isPersistent: 0
+    m_loadMode: 0
+  - m_sceneName: RunUI
     m_scene:
-      sceneAsset: {fileID: 102900000, guid: 7c5a8b4faac0a2f44914fcf3e27d25f7, type: 3}
-      sceneName: Run
+      sceneAsset: {fileID: 102900000, guid: d54cb1c8a36b3364f80762cebd645d81, type: 3}
+      sceneName: RunUI
+    m_isPersistent: 1
+    m_loadMode: 0
+  - m_sceneName: Map
+    m_scene:
+      sceneAsset: {fileID: 102900000, guid: caba3a527e47d7d4ea94060265513a1e, type: 3}
+      sceneName: Map
+    m_isPersistent: 0
     m_loadMode: 1
