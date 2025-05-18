@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Characters
   m_EditorClassIdentifier: 
   m_characters:
-  - m_name: Sapper
+  - m_id: 
+    m_name: Sapper
     m_icon: {fileID: 467157201, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: 1103041419, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -27,7 +28,20 @@ MonoBehaviour:
     m_attackPoints: 80
     m_shield: 200
     m_actionPoints: 4
-  - m_name: Shock Trooper
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_conditions: 0
+        m_actions:
+        - m_conditions: 0
+          m_sequence:
+          - m_type: 0
+            m_target: 0
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+  - m_id: 
+    m_name: Shock Trooper
     m_icon: {fileID: 1955355303, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: -162991495, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -41,7 +55,10 @@ MonoBehaviour:
     m_attackPoints: 20
     m_shield: 75
     m_actionPoints: 7
-  - m_name: Engineer
+    m_combatBehavior:
+      m_triggers: []
+  - m_id: 
+    m_name: Engineer
     m_icon: {fileID: 86781572, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: 934649307, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: ccccccccccccccccccccccccccccccccccccccccccccc
@@ -55,7 +72,10 @@ MonoBehaviour:
     m_attackPoints: 90
     m_shield: 170
     m_actionPoints: 2
-  - m_name: Medic
+    m_combatBehavior:
+      m_triggers: []
+  - m_id: 
+    m_name: Medic
     m_icon: {fileID: -862002870, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: -2093050633, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: ddddddddddddddddddddddddddddd
@@ -69,3 +89,5 @@ MonoBehaviour:
     m_attackPoints: 120
     m_shield: 60
     m_actionPoints: 3
+    m_combatBehavior:
+      m_triggers: []

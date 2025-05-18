@@ -1584,7 +1584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_transitionController: {fileID: 1719821490}
-  m_loadingTime: 5
+  m_loadingTime: 2
 --- !u!4 &1789239288
 Transform:
   m_ObjectHideFlags: 0

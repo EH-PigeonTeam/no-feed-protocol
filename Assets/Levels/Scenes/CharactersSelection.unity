@@ -1066,6 +1066,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290076756}
   m_CullTransparentMesh: 1
+--- !u!1 &305999054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305999056}
+  - component: {fileID: 305999055}
+  m_Layer: 0
+  m_Name: Init Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &305999055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305999054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b0aad56b617a04d8c71273c8038610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_selectionController: {fileID: 1507074338}
+  m_saveFileName: player_data
+  m_onFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 688880479}
+        m_TargetAssemblyTypeName: Code.Systems.LoadingScene.LoadScene, Assembly-CSharp
+        m_MethodName: LoadSceneByName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Run
+          m_BoolArgument: 0
+        m_CallState: 2
+    editorColor: {r: 0, g: 1, b: 0, a: 1}
+    editorShowConnections: 1
+    editorDisplayMode: 0
+--- !u!4 &305999056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305999054}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &316088936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,6 +2483,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_buttonSection: {fileID: 1313874327}
   m_characterDataExposer: {fileID: 622385753}
+--- !u!1 &688880478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688880480}
+  - component: {fileID: 688880479}
+  m_Layer: 0
+  m_Name: Load new scene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &688880479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688880478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45e5f5dd28221a44a5a075b89b9b7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &688880480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688880478}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &911783541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3984,9 +4092,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7451258426942251306, guid: 56b267c314612544b9fef0426c369698, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1630592042}
-    - targetCorrespondingSourceObject: {fileID: 7451258426942251306, guid: 56b267c314612544b9fef0426c369698, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1630592043}
   m_SourcePrefab: {fileID: 100100000, guid: 56b267c314612544b9fef0426c369698, type: 3}
 --- !u!224 &1630592040 stripped
@@ -3999,18 +4104,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7451258426942251306, guid: 56b267c314612544b9fef0426c369698, type: 3}
   m_PrefabInstance: {fileID: 1630592039}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1630592042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630592041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45e5f5dd28221a44a5a075b89b9b7ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1630592043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4026,16 +4119,17 @@ MonoBehaviour:
   m_interactionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1630592042}
-        m_TargetAssemblyTypeName: Code.Systems.LoadingScene.LoadScene, Assembly-CSharp
-        m_MethodName: LoadSceneByName
-        m_Mode: 5
+      - m_Target: {fileID: 305999055}
+        m_TargetAssemblyTypeName: NoFeelProtocol.Runtime.Logic.Player.PlayerCreator,
+          Assembly-CSharp
+        m_MethodName: CreateAndSave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Run
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     editorColor: {r: 0, g: 1, b: 0, a: 1}
@@ -5300,5 +5394,7 @@ SceneRoots:
   - {fileID: 1539051042}
   - {fileID: 558900847}
   - {fileID: 1507074339}
+  - {fileID: 305999056}
+  - {fileID: 688880480}
   - {fileID: 1832847048}
   - {fileID: 2110119751}

@@ -1,11 +1,13 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System;
-using System.Reflection;
 
-namespace Core.Gameplay.Items.Data
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+namespace NoFeelProtocol.Runtime.Data.Items
 {
     [HideMonoScript]
     [CreateAssetMenu(fileName = "ItemsData", menuName = "No Feed Protocol/ItemsData")]
@@ -17,12 +19,57 @@ namespace Core.Gameplay.Items.Data
         private Item[] m_items;
 
         public Item[] Items => m_items;
+
         public Item GetItem(int index) => m_items[index];
+
+        /// <summary>
+        /// Finds an item by its unique ID.
+        /// </summary>
+        public Item GetById(string id)
+        {
+            foreach (var item in m_items)
+            {
+                if (item.Id == id)
+                    return item;
+            }
+
+            Debug.LogWarning($"Item ID '{id}' not found.");
+            return null;
+        }
     }
 
     [System.Serializable]
-    public class Item
+    public class Item : ISerializationCallbackReceiver
     {
+        #region Unique ID ---------------------------------------------------
+
+        [HideInInspector]
+        [SerializeField]
+        private string m_id;
+
+        /// <summary>
+        /// Unique, non-editable ID used for lookup and save data.
+        /// </summary>
+        public string Id => m_id;
+
+#if UNITY_EDITOR
+        public void OnValidate()
+        {
+            if (string.IsNullOrEmpty(m_id))
+            {
+                m_id = Guid.NewGuid().ToString();
+                EditorUtility.SetDirty(Selection.activeObject);
+            }
+        }
+#endif
+
+        public void OnBeforeSerialize() { }
+        public void OnAfterDeserialize() { }
+
+        #endregion
+
+        #region Basic Info --------------------------------------------------
+
         [FoldoutGroup("@m_name")]
         [Tooltip("The name of the item")]
         [SerializeField]
@@ -49,28 +96,31 @@ namespace Core.Gameplay.Items.Data
         [SerializeField, InlineProperty, HideLabel]
         private Ability ability;
 
+        #endregion
+
+        #region Public Properties -------------------------------------------
+
         public string Name => m_name;
         public Sprite Icon => m_icon;
         public string Description => m_description;
         public float Percent => m_Percent;
         public Ability GetAbility => ability;
+
+        #endregion
     }
 
     [System.Serializable]
     public class Ability
     {
         [FoldoutGroup("Ability")]
-        [Tooltip("")]
         [SerializeField]
         public AbilityTriggerMoment TriggerMoment;
 
         [FoldoutGroup("Ability")]
-        [Tooltip("")]
         [SerializeField, InlineProperty, HideLabel]
         public AbilityCondition Condition;
 
         [FoldoutGroup("Ability")]
-        [Tooltip("")]
         [SerializeField]
         public List<AbilityEffect> Effects;
     }
@@ -79,17 +129,14 @@ namespace Core.Gameplay.Items.Data
     public class AbilityCondition
     {
         [FoldoutGroup("AbilityCondition")]
-        [Tooltip("")]
         [SerializeField]
         public AbilityConditionType Type;
 
         [FoldoutGroup("AbilityCondition")]
-        [Tooltip("")]
         [SerializeField]
-        public AbilityTargetType Target; 
-        
+        public AbilityTargetType Target;
+
         [FoldoutGroup("AbilityCondition")]
-        [Tooltip("")]
         [SerializeField]
         public int Value;
     }
@@ -98,52 +145,47 @@ namespace Core.Gameplay.Items.Data
     public class AbilityEffect
     {
         [FoldoutGroup("$Type")]
-        [Tooltip("")]
         [SerializeField]
         public AbilityEffectType Type;
 
         [FoldoutGroup("$Type")]
-        [Tooltip("")]
         [SerializeField]
         public AbilityEffectAction Action;
 
         [FoldoutGroup("$Type")]
-        [Tooltip("")]
         [SerializeField]
         public int Value;
 
         [FoldoutGroup("$Type")]
-        [Tooltip("")]
         [SerializeField]
         public AbilityTargetType Target;
     }
 
     public enum AbilityTriggerMoment
     {
-        Always,
-        //OnUse
+        Always
     }
 
     public enum AbilityConditionType
     {
         OwnsItem,
-        //TurnsPassed,
-        //OnDeathCharacter,
-        //OnDeathEnemy,
-        //OnHpBelowCharacter,
-        //OnHpBelowEnemy,
-        //OnShieldBelowCharacters,
-        //OnShieldBelowEnemies,
-        //WheelSpin,
-        //WheelResultsProvided,
-        //WheelLocked,
-        //WheelRotationsRemaining,
-        //WheelPointsProvided,
-        //OnActCharacter,
-        //OnActEnemy,
-        //ConsumableUsed,
-        //OnGain,
-        //OnLoss
+        TurnsPassed,
+        OnDeathCharacter,
+        OnDeathEnemy,
+        OnHpBelowCharacter,
+        OnHpBelowEnemy,
+        OnShieldBelowCharacters,
+        OnShieldBelowEnemies,
+        WheelSpin,
+        WheelResultsProvided,
+        WheelLocked,
+        WheelRotationsRemaining,
+        WheelPointsProvided,
+        OnActCharacter,
+        OnActEnemy,
+        ConsumableUsed,
+        OnGain,
+        OnLoss
     }
 
     public enum AbilityEffectType
@@ -154,10 +196,9 @@ namespace Core.Gameplay.Items.Data
         DamageHealth,
         DamageShield,
         Coins,
-        //Movement,
         Wheels,
-        //HealHealth,
-        //HealShield
+        HealHealth,
+        HealShield
     }
 
     public enum AbilityEffectAction
@@ -169,13 +210,13 @@ namespace Core.Gameplay.Items.Data
     public enum AbilityTargetType
     {
         Self,
-        //Ally,
-        //Enemy,
-        //AllAllies,
-        //AllEnemies,
-        //AllCharacters,
-        //SpecificCharacter,
-        //SpecificEnemy,
+        Ally,
+        Enemy,
+        AllAllies,
+        AllEnemies,
+        AllCharacters,
+        SpecificCharacter,
+        SpecificEnemy,
         SlotMachine
     }
 }

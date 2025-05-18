@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Core.Players;
 using Code.Systems.Locator;
+using NoFeelProtocol.Runtime.Data.Characters;
 
 namespace Core.Selection_Characters
 {
@@ -17,12 +17,10 @@ namespace Core.Selection_Characters
         private CharactersData m_charactersData;
 
         [BoxGroup("Character Selection")]
-        [Tooltip("The list of characters")]
         [SerializeField]
         private CharacterSection m_sectionTop;
 
         [BoxGroup("Character Selection")]
-        [Tooltip("The list of characters")]
         [SerializeField]
         private CharacterSection m_sectionBottom;
 
@@ -30,18 +28,14 @@ namespace Core.Selection_Characters
 
         #region Private Members ------------------------------------------
 
-        [FoldoutGroup("Character Selection Top")]
-        [Tooltip("")]
         [SerializeField]
         private List<ButtonAudioToggle> m_topButtons = new();
 
-        [FoldoutGroup("Character Selection Bottom")]
-        [Tooltip("")]
         [SerializeField]
         private List<ButtonAudioToggle> m_bottomButtons = new();
 
-        private ButtonAudioToggle m_lastSelectedTop;
-        private ButtonAudioToggle m_lastSelectedBottom;
+        private int m_selectedTopIndex = -1;
+        private int m_selectedBottomIndex = -1;
 
         #endregion
 
@@ -64,11 +58,10 @@ namespace Core.Selection_Characters
 
         private void Init()
         {
-            for (int i = 0; i < this.m_charactersData.Characters.Length; i++)
+            for (int i = 0; i < m_charactersData.Characters.Length; i++)
             {
-                var character = this.m_charactersData[i];
+                var character = m_charactersData[i];
 
-                // set image
                 m_topButtons[i].SetActiveSprite(character.Icon);
                 m_bottomButtons[i].SetActiveSprite(character.Icon);
 
@@ -86,45 +79,44 @@ namespace Core.Selection_Characters
 
         public void OnCharacterButtonClicked(int index, bool isTop)
         {
-            Debug.Log("Character selected: " + index);
-
-            var character = this.m_charactersData[index];
+            var character = m_charactersData[index];
 
             if (isTop)
             {
-                // Update UI
-                this.m_sectionTop.CharacterManifest.Display(character);
-
-                // Deselect previous
-                if (this.m_lastSelectedTop != null)
-                    this.m_lastSelectedTop.Deactivate();
-
-                // Activate current
-                ButtonAudioToggle selected = this.m_topButtons[index] as ButtonAudioToggle;
-                selected.Activate();
-                this.m_lastSelectedTop = selected;
+                m_sectionTop.CharacterManifest.Display(character);
+                m_selectedTopIndex = index;
+                DeactivatePrevious(m_topButtons, ref m_selectedTopIndex, index);
             }
             else
             {
-                // Update UI
-                this.m_sectionBottom.CharacterManifest.Display(character);
-
-                if (this.m_lastSelectedBottom != null)
-                    this.m_lastSelectedBottom.Deactivate();
-
-                ButtonAudioToggle selected = this.m_bottomButtons[index] as ButtonAudioToggle;
-                selected.Activate();
-                this.m_lastSelectedBottom = selected;
+                m_sectionBottom.CharacterManifest.Display(character);
+                m_selectedBottomIndex = index;
+                DeactivatePrevious(m_bottomButtons, ref m_selectedBottomIndex, index);
             }
+        }
+
+        private void DeactivatePrevious(List<ButtonAudioToggle> buttons, ref int lastIndex, int currentIndex)
+        {
+            if (lastIndex >= 0 && lastIndex != currentIndex)
+                buttons[lastIndex].Deactivate();
+
+            buttons[currentIndex].Activate();
+            lastIndex = currentIndex;
         }
 
         #endregion
 
-        #region Public Methods -------------------------------------------
+        #region Public API ----------------------------------------------
 
-        public bool HasTwoCharacterSelected() => this.m_lastSelectedTop != null && this.m_lastSelectedBottom != null;
+        public bool HasTwoCharacterSelected() =>
+            m_selectedTopIndex >= 0 && m_selectedBottomIndex >= 0;
+
+        public CharacterData SelectedTopCharacter =>
+            m_selectedTopIndex >= 0 ? m_charactersData[m_selectedTopIndex] : null;
+
+        public CharacterData SelectedBottomCharacter =>
+            m_selectedBottomIndex >= 0 ? m_charactersData[m_selectedBottomIndex] : null;
 
         #endregion
-
     }
 }

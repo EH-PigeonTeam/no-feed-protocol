@@ -12,19 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75715d14ab57e2a40bc228f95114c133, type: 3}
   m_Name: ItemsData
   m_EditorClassIdentifier: 
-  m_items:
-  - m_name: 
-    m_icon: {fileID: 0}
-    m_description: 
-    m_Percent: 1
-    ability:
-      TriggerMoment: 0
-      Condition:
-        Type: 0
-        Target: 0
-        Value: 0
-      Effects:
-      - Type: 0
-        Action: 0
-        Value: 0
-        Target: 0
+  m_items: []
