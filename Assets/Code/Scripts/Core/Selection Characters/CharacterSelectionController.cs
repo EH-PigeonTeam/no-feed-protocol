@@ -84,13 +84,11 @@ namespace Core.Selection_Characters
             if (isTop)
             {
                 m_sectionTop.CharacterManifest.Display(character);
-                m_selectedTopIndex = index;
                 DeactivatePrevious(m_topButtons, ref m_selectedTopIndex, index);
             }
             else
             {
                 m_sectionBottom.CharacterManifest.Display(character);
-                m_selectedBottomIndex = index;
                 DeactivatePrevious(m_bottomButtons, ref m_selectedBottomIndex, index);
             }
         }

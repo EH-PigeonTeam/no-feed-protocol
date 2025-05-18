@@ -18,6 +18,12 @@ namespace NoFeelProtocol.Runtime.Data.Items
         [SerializeField]
         private Item[] m_items;
 
+        private void OnValidate()
+        {
+            foreach (var item in m_items)
+                item.OnValidate();
+        }
+
         public Item[] Items => m_items;
 
         public Item GetItem(int index) => m_items[index];
@@ -38,13 +44,13 @@ namespace NoFeelProtocol.Runtime.Data.Items
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Item : ISerializationCallbackReceiver
     {
         #region Unique ID ---------------------------------------------------
 
-        [HideInInspector]
-        [SerializeField]
+        [FoldoutGroup("@m_name")]
+        [SerializeField, ReadOnly]
         private string m_id;
 
         /// <summary>

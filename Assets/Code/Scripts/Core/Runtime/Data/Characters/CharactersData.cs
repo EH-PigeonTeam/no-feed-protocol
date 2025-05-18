@@ -19,6 +19,16 @@ namespace NoFeelProtocol.Runtime.Data.Characters
 
         #endregion
 
+        #region OnValidate --------------------------------------------------
+
+        private void OnValidate()
+        {
+            foreach (var character in m_characters)
+                character.OnValidate();
+        }
+
+        #endregion
+
         #region Public Properties -------------------------------------------
 
         public CharacterData[] Characters => this.m_characters;
@@ -47,8 +57,8 @@ namespace NoFeelProtocol.Runtime.Data.Characters
     {
         #region Unique ID ---------------------------------------------------
 
-        [HideInInspector]
-        [SerializeField]
+        [FoldoutGroup("@m_name")]
+        [SerializeField, ReadOnly]
         private string m_id;
 
         /// <summary>
