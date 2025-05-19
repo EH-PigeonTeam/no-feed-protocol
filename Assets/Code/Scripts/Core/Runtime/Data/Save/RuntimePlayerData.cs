@@ -1,29 +1,66 @@
+using System;
 using System.Collections.Generic;
-using NoFeelProtocol.Runtime.Data.Characters;
-using NoFeelProtocol.Runtime.Data.Items;
+using UnityEngine;
+using Sirenix.OdinInspector;
+using NoFeedProtocol.Runtime.Data.Characters;
+using NoFeedProtocol.Runtime.Data.Items;
 
-namespace NoFeelProtocol.Runtime.Data.Save
+namespace NoFeedProtocol.Runtime.Data.Save
 {
-    /// <summary>
-    /// Runtime structure representing the full player state during gameplay.
-    /// Populated at run start from saved or selected data.
-    /// </summary>
+    [Serializable]
+    [HideMonoScript]
     public class RuntimePlayerData
     {
-        #region Properties --------------------------------------------------
+        #region Serialized Fields --------------------------------------------
 
-        public CharacterData CharacterTop { get; }
-        public CharacterData CharacterBottom { get; }
+        [SerializeField, InlineProperty, LabelWidth(100)]
+        private CharacterData m_characterTop;
 
-        public int CurrentShield { get; set; }
-        public int Coins { get; set; }
-        public int CurrentColumnIndex { get; set; }
+        [SerializeField, InlineProperty, LabelWidth(100)]
+        private CharacterData m_characterBottom;
 
-        public List<Item> OwnedItems { get; } = new();
+        [SerializeField]
+        private int m_currentShield;
+
+        [SerializeField]
+        private int m_coins;
+
+        [SerializeField]
+        private int m_currentColumnIndex;
+
+        [SerializeField]
+        private List<Item> m_ownedItems = new();
 
         #endregion
 
-        #region Constructor -------------------------------------------------
+        #region Public Properties --------------------------------------------
+
+        public CharacterData CharacterTop => m_characterTop;
+        public CharacterData CharacterBottom => m_characterBottom;
+
+        public int CurrentShield
+        {
+            get => m_currentShield;
+            set => m_currentShield = value;
+        }
+
+        public int Coins
+        {
+            get => m_coins;
+            set => m_coins = value;
+        }
+
+        public int CurrentColumnIndex
+        {
+            get => m_currentColumnIndex;
+            set => m_currentColumnIndex = value;
+        }
+
+        public List<Item> OwnedItems => m_ownedItems;
+
+        #endregion
+
+        #region Constructor --------------------------------------------------
 
         public RuntimePlayerData(
             CharacterData characterTop,
@@ -32,11 +69,11 @@ namespace NoFeelProtocol.Runtime.Data.Save
             int coins,
             int columnIndex)
         {
-            this.CharacterTop = characterTop;
-            this.CharacterBottom = characterBottom;
-            this.CurrentShield = shield;
-            this.Coins = coins;
-            this.CurrentColumnIndex = columnIndex;
+            m_characterTop = characterTop;
+            m_characterBottom = characterBottom;
+            m_currentShield = shield;
+            m_coins = coins;
+            m_currentColumnIndex = columnIndex;
         }
 
         #endregion

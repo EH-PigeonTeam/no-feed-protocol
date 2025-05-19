@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using NoFeelProtocol.Runtime.Data.Combat;
+using NoFeedProtocol.Runtime.Data.Combat;
 using UnityEditor;
 
-namespace NoFeelProtocol.Runtime.Data.Characters
+namespace NoFeedProtocol.Runtime.Data.Characters
 {
     [HideMonoScript]
-    [CreateAssetMenu(fileName = "Characters", menuName = "No Feel Protocol/Characters")]
+    [CreateAssetMenu(fileName = "Characters", menuName = "No Feed Protocol/Characters")]
     public class CharactersData : ScriptableObject
     {
         #region Character Definitions ---------------------------------------

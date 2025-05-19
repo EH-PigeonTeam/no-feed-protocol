@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace NoFeelProtocol.Runtime.Data.Combat
+namespace NoFeedProtocol.Runtime.Data.Combat
 {
     [Serializable]
     public class CharacterCombatBehavior

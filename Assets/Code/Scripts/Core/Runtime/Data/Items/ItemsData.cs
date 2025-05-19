@@ -7,7 +7,7 @@ using System;
 using UnityEditor;
 #endif
 
-namespace NoFeelProtocol.Runtime.Data.Items
+namespace NoFeedProtocol.Runtime.Data.Items
 {
     [HideMonoScript]
     [CreateAssetMenu(fileName = "ItemsData", menuName = "No Feed Protocol/ItemsData")]

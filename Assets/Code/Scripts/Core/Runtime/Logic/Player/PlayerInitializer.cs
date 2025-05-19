@@ -1,34 +1,32 @@
 ﻿using UnityEngine;
-using NoFeelProtocol.Runtime.Data.Characters;
-using NoFeelProtocol.Runtime.Data.Save;
-using NoFeelProtocol.Runtime.Logic.Conversion;
+using NoFeedProtocol.Runtime.Data.Characters;
+using NoFeedProtocol.Runtime.Data.Run;
+using NoFeedProtocol.Runtime.Data.Save;
+using NoFeedProtocol.Runtime.Logic.Conversion;
 using Core.Selection_Characters;
 using PsychoGarden.Systems.Save;
-using Sirenix.OdinInspector;
 using PsychoGarden.TriggerEvents;
+using Sirenix.OdinInspector;
 
-namespace NoFeelProtocol.Runtime.Logic.Player
+namespace NoFeedProtocol.Runtime.Logic.Player
 {
-    /// <summary>
-    /// Creates a new player from selected characters and saves the result using SaveSystem.
-    /// </summary>
     [HideMonoScript]
-    public class PlayerCreator : MonoBehaviour
+    public class RunCreator : MonoBehaviour
     {
-        #region Exposed Members ---------------------------------------------
+        #region Inspector References ----------------------------------------
 
         [BoxGroup("Settings")]
-        [Tooltip("")]
-        [SerializeField]
+        [Tooltip("Character selection controller reference")]
+        [SerializeField, Required]
         private CharacterSelectionController m_selectionController;
 
         [BoxGroup("Settings")]
-        [Tooltip("The name use for create file")]
+        [Tooltip("File name used to save the run")]
         [SerializeField]
-        private string m_saveFileName = "player_data";
+        private string m_saveFileName = "run_data";
 
         [BoxGroup("Settings")]
-        [Tooltip("The name use for create file")]
+        [Tooltip("Event triggered after saving the run")]
         [SerializeField]
         private TriggerEvent m_onFinish;
 
@@ -37,34 +35,35 @@ namespace NoFeelProtocol.Runtime.Logic.Player
         #region Public Methods ----------------------------------------------
 
         /// <summary>
-        /// Creates the player from selected characters and saves it.
+        /// Creates player and run data and saves it to file.
         /// </summary>
         public void CreateAndSave()
         {
             if (!m_selectionController.HasTwoCharacterSelected())
             {
-                Debug.LogWarning("Cannot create player: two characters not selected.");
+                Debug.LogWarning("[RunCreator] Cannot create run: two characters must be selected.");
                 return;
             }
 
             CharacterData top = m_selectionController.SelectedTopCharacter;
             CharacterData bottom = m_selectionController.SelectedBottomCharacter;
 
-            var runtime = new RuntimePlayerData(
+            var playerData = new RuntimePlayerData(
                 top,
                 bottom,
                 top.Shield + bottom.Shield,
-                0, // Coins
-                0  // Column index
+                coins: 0,
+                columnIndex: 0
             );
 
-            PlayerSaveData saveData = PlayerDataConverter.ToSaveData(runtime);
+            var runData = new RunData(playerData, 0, null);
+            var saveData = RunSaveData.FromRuntime(runData);
 
             SaveSystem.Save(saveData, m_saveFileName);
 
-            Debug.Log($"<color=green>Player saved successfully →</color> {m_saveFileName}");
+            Debug.Log($"<color=green>[RunCreator] Run saved →</color> {m_saveFileName}");
 
-            m_onFinish?.Invoke(this.transform);
+            m_onFinish?.Invoke(transform);
         }
 
         #endregion

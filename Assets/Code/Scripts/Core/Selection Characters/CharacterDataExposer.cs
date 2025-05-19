@@ -1,4 +1,4 @@
-﻿using NoFeelProtocol.Runtime.Data.Characters;
+﻿using NoFeedProtocol.Runtime.Data.Characters;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;

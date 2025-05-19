@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Code.Systems.Locator;
-using NoFeelProtocol.Runtime.Data.Characters;
+using NoFeedProtocol.Runtime.Data.Characters;
 
 namespace Core.Selection_Characters
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace NoFeelProtocol.Runtime.Data.Save
+namespace NoFeedProtocol.Runtime.Data.Save
 {
     /// <summary>
     /// Compact runtime-saveable structure that holds all essential player data for saving and loading.
@@ -58,6 +58,8 @@ namespace NoFeelProtocol.Runtime.Data.Save
         #endregion
 
         #region Constructors ------------------------------------------------
+
+        public PlayerSaveData() { }
 
         public PlayerSaveData(string characterTopID, string characterBottomID, int shieldValue, int coins, int currentColumnIndex, List<string> ownedItemIDs)
         {

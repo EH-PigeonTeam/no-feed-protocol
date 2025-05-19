@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_selectionController: {fileID: 1507074338}
-  m_saveFileName: player_data
+  m_saveFileName: run_data
   m_onFinish:
     m_PersistentCalls:
       m_Calls:

@@ -1,9 +1,9 @@
 using System.Linq;
-using NoFeelProtocol.Runtime.Data.Save;
-using NoFeelProtocol.Runtime.Data.Characters;
-using NoFeelProtocol.Runtime.Data.Items;
+using NoFeedProtocol.Runtime.Data.Save;
+using NoFeedProtocol.Runtime.Data.Characters;
+using NoFeedProtocol.Runtime.Data.Items;
 
-namespace NoFeelProtocol.Runtime.Logic.Conversion
+namespace NoFeedProtocol.Runtime.Logic.Conversion
 {
     /// <summary>
     /// Converts player runtime data into savable format and vice versa.
@@ -28,7 +28,7 @@ namespace NoFeelProtocol.Runtime.Logic.Conversion
         /// <summary>
         /// Converts save data into a full runtime structure.
         /// </summary>
-        public static RuntimePlayerData FromSaveData(
+        public static RuntimePlayerData ToRuntimeData(
             PlayerSaveData save,
             CharactersData characterDatabase,
             ItemsData itemsDatabase)
