@@ -28,6 +28,6 @@ MonoBehaviour:
     m_multiplier: 1
     m_target: 1
     m_percent: 0.202
-  m_slotWheelsCount: 6
+  m_slotWheelsCount: 5
   m_chances: 3
   m_delay: 1

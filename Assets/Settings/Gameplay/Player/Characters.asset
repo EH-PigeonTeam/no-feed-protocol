@@ -31,9 +31,9 @@ MonoBehaviour:
     m_combatBehavior:
       m_triggers:
       - m_trigger: 0
-        m_conditions: 0
         m_actions:
         - m_conditions: 0
+          m_value: 0
           m_sequence:
           - m_type: 0
             m_target: 0
@@ -90,4 +90,29 @@ MonoBehaviour:
     m_shield: 60
     m_actionPoints: 3
     m_combatBehavior:
-      m_triggers: []
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 16
+          m_value: 0
+          m_sequence:
+          - m_type: 0
+            m_target: 1
+            m_overrideValue: 0
+            m_value: 10
+            m_modifier: 1
+          - m_type: 1
+            m_target: 5
+            m_overrideValue: 1
+            m_value: 0
+            m_modifier: 1
+      - m_trigger: 1
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_type: 0
+            m_target: 4
+            m_overrideValue: 1
+            m_value: 10
+            m_modifier: 1

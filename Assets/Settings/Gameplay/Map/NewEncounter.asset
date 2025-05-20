@@ -26,7 +26,7 @@ MonoBehaviour:
   - m_id: 85657cf9-9216-469f-bf01-a734aa239c0c
     m_type: 3
     m_sceneName: aaaa
-    m_percentage: 1
+    m_percentage: 0.388
     m_icon: {fileID: 21300000, guid: e2ed792f801284449a33d405a54c252d, type: 3}
   - m_id: 3445342d-6d35-41a1-8239-9ef6ee66f891
     m_type: 2

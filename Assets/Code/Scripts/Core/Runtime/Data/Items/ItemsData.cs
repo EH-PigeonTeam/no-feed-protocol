@@ -115,36 +115,38 @@ namespace NoFeedProtocol.Runtime.Data.Items
         #endregion
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Ability
     {
         [FoldoutGroup("Ability")]
+        [Tooltip("The trigger moment of the ability")]
         [SerializeField]
-        public AbilityTriggerMoment TriggerMoment;
+        private AbilityTriggerMoment m_triggerMoment;
 
         [FoldoutGroup("Ability")]
+        [Tooltip("The condition of the ability")]
         [SerializeField, InlineProperty, HideLabel]
-        public AbilityCondition Condition;
+        private AbilityCondition m_Condition;
 
         [FoldoutGroup("Ability")]
+        [Tooltip("The effects of the ability")]
         [SerializeField]
-        public List<AbilityEffect> Effects;
+        private List<AbilityEffect> m_effects;
+
+        public AbilityTriggerMoment TriggerMoment => m_triggerMoment;
+        public AbilityCondition Condition => m_Condition;
+        public List<AbilityEffect> Effects => m_effects;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class AbilityCondition
     {
         [FoldoutGroup("AbilityCondition")]
+        [Tooltip("The type of condition")]
         [SerializeField]
-        public AbilityConditionType Type;
+        private AbilityConditionType m_type;
 
-        [FoldoutGroup("AbilityCondition")]
-        [SerializeField]
-        public AbilityTargetType Target;
-
-        [FoldoutGroup("AbilityCondition")]
-        [SerializeField]
-        public int Value;
+        public AbilityConditionType Type => m_type;
     }
 
     [System.Serializable]

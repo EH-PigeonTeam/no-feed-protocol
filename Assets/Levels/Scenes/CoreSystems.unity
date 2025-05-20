@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d026380574a0e48aa0c1d9134572ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_priority: 1
 --- !u!114 &399868334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1088,7 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c522ebae967bec4fb5e5f9ceac5e367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_firstScene: CharacterSelection
+  m_firstScene: Logo
   m_sceneData: {fileID: 11400000, guid: ecb5ab22bcfa49e47a604507b02df06a, type: 2}
 --- !u!4 &792255615
 Transform:

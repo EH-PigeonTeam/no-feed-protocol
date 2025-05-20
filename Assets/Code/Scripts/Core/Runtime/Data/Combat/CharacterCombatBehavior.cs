@@ -22,29 +22,13 @@ namespace NoFeedProtocol.Runtime.Data.Combat
         private CombatTriggerType m_trigger;
 
         [FoldoutGroup("$m_trigger")]
-        [ValidateInput("IsShieldConditionValid", "WithShield and WithOutShield cannot be enabled at the same time.")]
-        [Tooltip("Conditions that must be true to activate this block")]
-        [SerializeField]
-        private CombatConditionType m_conditions;
-
-        [FoldoutGroup("$m_trigger")]
         [Tooltip("List of conditional action blocks")]
         [SerializeField]
         private CombatActionBlock[] m_actions;
 
         public CombatTriggerType Trigger => this.m_trigger;
-        public CombatConditionType Conditions => this.m_conditions;
+
         public CombatActionBlock[] Actions => this.m_actions;
-
-#if UNITY_EDITOR
-        private bool IsShieldConditionValid(CombatConditionType value)
-        {
-            bool hasWith = (value & CombatConditionType.WithShield) != 0;
-            bool hasWithout = (value & CombatConditionType.WithOutShield) != 0;
-
-            return !(hasWith && hasWithout);
-        }
-#endif
     }
 
     [Serializable]
@@ -57,11 +41,17 @@ namespace NoFeedProtocol.Runtime.Data.Combat
         private CombatConditionType m_conditions;
 
         [FoldoutGroup("@GetName()")]
+        [Tooltip("Conditions to activate this action block")]
+        [SerializeField, ShowIf("m_conditions", CombatConditionType.SelfHpBelow)]
+        private int m_value;
+
+        [FoldoutGroup("@GetName()")]
         [Tooltip("Ordered list of actions to execute")]
         [SerializeField]
         private CombatAction[] m_sequence;
 
         public CombatConditionType Conditions => this.m_conditions;
+        public int Value => this.m_value;
         public CombatAction[] Sequence => this.m_sequence;
 
 #if UNITY_EDITOR
