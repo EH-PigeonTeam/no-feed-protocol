@@ -8,7 +8,7 @@ namespace Code.Systems.LoadingScene
 {
     [DefaultExecutionOrder(-80)]
     [HideMonoScript]
-    public class SceneManager : MonoBehaviour
+    public class ScenesManager : MonoBehaviour
     {
         [BoxGroup("Scene Settings")]
         [Tooltip("The first scene to load")]
@@ -20,25 +20,21 @@ namespace Code.Systems.LoadingScene
         [SerializeField, InlineEditor, Required]
         private SceneResources m_sceneData;
 
-        [ShowInInspector, ReadOnly]
-        private readonly HashSet<string> m_persistentScenes = new();
-        private const string CoreSystemsScene = "CoreSystems";
-
         private void Start()
         {
-            ServiceLocator.Get<ILoadSceneManager>().Fade(false, true);
-            ServiceLocator.Get<ILoadSceneManager>().FakeLoadingTime(false);
+            ServiceLocator.Get<LoadSceneManager>().Fade(false, true);
+            ServiceLocator.Get<LoadSceneManager>().FakeLoadingTime(false);
             LoadScene(m_firstScene);
         }
 
         private void OnEnable()
         {
-            ServiceLocator.Register<SceneManager>(this);
+            ServiceLocator.Register<ScenesManager>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<SceneManager>();
+            ServiceLocator.Unregister<ScenesManager>();
         }
 
         #region Public Methods ---------------------------------------------------------
@@ -69,7 +65,7 @@ namespace Code.Systems.LoadingScene
 
         public void LoadScene(string sceneName, LoadSceneMode mode)
         {
-            ChangeScene(new SceneData(sceneName, mode, false));
+            ChangeScene(new SceneData(sceneName, mode));
         }
 
         public void LoadScenes(string[] sceneNames)
@@ -88,25 +84,7 @@ namespace Code.Systems.LoadingScene
                 sceneDatas.Add(data);
             }
 
-            SceneData mainScene = sceneDatas.Find(s => s.LoadMode == LoadSceneMode.Single);
-
-            if (mainScene != null)
-            {
-                m_persistentScenes.Clear();
-                m_persistentScenes.Add(CoreSystemsScene);
-            }
-
-            foreach (var scene in sceneDatas)
-            {
-                if (scene.IsPersistent)
-                {
-                    m_persistentScenes.Add(scene.SceneName);
-                    m_persistentScenes.Add(CoreSystemsScene);
-                }
-            }
-
-            ServiceLocator.Get<ILoadSceneManager>()
-                .LoadScenes(sceneDatas, mainScene, m_persistentScenes);
+            ServiceLocator.Get<LoadSceneManager>().LoadScenes(sceneDatas);
         }
 
         #endregion
@@ -115,20 +93,9 @@ namespace Code.Systems.LoadingScene
 
         internal void ChangeScene(SceneData sceneData)
         {
-            if (sceneData.LoadMode == LoadSceneMode.Single)
-            {
-                m_persistentScenes.Clear();
+            var loadSceneManager = ServiceLocator.Get<LoadSceneManager>();
 
-                ServiceLocator.Get<ILoadSceneManager>()
-                    .LoadScene(sceneData.SceneName, LoadSceneMode.Single, new[] { CoreSystemsScene });
-
-                m_persistentScenes.Add(sceneData.Name);
-            }
-            else
-            {
-                ServiceLocator.Get<ILoadSceneManager>()
-                    .LoadScene(sceneData.SceneName, LoadSceneMode.Additive, m_persistentScenes);
-            }
+            loadSceneManager.LoadScene(sceneData.SceneName, sceneData.Mode);
         }
 
         #endregion

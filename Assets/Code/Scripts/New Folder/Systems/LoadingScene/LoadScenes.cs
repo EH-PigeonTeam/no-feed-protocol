@@ -19,7 +19,7 @@ namespace Code.Systems.LoadingScene
 
         public void LoadScenesByName(string[] sceneNames)
         {
-            ServiceLocator.Get<SceneManager>().LoadScenes(sceneNames);
+            ServiceLocator.Get<ScenesManager>().LoadScenes(sceneNames);
         }
     }
 }

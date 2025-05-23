@@ -99,7 +99,7 @@ namespace NoFeedProtocol.Runtime.Logic.Map
             m_dataStore.GameData.Run.Map.LastNode = position;
 
             // load scene
-            ServiceLocator.Get<SceneManager>()
+            ServiceLocator.Get<ScenesManager>()
                 .LoadScene(this.m_encounters.GetEncounter(this.m_nodes[position.X, position.Y].Id).SceneName);
         }
 

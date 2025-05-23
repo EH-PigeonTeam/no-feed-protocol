@@ -9,12 +9,12 @@ namespace Code.Systems.LoadingScene
     {
         public void LoadSceneByName(string sceneName)
         {
-            ServiceLocator.Get<SceneManager>().LoadScene(sceneName);
+            ServiceLocator.Get<ScenesManager>().LoadScene(sceneName);
         }
 
         public void LoadSceneByIndex(int index)
         {
-            ServiceLocator.Get<SceneManager>().LoadScene(index);
+            ServiceLocator.Get<ScenesManager>().LoadScene(index);
         }
     }
 }

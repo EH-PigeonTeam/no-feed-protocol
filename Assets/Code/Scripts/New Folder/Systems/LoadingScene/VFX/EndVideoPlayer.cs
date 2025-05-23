@@ -15,7 +15,7 @@ namespace Code.Scripts.Systems.LoadingScene.VFX
         private string sceneName;
 
         [Button("Load Scene")]
-        private void LoadScene() => ServiceLocator.Get<SceneManager>().LoadScene(sceneName);
+        private void LoadScene() => ServiceLocator.Get<ScenesManager>().LoadScene(sceneName);
 
         private VideoPlayer videoPlayer;
 
@@ -32,7 +32,7 @@ namespace Code.Scripts.Systems.LoadingScene.VFX
 
         private void OnVideoEnd(VideoPlayer vp)
         {
-            ServiceLocator.Get<SceneManager>().LoadScene(sceneName);
+            ServiceLocator.Get<ScenesManager>().LoadScene(sceneName);
         }
     }
 }
