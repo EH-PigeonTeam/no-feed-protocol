@@ -15,11 +15,13 @@ namespace NoFeedProtocol.Authoring.Items
         [SerializeField]
         private Item[] m_items;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             foreach (var item in m_items)
                 item.OnValidate();
         }
+#endif
 
         public Item[] Items => m_items;
 
