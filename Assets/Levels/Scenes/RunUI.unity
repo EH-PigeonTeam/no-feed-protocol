@@ -5402,7 +5402,7 @@ GameObject:
   - component: {fileID: 1852760545}
   - component: {fileID: 1852760546}
   m_Layer: 0
-  m_Name: Run context
+  m_Name: Data Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5432,12 +5432,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1852760544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ace5d765a7aa61f48bc64b68727601ab, type: 3}
+  m_Script: {fileID: 11500000, guid: fc8a62c5ab512f5438ed71b1395ac5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_saveFileName: run_data
-  m_charactersData: {fileID: 11400000, guid: f5b4deb00c8777444b563b77e27fb666, type: 2}
-  m_itemsData: {fileID: 11400000, guid: 4fa9d393c646ca64798dfc74aadd2d7c, type: 2}
+  m_gameData:
+    m_run:
+      m_playerData:
+        m_characterTop:
+          Health: 0
+          Energy: 0
+        m_characterBottom:
+          Health: 0
+          Energy: 0
+        m_maxShield: 0
+        m_currentShield: 0
+        m_coins: 0
+        m_currentColumnIndex: 0
+        m_ownedItems: []
+    m_itemIDsUnlocked: []
 --- !u!1001 &1909728036
 PrefabInstance:
   m_ObjectHideFlags: 0

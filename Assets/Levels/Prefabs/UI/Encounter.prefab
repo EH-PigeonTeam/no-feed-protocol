@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7112265465007562240}
   - component: {fileID: 4096699047460215126}
   - component: {fileID: 8033807256671809299}
-  - component: {fileID: 7233293638507438414}
+  - component: {fileID: 5827501793871791384}
   m_Layer: 5
   m_Name: Encounter
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7233293638507438414
+--- !u!114 &5827501793871791384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4314923488756626892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48fd30dc6abb6f944aa9b22e39596f8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 954e16e074bb2a34187d3d7753833cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:

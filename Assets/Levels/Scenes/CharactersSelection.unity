@@ -1076,6 +1076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 305999056}
   - component: {fileID: 305999055}
+  - component: {fileID: 305999057}
   m_Layer: 0
   m_Name: Init Player
   m_TagString: Untagged
@@ -1096,7 +1097,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_selectionController: {fileID: 1507074338}
-  m_saveFileName: run_data
   m_onFinish:
     m_PersistentCalls:
       m_Calls:
@@ -1130,6 +1130,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &305999057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305999054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8a62c5ab512f5438ed71b1395ac5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameData:
+    m_run:
+      m_playerData:
+        m_characterTop:
+          Health: 0
+          Energy: 0
+        m_characterBottom:
+          Health: 0
+          Energy: 0
+        m_maxShield: 0
+        m_currentShield: 0
+        m_coins: 0
+        m_currentColumnIndex: 0
+        m_ownedItems: []
+      m_mapData:
+        m_lastNode:
+          X: 0
+          Y: 0
+        m_nodes: []
+    m_itemIDsUnlocked: []
 --- !u!1 &316088936
 GameObject:
   m_ObjectHideFlags: 0
