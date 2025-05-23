@@ -836,12 +836,13 @@ MonoBehaviour:
         m_topTransform:
           Position: {x: 2.5, y: 0, z: 5}
           Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 0, y: 0, z: 0}
+          Scale: {x: 1, y: 1, z: 1}
         m_bottomTransform:
           Position: {x: 5, y: 0, z: 0}
           Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 0, y: 0, z: 0}
+          Scale: {x: 1, y: 1, z: 1}
         m_characterPrefab: {fileID: 7998539078406814515, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+        m_charactersData: {fileID: 11400000, guid: f5b4deb00c8777444b563b77e27fb666, type: 2}
         m_enemies: {fileID: 11400000, guid: f5b4deb00c8777444b563b77e27fb666, type: 2}
     - rid: 83453463927980162
       type: {class: MakeHumanPlayer, ns: NoFeedProtocol.Runtime.Logic, asm: Assembly-CSharp}
@@ -849,12 +850,13 @@ MonoBehaviour:
         m_topTransform:
           Position: {x: -2.5, y: 0, z: 5}
           Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 0, y: 0, z: 0}
+          Scale: {x: 1, y: 1, z: 1}
         m_bottomTransform:
           Position: {x: -5, y: 0, z: 0}
           Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 0, y: 0, z: 0}
+          Scale: {x: 1, y: 1, z: 1}
         m_characterPrefab: {fileID: 7998539078406814515, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+        m_charactersData: {fileID: 11400000, guid: f5b4deb00c8777444b563b77e27fb666, type: 2}
 --- !u!4 &949426620
 Transform:
   m_ObjectHideFlags: 0

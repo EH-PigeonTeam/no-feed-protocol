@@ -17,24 +17,29 @@ MonoBehaviour:
     m_type: 0
     m_sceneName: Battle
     m_percentage: 1
-    m_icon: {fileID: 21300000, guid: 9391454a46a108240ac69911fadf6cec, type: 3}
+    m_icon: {fileID: -1147676196, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}
   - m_id: 43cca54e-0816-4107-ae5e-c00a9aee06cd
     m_type: 1
     m_sceneName: 
     m_percentage: 1
-    m_icon: {fileID: 21300000, guid: be1a7482b2c6b4a4aaa68c73c0f82bab, type: 3}
+    m_icon: {fileID: 724576234, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}
   - m_id: 85657cf9-9216-469f-bf01-a734aa239c0c
     m_type: 3
     m_sceneName: aaaa
     m_percentage: 0.388
-    m_icon: {fileID: 21300000, guid: e2ed792f801284449a33d405a54c252d, type: 3}
+    m_icon: {fileID: 1272763211, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}
   - m_id: 3445342d-6d35-41a1-8239-9ef6ee66f891
     m_type: 2
     m_sceneName: bbbb
     m_percentage: 1
-    m_icon: {fileID: 21300000, guid: 15767d0debd4e5a4e8240e49a5c0767e, type: 3}
+    m_icon: {fileID: -311334852, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}
   - m_id: 57e54db8-3798-4125-9217-236fa699802f
     m_type: 4
     m_sceneName: cccc
     m_percentage: 0
-    m_icon: {fileID: 21300000, guid: ff4817a61f6950047985c6ffbddb9b97, type: 3}
+    m_icon: {fileID: 465941656, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}
+  - m_id: 7e6ffdd2-8f67-46be-a237-b63ae3e82415
+    m_type: 1
+    m_sceneName: ssss
+    m_percentage: 1
+    m_icon: {fileID: -1664567529, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}

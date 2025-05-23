@@ -6,6 +6,7 @@ using NoFeedProtocol.Shared.Utilities;
 using System.Collections.Generic;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Authoring.Characters.Animation;
+using NoFeedProtocol.Authoring.Characters;
 
 namespace NoFeedProtocol.Runtime.UI
 {
@@ -31,14 +32,19 @@ namespace NoFeedProtocol.Runtime.UI
 
         #endregion
 
-        public void Init(CharacterRuntimeData data)
+        public void Init(CharacterRuntimeData data, CharactersData charactersData)
         {
             Health(data.Health.ToString());
-            //Attack(data.AttackPoints.ToString());
-            //AttackToShield(data.AttackPointsShield.ToString());
-            //EnergyMax(data.ActionPoints);
-            //Energy(data.ActionPoints);
-            //SetAnimator(data.Anim);
+
+            var character = charactersData.GetById(data.Id);
+            if (character == null)
+                return;
+
+            Attack(character.AttackPoints.ToString());
+            AttackToShield(character.AttackPointsShield.ToString());
+            EnergyMax(character.EnergyRequired);
+            Energy(character.EnergyRequired);
+            SetAnimator(character.Anim);
         }
 
         #region Methods ------------------------------------------
@@ -72,10 +78,10 @@ namespace NoFeedProtocol.Runtime.UI
         {
             var clips = new Dictionary<string, AnimationClip>
             {
-                { "Idle", anim.Idle },
-                { "Attack", anim.Attack },
-                { "Damage", anim.Damage },
-                { "Death", anim.Death }
+                { "Medic_Idle", anim.Idle },
+                { "Medic_Attack", anim.Attack },
+                { "Medic_Damage", anim.Damage },
+                { "Medic_Death", anim.Death }
             };
 
             this.m_animator.runtimeAnimatorController = AnimatorInjector.InjectOverrides(

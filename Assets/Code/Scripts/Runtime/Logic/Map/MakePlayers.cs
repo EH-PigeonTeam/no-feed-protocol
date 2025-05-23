@@ -58,6 +58,10 @@ namespace NoFeedProtocol.Runtime.Logic
         [SerializeField, AssetsOnly]
         protected GameObject m_characterPrefab;
 
+        [BoxGroup("Characters Prefab")]
+        [SerializeField, AssetsOnly]
+        protected CharactersData m_charactersData;
+
         protected Transform Transform;
 
         public virtual void Generate(Transform transform)
@@ -74,7 +78,7 @@ namespace NoFeedProtocol.Runtime.Logic
 
             if (character.TryGetComponent(out CharacterInterface characterInterface) && data != null)
             {
-                characterInterface.Init(data);
+                characterInterface.Init(data, m_charactersData);
             }
 
             return character;
