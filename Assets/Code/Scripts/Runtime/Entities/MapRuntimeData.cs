@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using NoFeedProtocol.Persistence.Map;
+using Sirenix.OdinInspector;
 
 namespace NoFeedProtocol.Runtime.Entities
 {
@@ -12,6 +13,9 @@ namespace NoFeedProtocol.Runtime.Entities
         [SerializeField]
         private GridPosition? m_lastNode = null;
         public List<NodeRuntimeData> Nodes = new();
+
+        [ShowInInspector]
+        public bool HasLastNode => LastNode.HasValue;
 
         public GridPosition? LastNode
         {

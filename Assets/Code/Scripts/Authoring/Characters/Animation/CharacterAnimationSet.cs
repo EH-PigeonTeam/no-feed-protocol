@@ -6,15 +6,19 @@ namespace NoFeedProtocol.Authoring.Characters.Animation
     public class CharacterAnimationSet
     {
         [Tooltip("Idle animation clip.")]
+        [SerializeField]
         private AnimationClip m_idle;
 
         [Tooltip("Attack animation clip.")]
+        [SerializeField]
         private AnimationClip m_attack;
 
         [Tooltip("Damage reaction animation clip.")]
+        [SerializeField]
         private AnimationClip m_damage;
 
         [Tooltip("Death animation clip.")]
+        [SerializeField]
         private AnimationClip m_death;
 
         public AnimationClip Idle => m_idle;

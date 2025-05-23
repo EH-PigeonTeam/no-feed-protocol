@@ -11,6 +11,10 @@ public struct GridPosition
         X = x;
         Y = y;
     }
+    public override readonly string ToString()
+    {
+        return $"({X}, {Y})";
+    }
 }
 
 [Serializable]

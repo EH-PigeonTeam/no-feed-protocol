@@ -30,16 +30,18 @@ namespace NoFeedProtocol.Runtime.Logic.Map
         {
             m_dataStore = ServiceLocator.Get<RuntimeDataStore>();
 
-            //if (m_dataStore.GameData.Run.Map.Nodes != null)
-            //{
-            //    //m_nodes = m_dataStore.GameData.Run.Map.Nodes // convert back
-            //}
-            //else
-            //{
-            m_nodes = MapGenerator.Generate(m_structure, m_references, m_encounters);
+            if (m_dataStore.GameData.Run.Map?.Nodes?.Count > 0)
+            {
+                Debug.Log("Loading existing map...");
 
-            m_dataStore.GameData.Run.Map.Nodes = Flatten(m_nodes);
-            //}
+                //m_nodes = m_dataStore.GameData.Run.Map.Nodes // convert back
+            }
+            else
+            {
+                m_nodes = MapGenerator.Generate(m_structure, m_references, m_encounters);
+
+                m_dataStore.GameData.Run.Map.Nodes = Flatten(m_nodes);
+            }
 
             DrawAndBindNodes();
         }

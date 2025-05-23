@@ -68,7 +68,7 @@ public static class MapVisualizer
 
     private static bool IsNodeActive(GridPosition? lastNode, GridPosition current, List<NodeRuntimeData> nodes)
     {
-        if (lastNode == null)
+        if (!lastNode.HasValue)
             return current.X == 0;
 
         var previous = nodes.Find(n => n.Position.Equals(lastNode.Value));

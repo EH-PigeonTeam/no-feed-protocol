@@ -52,8 +52,8 @@ namespace NoFeedProtocol.Runtime.Logic.Data
             {
                 Debug.LogWarning("RuntimeDataStore: Run was null. Rebuilding with default data.");
 
-                var characterTop = new CharacterRuntimeData { Id = "topCharacterId", Health = 30, Energy = 0 };
-                var characterBottom = new CharacterRuntimeData { Id = "bottomCharacterId", Health = 30, Energy = 0 };
+                var characterTop = new CharacterRuntimeData { Id = "", Health = 0, Energy = 0 };
+                var characterBottom = new CharacterRuntimeData { Id = "", Health = 0, Energy = 0 };
 
                 var player = new PlayerRuntimeData
                 {
@@ -133,11 +133,11 @@ namespace NoFeedProtocol.Runtime.Logic.Data
 
             var characterTop = topCharData != null
                 ? new CharacterRuntimeData { Id = topCharData.Id, Health = topCharData.Health, Energy = topCharData.Energy }
-                : new CharacterRuntimeData { Id = "topCharacterId", Health = 30, Energy = 0 };
+                : new CharacterRuntimeData { Id = "", Health = 0, Energy = 0 };
 
             var characterBottom = bottomCharData != null
                 ? new CharacterRuntimeData { Id = bottomCharData.Id, Health = bottomCharData.Health, Energy = bottomCharData.Energy }
-                : new CharacterRuntimeData { Id = "bottomCharacterId", Health = 30, Energy = 0 };
+                : new CharacterRuntimeData { Id = "", Health = 0, Energy = 0 };
 
             var player = new PlayerRuntimeData
             {

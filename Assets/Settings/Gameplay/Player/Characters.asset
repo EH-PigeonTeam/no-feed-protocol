@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characters:
   - m_id: 25611593-ddfd-46b8-b77e-15128116458d
-    m_name: Sapper
+    m_name: Heavy
     m_icon: {fileID: 467157201, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: 1103041419, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     m_anim:
-      Idle: {fileID: 0}
-      Attack: {fileID: 0}
-      Damage: {fileID: 0}
-      Dead: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 91ac7dce041b7574eb5d962cf76c144a, type: 2}
+      m_attack: {fileID: 7400000, guid: be33278378d6ca84fa3bda954c4d24ec, type: 2}
+      m_damage: {fileID: 7400000, guid: 55e698dc01507c146b4ce36c1711152b, type: 2}
+      m_death: {fileID: 7400000, guid: 5363672c9ecc96641a4d39610d58f3f5, type: 2}
     m_maxHealth: 100
     m_attackPointsShield: 50
     m_attackPoints: 80
     m_shield: 200
-    m_actionPoints: 4
+    m_energyRequired: 1
     m_combatBehavior:
       m_triggers:
       - m_trigger: 0
@@ -41,20 +41,20 @@ MonoBehaviour:
             m_value: 0
             m_modifier: 1
   - m_id: c976a871-24b4-486a-a62a-92f88a9e5f44
-    m_name: Shock Trooper
+    m_name: Assault
     m_icon: {fileID: 1955355303, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: -162991495, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     m_anim:
-      Idle: {fileID: 0}
-      Attack: {fileID: 0}
-      Damage: {fileID: 0}
-      Dead: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 0b8f06f0630dde844ac11b2c57261f22, type: 2}
+      m_attack: {fileID: 7400000, guid: 5783ca327098b6a47b556b7fa7258288, type: 2}
+      m_damage: {fileID: 7400000, guid: d77e16027c341d045a899c7af5abc53a, type: 2}
+      m_death: {fileID: 7400000, guid: 560d3037765cabf4abc0c05257b72ed5, type: 2}
     m_maxHealth: 80
     m_attackPointsShield: 150
     m_attackPoints: 20
     m_shield: 75
-    m_actionPoints: 7
+    m_energyRequired: 1
     m_combatBehavior:
       m_triggers: []
   - m_id: 1de477d4-d06a-46d4-a23e-c5456f2e6e02
@@ -63,15 +63,15 @@ MonoBehaviour:
     m_icon2: {fileID: 934649307, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: ccccccccccccccccccccccccccccccccccccccccccccc
     m_anim:
-      Idle: {fileID: 0}
-      Attack: {fileID: 0}
-      Damage: {fileID: 0}
-      Dead: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 4847044766e5da447a95d9b1f9473c1a, type: 2}
+      m_attack: {fileID: 7400000, guid: 2e01b0ab78db09648ab0cc4181c42630, type: 2}
+      m_damage: {fileID: 7400000, guid: 3e1e68bd290b5404eb62f3549a6b87a7, type: 2}
+      m_death: {fileID: 7400000, guid: 80c359b991234fc46935815924ec9cfc, type: 2}
     m_maxHealth: 20
     m_attackPointsShield: 80
     m_attackPoints: 90
     m_shield: 170
-    m_actionPoints: 2
+    m_energyRequired: 1
     m_combatBehavior:
       m_triggers: []
   - m_id: b9e53ea2-c6d0-4a7c-bac7-7f907761b5dc
@@ -80,15 +80,15 @@ MonoBehaviour:
     m_icon2: {fileID: -2093050633, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_description: ddddddddddddddddddddddddddddd
     m_anim:
-      Idle: {fileID: 0}
-      Attack: {fileID: 0}
-      Damage: {fileID: 0}
-      Dead: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 747f992ebf1b4ba4b8e555315e23ca4f, type: 2}
+      m_attack: {fileID: 7400000, guid: e5a90fe321bc7d54bbf7421650be79ff, type: 2}
+      m_damage: {fileID: 7400000, guid: 6f79b348287608541916b4aaa8bbad63, type: 2}
+      m_death: {fileID: 7400000, guid: 4539e354c9e68f04a990d2d89f25fb89, type: 2}
     m_maxHealth: 60
     m_attackPointsShield: 40
     m_attackPoints: 120
     m_shield: 60
-    m_actionPoints: 3
+    m_energyRequired: 1
     m_combatBehavior:
       m_triggers:
       - m_trigger: 0

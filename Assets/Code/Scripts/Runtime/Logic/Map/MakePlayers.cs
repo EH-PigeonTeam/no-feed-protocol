@@ -5,6 +5,7 @@ using Code.Systems.Locator;
 using NoFeedProtocol.Runtime.UI;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Authoring.Characters;
+using NoFeedProtocol.Runtime.Logic.Data;
 
 namespace NoFeedProtocol.Runtime.Logic
 {
@@ -97,7 +98,7 @@ namespace NoFeedProtocol.Runtime.Logic
         {
             base.Generate(transform);
 
-            this.m_playerData = /*ServiceLocator.Get<RunContext>().RunRuntimeData.Player*/null;
+            this.m_playerData = ServiceLocator.Get<RuntimeDataStore>().GameData.Run.Player;
 
             Make(this.m_characterPrefab, this.m_topTransform, this.m_playerData.CharacterTop);
             Make(this.m_characterPrefab, this.m_bottomTransform, this.m_playerData.CharacterBottom);

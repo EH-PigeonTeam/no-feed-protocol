@@ -56,7 +56,7 @@ namespace NoFeedProtocol.Runtime.Logic.Player
                 Player = playerData,
                 Map = new MapRuntimeData
                 {
-                    LastNode = new GridPosition(0, 0),
+                    LastNode = (GridPosition?)null,
                     Nodes = new System.Collections.Generic.List<NodeRuntimeData>()
                 }
             };
