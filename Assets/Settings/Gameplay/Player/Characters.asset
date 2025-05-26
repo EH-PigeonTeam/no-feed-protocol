@@ -93,7 +93,7 @@ MonoBehaviour:
       m_triggers:
       - m_trigger: 0
         m_actions:
-        - m_conditions: 16
+        - m_conditions: 1
           m_value: 0
           m_sequence:
           - m_type: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
           - m_type: 1
             m_target: 5
             m_overrideValue: 1
-            m_value: 0
+            m_value: 10
             m_modifier: 1
       - m_trigger: 1
         m_actions:
