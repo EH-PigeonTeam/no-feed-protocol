@@ -576,7 +576,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 338130292}
-  - component: {fileID: 338130293}
   - component: {fileID: 338130294}
   - component: {fileID: 338130295}
   m_Layer: 5
@@ -606,23 +605,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 227}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &338130293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338130291}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27915eff4d50256469748d7bbca467a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_slotMachine: {fileID: 11400000, guid: feeb86a50939e494da7ced17c6cbf448, type: 2}
-  m_slotWheelPrefab: {fileID: 6743090570990411289, guid: 9ac97b5ef71386548ab71d52b9689b27, type: 3}
-  m_indicatorPrefab: {fileID: 498321738235099230, guid: 07021a5830d289543963f61909940cca, type: 3}
-  m_slotWheelContainer: {fileID: 915517271}
-  m_indicatorContainer: {fileID: 0}
 --- !u!114 &338130294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,18 +847,18 @@ PrefabInstance:
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1753518342}
+      objectReference: {fileID: 1753518343}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Interact
+      value: Spin
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Core.Gameplay.SlotMachine.SlotMachine, Assembly-CSharp
+      value: NoFeedProtocol.Runtime.Logic.Slot.SlotMachineController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1596,7 +1578,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753518341}
-  - component: {fileID: 1753518342}
   - component: {fileID: 1753518343}
   - component: {fileID: 1753518344}
   m_Layer: 5
@@ -1628,23 +1609,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -442}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1753518342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753518340}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27915eff4d50256469748d7bbca467a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_slotMachine: {fileID: 11400000, guid: feeb86a50939e494da7ced17c6cbf448, type: 2}
-  m_slotWheelPrefab: {fileID: 6743090570990411289, guid: 9ac97b5ef71386548ab71d52b9689b27, type: 3}
-  m_indicatorPrefab: {fileID: 498321738235099230, guid: 07021a5830d289543963f61909940cca, type: 3}
-  m_slotWheelContainer: {fileID: 702797901}
-  m_indicatorContainer: {fileID: 1267030876}
 --- !u!114 &1753518343
 MonoBehaviour:
   m_ObjectHideFlags: 0

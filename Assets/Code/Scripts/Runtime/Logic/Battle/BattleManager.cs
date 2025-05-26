@@ -66,7 +66,9 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
             m_battleData.InitializeFromRuntime();
 
             m_playerSlot.Setup(this.m_slotMachineConfig, this.m_itemResolver.GetByIds(this.m_battleData.PlayerTeam.Items));
+            m_playerSlot.OnSpinCompleted += OnPlayerSpinCompleted;
             m_enemySlot.Setup(this.m_slotMachineConfig, this.m_itemResolver.GetByIds(this.m_battleData.EnemyTeam.Items));
+            m_enemySlot.OnSpinCompleted += OnEnemySpinCompleted;
             //m_combatResolver.Setup(m_battleData, m_eventSystem);
 
             StartFirstTurn();
@@ -75,6 +77,11 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
         private void StartFirstTurn()
         {
             m_turnManager.StartFirstTurn();
+        }
+
+        private void OnDisable()
+        {
+            
         }
 
         #endregion
@@ -89,6 +96,23 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
             m_turnManager.NextTurn();
         }
 
+        #endregion
+
+        #region Event Handlers -----------------------------------------------
+
+        private void OnPlayerSpinCompleted(SlotResult result)
+        {
+            Debug.Log("PLAYER Spin done: " + result);
+            //ApplySpinResultToPlayer(result);
+            //EnterTargetingPhase();
+        }
+
+        private void OnEnemySpinCompleted(SlotResult result)
+        {
+            Debug.Log("ENEMY Spin done: " + result);
+            //ApplySpinResultToEnemy(result);
+            //EnterTargetingPhase();
+        }
         #endregion
     }
 }

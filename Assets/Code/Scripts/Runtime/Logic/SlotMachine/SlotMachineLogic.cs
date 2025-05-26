@@ -12,6 +12,9 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
     /// </summary>
     public class SlotMachineLogic
     {
+        public delegate void SpinCompletedHandler(SlotResult result);
+        public event SpinCompletedHandler OnSpinCompleted;
+
         private List<SlotSymbolData> m_symbolPool;
         private int m_wheelCount;
         private int m_spinLimit;
@@ -48,7 +51,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// </summary>
         public void Spin()
         {
-            if (IsSpinLimitReached)
+            if (IsSpinLimitReached || AllWheelsLocked())
                 return;
 
             for (int i = 0; i < m_wheelCount; i++)
@@ -60,6 +63,12 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
             }
 
             m_spinCount++;
+
+            if (IsSpinLimitReached || AllWheelsLocked())
+            {
+                var result = CalculateResult();
+                OnSpinCompleted?.Invoke(result);
+            }
         }
 
         /// <summary>
@@ -114,6 +123,11 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
             }
 
             return new SlotResult(energyTop, energyBottom, shieldRecovery);
+        }
+
+        private bool AllWheelsLocked()
+        {
+            return m_lockedIndexes.Count >= m_wheelCount;
         }
 
         private SlotSymbolData PickRandomSymbol()

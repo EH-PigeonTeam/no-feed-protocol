@@ -13,27 +13,30 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
     [HideMonoScript]
     public class SlotMachineController : MonoBehaviour
     {
+        public delegate void SpinResultHandler(SlotResult result);
+        public event SpinResultHandler OnSpinCompleted;
+
         [BoxGroup("Slot Configuration")]
         [SerializeField] private bool m_isPlayerControlled = true;
 
         [FoldoutGroup("Slot Structure", expanded: true)]
         [Tooltip("The slot wheel prefab to instantiate.")]
-        [SerializeField, AssetsOnly] 
+        [SerializeField, AssetsOnly]
         private GameObject m_slotWheelPrefab;
 
         [FoldoutGroup("Slot Structure")]
         [Tooltip("The indicator prefab to instantiate.")]
-        [SerializeField, AssetsOnly] 
+        [SerializeField, AssetsOnly]
         private GameObject m_indicatorPrefab;
 
         [FoldoutGroup("Slot Structure")]
         [Tooltip("The container for slot wheels.")]
-        [SerializeField, ChildGameObjectsOnly] 
+        [SerializeField, ChildGameObjectsOnly]
         private Transform m_wheelContainer;
 
         [FoldoutGroup("Slot Structure")]
         [Tooltip("The container for spin indicators.")]
-        [SerializeField, ChildGameObjectsOnly] 
+        [SerializeField, ChildGameObjectsOnly]
         private Transform m_indicatorContainer;
 
         [BoxGroup("References")]
@@ -54,6 +57,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         {
             m_logic = new SlotMachineLogic();
             m_logic.Setup(data, items);
+            m_logic.OnSpinCompleted += HandleSpinComplete;
 
             m_builder = new SlotMachineBuilder(
                 m_slotWheelPrefab,
@@ -70,6 +74,11 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
             if (m_view != null)
                 m_view.Setup(m_wheels, m_indicators);
+        }
+
+        private void OnDisable()
+        {
+            m_logic.OnSpinCompleted -= HandleSpinComplete;
         }
 
         #endregion
@@ -123,5 +132,15 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         public bool IsLocked => m_logic.IsSpinLimitReached;
 
         #endregion
+
+        #region Event Handlers --------------------------------------------------
+
+        private void HandleSpinComplete(SlotResult result)
+        {
+            OnSpinCompleted?.Invoke(result);
+        }
+
+        #endregion
+
     }
 }

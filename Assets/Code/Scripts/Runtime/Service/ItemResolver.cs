@@ -11,7 +11,7 @@ namespace NoFeedProtocol.Runtime.Services.Items
     public class ItemResolver : MonoBehaviour
     {
         [BoxGroup("References")]
-        [SerializeField]
+        [SerializeField, InlineEditor]
         private ItemsData m_database;
 
         /// <summary>
@@ -19,7 +19,12 @@ namespace NoFeedProtocol.Runtime.Services.Items
         /// </summary>
         public Item GetById(string id)
         {
-            return m_database.Items.FirstOrDefault(i => i.Id == id);
+            var item = m_database.Items.FirstOrDefault(i => i.Id == id);
+#if UNITY_EDITOR
+            if (item == null)
+                Debug.LogWarning($"[ItemResolver] Item with ID '{id}' not found.");
+#endif
+            return item;
         }
 
         /// <summary>
