@@ -20,37 +20,17 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         [SerializeField, MinValue(0f)]
         private float m_symbolRevealDelay = 0.1f;
 
-        [FoldoutGroup("Debug", expanded: true)]
-        [Tooltip("The list of instantiated slot wheels.")]
-        [ShowInInspector, ReadOnly]
-        private List<SlotWheel> m_slotWheels;
-
-        [FoldoutGroup("Debug")]
-        [Tooltip("The list of instantiated spin indicators.")]
-        [ShowInInspector, ReadOnly]
-        private List<Indicator> m_indicators;
-
-        /// <summary>
-        /// Initializes the view with instantiated visual components.
-        /// </summary>
-        public void Setup(List<SlotWheel> wheels, List<Indicator> indicators)
-        {
-            m_slotWheels = wheels;
-            m_indicators = indicators;
-        }
-
         /// <summary>
         /// Displays the current symbols by updating each wheel's sprite.
         /// </summary>
-        public void DisplaySymbols(IReadOnlyList<SlotSymbolData> symbols)
+        public void DisplaySymbols(IReadOnlyList<SlotSymbolData> symbols, List<SlotWheel> slotWheels)
         {
-            for (int i = 0; i < m_slotWheels.Count; i++)
+            for (int i = 0; i < slotWheels.Count; i++)
             {
                 if (i >= symbols.Count || symbols[i] == null)
                     continue;
 
-                var image = m_slotWheels[i].GetComponent<Image>();
-                if (image != null)
+                if (slotWheels[i].TryGetComponent<Image>(out var image))
                 {
                     image.DOFade(0f, 0f); // fade-out instantly
                     image.sprite = symbols[i].Sprite;
@@ -59,41 +39,53 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
             }
         }
 
-        /// <summary>
-        /// Visually locks a wheel by graying it out or disabling it.
-        /// </summary>
-        public void LockWheel(int index)
+        public void Restore(List<SlotWheel> slotWheels, List<Indicator> indicators)
         {
-            if (index < 0 || index >= m_slotWheels.Count)
-                return;
+            LockView(slotWheels, false);
 
-            m_slotWheels[index].LockWheel(true);
+            RestoreIndicators(indicators);
         }
 
-        /// <summary>
-        /// Resets the view state of wheels and indicators.
-        /// </summary>
-        public void Restore()
+        public void Lock(List<SlotWheel> slotWheels, List<Indicator> indicators)
         {
-            foreach (var wheel in m_slotWheels)
-            {
-                wheel.Restore();
-            }
+            LockLogic(slotWheels, true);
+            LockView(slotWheels, true);
 
-            foreach (var indicator in m_indicators)
+            foreach (var indicator in indicators)
+            {
+                indicator.Activate();
+            }
+        }
+
+        public void LockLogic(List<SlotWheel> slotWheels, bool isLocked)
+        {
+            foreach (var wheel in slotWheels)
+            {
+                wheel.interactable = !isLocked;
+            }
+        }
+
+        private void LockView(List<SlotWheel> slotWheels, bool isLocked)
+        {
+            foreach (var wheel in slotWheels)
+            {
+                wheel.Lock(isLocked);
+            }
+        }
+
+        public void SetActiveIndicator(int index, List<Indicator> indicators)
+        {
+            if (index >= 0 && index < indicators.Count)
+            {
+                indicators[index].Activate();
+            }
+        }
+
+        public void RestoreIndicators(List<Indicator> indicators)
+        {
+            foreach (var indicator in indicators)
             {
                 indicator.Restore();
-            }
-        }
-
-        /// <summary>
-        /// Activates a spin indicator at the given index.
-        /// </summary>
-        public void ActivateIndicator(int index)
-        {
-            if (index >= 0 && index < m_indicators.Count)
-            {
-                m_indicators[index].Activate();
             }
         }
     }

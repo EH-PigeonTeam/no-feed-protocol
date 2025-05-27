@@ -1,52 +1,52 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using NoFeedProtocol.Authoring.Items;
 using Code.Systems.Locator;
-using NoFeedProtocol.Runtime.Entities;
+using NoFeedProtocol.Authoring.Characters;
 
-namespace NoFeedProtocol.Runtime.Services.Items
+namespace NoFeedProtocol.Runtime.Services.Characters
 {
     [HideMonoScript]
-    public class ItemResolver : MonoBehaviour
+    public class CharacterResolver : MonoBehaviour
     {
         [BoxGroup("References")]
         [SerializeField, InlineEditor]
-        private ItemsData m_database;
+        private CharactersData m_database;
 
         /// <summary>
         /// Resolves a single character by its unique ID.
         /// </summary>
-        public Item GetById(string id)
+        public CharacterData GetById(string id)
         {
-            var item = m_database.Items.FirstOrDefault(i => i.Id == id);
+            CharacterData character = m_database.Characters.FirstOrDefault(i => i.Id == id);
 #if UNITY_EDITOR
-            if (item == null)
+            if (character == null)
                 Debug.LogWarning($"[ItemResolver] Item with ID '{id}' not found.");
 #endif
-            return item;
+
+            return character;
         }
 
         /// <summary>
         /// Resolves multiple items by their unique IDs.
         /// </summary>
-        public List<Item> GetByIds(List<string> ids)
+        public List<CharacterData> GetByIds(List<string> ids)
         {
             return ids
                 .Select(GetById)
-                .Where(item => item != null)
+                .Where(characters => characters != null)
                 .ToList();
         }
 
         private void OnEnable()
         {
-            ServiceLocator.Register<ItemResolver>(this);
+            ServiceLocator.Register<CharacterResolver>(this);
         }
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<ItemResolver>();
+            ServiceLocator.Unregister<CharacterResolver>();
         }
     }
 }

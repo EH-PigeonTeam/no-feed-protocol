@@ -26,6 +26,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
         public IReadOnlyList<SlotSymbolData> CurrentSymbols => m_currentSymbols;
         public bool IsSpinLimitReached => m_spinCount >= m_spinLimit;
+        public int Count => m_spinCount;
 
         private int m_spinCount;
 
@@ -49,10 +50,15 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// <summary>
         /// Spins all unlocked wheels and stores the resulting symbols.
         /// </summary>
-        public void Spin()
+        public void Spin(List<int> lockedIndexes = null)
         {
+            m_lockedIndexes = lockedIndexes;
+
             if (IsSpinLimitReached || AllWheelsLocked())
+            {
+                m_spinCount = m_spinLimit;
                 return;
+            }
 
             for (int i = 0; i < m_wheelCount; i++)
             {

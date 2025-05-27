@@ -15,8 +15,7 @@ namespace NoFeedProtocol.Runtime.Entities
             return new CharacterSaveData
             {
                 Id = Id,
-                Health = Health,
-                Energy = Energy
+                Health = Health
             };
         }
 
@@ -25,8 +24,7 @@ namespace NoFeedProtocol.Runtime.Entities
             return new CharacterRuntimeData
             {
                 Id = save.Id,
-                Health = save.Health,
-                Energy = save.Energy
+                Health = save.Health
             };
         }
     }

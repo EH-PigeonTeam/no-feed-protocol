@@ -172,10 +172,10 @@ namespace Core.Gameplay.SlotMachine
 
         private void ResetWheels()
         {
-            for (int i = 0; i < this.m_slotWheels.Length; i++)
-            {
-                this.m_slotWheels[i].Restore();
-            }
+            //for (int i = 0; i < this.m_slotWheels.Length; i++)
+            //{
+            //    this.m_slotWheels[i].Restore();
+            //}
         }
 
         private void UpdateIndicators(int index)
@@ -239,10 +239,10 @@ namespace Core.Gameplay.SlotMachine
 
             if (this.m_isLocked)
             {
-                for (int i = 0; i < this.m_slotWheels.Length; i++)
-                {
-                    this.m_slotWheels[i].LockWheel(true);
-                }
+                //for (int i = 0; i < this.m_slotWheels.Length; i++)
+                //{
+                //    this.m_slotWheels[i].LockWheel(true);
+                //}
 
                 TakeData();
             }

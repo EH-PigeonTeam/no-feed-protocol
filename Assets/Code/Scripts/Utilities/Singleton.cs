@@ -29,7 +29,7 @@ namespace Code.Systems.Utils
             {
                 if (applicationIsQuitting)
                 {
-                    Debug.LogWarning($"[Singleton] Instance '{typeof(T)}' already destroyed on application quit.");
+                    //Debug.LogWarning($"[Singleton] Instance '{typeof(T)}' already destroyed on application quit.");
                     return null;
                 }
 
@@ -43,7 +43,7 @@ namespace Code.Systems.Utils
 
                         if (m_instance != null && FindObjectsByType<T>(FindObjectsSortMode.None).Length > 1)
                         {
-                            Debug.LogError($"[Singleton] Multiple instances of singleton {typeof(T)} detected!");
+                            //Debug.LogError($"[Singleton] Multiple instances of singleton {typeof(T)} detected!");
                             return m_instance;
                         }
 
@@ -76,7 +76,7 @@ namespace Code.Systems.Utils
             }
             else
             {
-                Debug.LogWarning($"[Singleton] Duplicate instance of {typeof(T)} found. Destroying the new one.");
+                //Debug.LogWarning($"[Singleton] Duplicate instance of {typeof(T)} found. Destroying the new one.");
                 Destroy(gameObject);
             }
         }

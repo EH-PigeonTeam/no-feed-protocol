@@ -4,6 +4,8 @@ using Sirenix.OdinInspector;
 using Core.Gameplay.SlotMachine;
 using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Authoring.Items;
+using Code.Systems.Locator;
+using NoFeedProtocol.Runtime.Logic.Battle;
 
 namespace NoFeedProtocol.Runtime.Logic.Slot
 {
@@ -17,7 +19,8 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         public event SpinResultHandler OnSpinCompleted;
 
         [BoxGroup("Slot Configuration")]
-        [SerializeField] private bool m_isPlayerControlled = true;
+        [SerializeField]
+        private bool m_isPlayerControlled = true;
 
         [FoldoutGroup("Slot Structure", expanded: true)]
         [Tooltip("The slot wheel prefab to instantiate.")]
@@ -66,19 +69,29 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
                 m_indicatorContainer
             );
 
-            m_wheels = m_builder.CreateWheels(m_logic.CurrentSymbols.Count);
+            m_wheels = m_builder.CreateWheels(data.SlotWheelCount);
 
             m_indicators = m_isPlayerControlled && m_indicatorContainer != null
                 ? m_builder.CreateIndicators(data.SpinCount)
                 : new List<Indicator>();
+        }
 
-            if (m_view != null)
-                m_view.Setup(m_wheels, m_indicators);
+        private void OnEnable()
+        {
+            if (m_isPlayerControlled)
+            {
+                BattleManager.OnPlayerTurn += Reset;
+            }
         }
 
         private void OnDisable()
         {
             m_logic.OnSpinCompleted -= HandleSpinComplete;
+
+            if (m_isPlayerControlled)
+            {
+                BattleManager.OnPlayerTurn -= Reset;
+            }
         }
 
         #endregion
@@ -90,23 +103,35 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// </summary>
         public void Spin()
         {
-            if (m_logic.IsSpinLimitReached)
-                return;
-
-            m_logic.Spin();
-            m_view.DisplaySymbols(m_logic.CurrentSymbols);
-
             if (m_isPlayerControlled)
-                m_view.ActivateIndicator(m_logic.CurrentSymbols.Count - 1);
-        }
+            {
+                if (m_logic.IsSpinLimitReached)
+                {
+                    return;
+                }
 
-        /// <summary>
-        /// Locks a specific wheel.
-        /// </summary>
-        public void LockWheel(int index)
-        {
-            m_logic.LockWheel(index);
-            m_view.LockWheel(index);
+                m_logic.Spin(GetLockedIndexes());
+                m_view.DisplaySymbols(m_logic.CurrentSymbols, m_wheels);
+
+                if (m_logic.Count == 1)
+                {
+                    m_view.LockLogic(m_wheels, false);
+                }
+
+                if (m_logic.IsSpinLimitReached)
+                {
+                    Debug.Log("Spin limit reached!");
+                    m_view.Lock(m_wheels, m_indicators);
+                    return;
+                }
+
+                m_view.SetActiveIndicator(m_logic.Count - 1, m_indicators);
+            }
+            else
+            {
+                m_logic.Spin();
+                m_view.DisplaySymbols(m_logic.CurrentSymbols, m_wheels);
+            }
         }
 
         /// <summary>
@@ -120,16 +145,26 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// <summary>
         /// Resets the entire slot machine state and visuals.
         /// </summary>
+        [Button]
         public void Reset()
         {
             m_logic.Reset();
-            m_view.Restore();
+            m_view.Restore(m_wheels, m_indicators);
         }
 
-        /// <summary>
-        /// Returns true if the slot machine reached its max spin count.
-        /// </summary>
-        public bool IsLocked => m_logic.IsSpinLimitReached;
+        private List<int> GetLockedIndexes()
+        {
+            List<int> ints = new();
+            for (int i = 0; i < m_wheels.Count; i++)
+            {
+                if (!m_wheels[i].IsLocked)
+                {
+                    continue;
+                }
+                ints.Add(i);
+            }
+            return ints;
+        }
 
         #endregion
 

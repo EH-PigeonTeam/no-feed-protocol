@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Authoring.Characters.Animation;
 using NoFeedProtocol.Authoring.Characters;
+using Code.Systems.Locator;
+using NoFeedProtocol.Runtime.Logic.Battle;
 
 namespace NoFeedProtocol.Runtime.UI
 {
@@ -15,20 +17,41 @@ namespace NoFeedProtocol.Runtime.UI
     {
         #region Fields -------------------------------------------
 
-        [SerializeField]
+        [BoxGroup("Components")]
+        [Tooltip("The health text")]
+        [SerializeField, ChildGameObjectsOnly]
         private TMP_Text m_health;
 
-        [SerializeField]
+        [BoxGroup("Components")]
+        [Tooltip("The attack text")]
+        [SerializeField, ChildGameObjectsOnly]
         private TMP_Text m_attack;
 
-        [SerializeField]
+        [BoxGroup("Components")]
+        [Tooltip("The attack to shield text")]
+        [SerializeField, ChildGameObjectsOnly]
         private TMP_Text m_attackToShield;
 
-        [SerializeField]
+        [BoxGroup("Components")]
+        [Tooltip("The energy bar of the character")]
+        [SerializeField, ChildGameObjectsOnly]
         private Slider m_energy;
 
-        [SerializeField]
+        [BoxGroup("Components")]
+        [Tooltip("The animator of the character")]
+        [SerializeField, ChildGameObjectsOnly]
         private Animator m_animator;
+
+        [BoxGroup("Components")]
+        [Tooltip("The viewfinder of the character")]
+        [SerializeField, ChildGameObjectsOnly]
+        private GameObject m_viewfinder;
+
+        [BoxGroup("Settings")]
+        [SerializeField]
+        private bool m_isEnemy;
+
+        private BattleManager m_battleManager;
 
         #endregion
 
@@ -45,6 +68,21 @@ namespace NoFeedProtocol.Runtime.UI
             EnergyMax(character.EnergyRequired);
             Energy(character.EnergyRequired);
             SetAnimator(character.Anim);
+
+            if (this.m_isEnemy)
+            {
+                this.m_battleManager = ServiceLocator.Get<BattleManager>();
+
+                this.m_battleManager.OnPlayerAiming += SetViewfinderActive;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (this.m_isEnemy)
+            {
+                this.m_battleManager.OnPlayerAiming -= SetViewfinderActive;
+            }
         }
 
         #region Methods ------------------------------------------
@@ -88,6 +126,18 @@ namespace NoFeedProtocol.Runtime.UI
                 this.m_animator.runtimeAnimatorController,
                 clips
             );
+        }
+
+        private void SetViewfinderActive(bool isActive)
+        {
+            if (this.m_viewfinder.TryGetComponent(out CanvasGroupFade fade) && this.m_viewfinder.activeSelf)
+            {
+                fade.FadeOutAndDisable();
+            }
+            else
+            {
+                this.m_viewfinder.SetActive(isActive);
+            }
         }
 
         #endregion

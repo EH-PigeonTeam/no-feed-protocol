@@ -8,6 +8,8 @@ namespace NoFeedProtocol.Shared.Utilities
     /// </summary>
     public static class AnimatorInjector
     {
+        private const string ANIMATOR_INJECTOR_TAG = "[<color=yellow>AnimatorInjector</color>]";
+
         /// <summary>
         /// Injects animation clip overrides into the given controller.
         /// </summary>
@@ -27,7 +29,7 @@ namespace NoFeedProtocol.Shared.Utilities
             var overrideList = new List<KeyValuePair<AnimationClip, AnimationClip>>();
             overrideController.GetOverrides(overrideList);
 
-            Debug.Log($"[AnimatorInjector] Total override targets: {overrideList.Count}");
+            Debug.Log($"{ANIMATOR_INJECTOR_TAG} Total override targets: {overrideList.Count}");
 
             for (int i = 0; i < overrideList.Count; i++)
             {
@@ -35,7 +37,7 @@ namespace NoFeedProtocol.Shared.Utilities
 
                 if (originalClip == null)
                 {
-                    Debug.LogWarning($"[AnimatorInjector] Null clip in controller override list at index {i}.");
+                    Debug.LogWarning($"{ANIMATOR_INJECTOR_TAG} Null clip in controller override list at index {i}.");
                     continue;
                 }
 
@@ -45,17 +47,17 @@ namespace NoFeedProtocol.Shared.Utilities
                 {
                     if (newClip != null)
                     {
-                        Debug.Log($"[AnimatorInjector] Overriding '{name}' with '{newClip.name}'");
+                        Debug.Log($"{ANIMATOR_INJECTOR_TAG} Overriding '{name}' with '{newClip.name}'");
                         overrideList[i] = new KeyValuePair<AnimationClip, AnimationClip>(originalClip, newClip);
                     }
                     else
                     {
-                        Debug.LogWarning($"[AnimatorInjector] New clip for '{name}' is null.");
+                        Debug.LogWarning($"{ANIMATOR_INJECTOR_TAG} New clip for '{name}' is null.");
                     }
                 }
                 else
                 {
-                    Debug.Log($"[AnimatorInjector] No override found for '{name}' — keeping original.");
+                    Debug.Log($"{ANIMATOR_INJECTOR_TAG} No override found for '{name}' — keeping original.");
                 }
             }
 

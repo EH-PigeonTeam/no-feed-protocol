@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Core.Gameplay.SlotMachine
 {
-    public class SlotWheel : ButtonAudio, IResettable
+    public class SlotWheel : ButtonAudio
     {
         [Header("Slot Wheel")]
         [SerializeField] private GameObject m_wheelObject;
@@ -33,16 +33,11 @@ namespace Core.Gameplay.SlotMachine
             this.m_wheelObject.SetActive(state);
         }
 
-        public void LockWheel(bool state)
-        {
-            SetWheel(state);
-            this.interactable = !state;
-        }
-
-        public void Restore()
-        {
-            LockWheel(false);
-        }
+        /// <summary>
+        /// Locks or unlocks the wheel
+        /// </summary>
+        /// <param name="state">If true, the wheel is locked</param>
+        public void Lock(bool state) => SetWheel(state);
     }
 
     public interface IResettable

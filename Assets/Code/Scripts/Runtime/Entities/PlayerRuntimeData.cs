@@ -36,5 +36,10 @@ namespace NoFeedProtocol.Runtime.Entities
                 Items = new List<string>(save.OwnedItemIDs)
             };
         }
+
+        public bool CharactersAreAlive()
+        {
+            return CharacterTop.Health > 0 && CharacterBottom.Health > 0;
+        }
     }
 }

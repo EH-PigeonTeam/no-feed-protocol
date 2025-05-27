@@ -1,8 +1,5 @@
 using System;
-using UnityEngine;
 using Sirenix.OdinInspector;
-using NoFeedProtocol.Runtime.Logic.Data;
-//using NoFeedProtocol.Runtime.Logic.Events;
 
 namespace NoFeedProtocol.Runtime.Logic.Turns
 {
@@ -18,15 +15,14 @@ namespace NoFeedProtocol.Runtime.Logic.Turns
         /// <summary>
         /// Current active team.
         /// </summary>
-        public TeamSide CurrentTurn => m_currentTurn;
+        public TeamSide CurrentTurn => this.m_currentTurn;
 
         /// <summary>
         /// Starts the battle with the player's turn by default.
         /// </summary>
         public void StartFirstTurn()
         {
-            m_currentTurn = TeamSide.Player;
-            //BattleEventSystem.Invoke(BattleEventType.OnTurnStart, new BattleContext(m_currentTurn));
+            this.m_currentTurn = TeamSide.Player;
         }
 
         /// <summary>
@@ -34,8 +30,7 @@ namespace NoFeedProtocol.Runtime.Logic.Turns
         /// </summary>
         public void NextTurn()
         {
-            m_currentTurn = m_currentTurn == TeamSide.Player ? TeamSide.Enemy : TeamSide.Player;
-            //BattleEventSystem.Invoke(BattleEventType.OnTurnStart, new BattleContext(m_currentTurn));
+            this.m_currentTurn = this.m_currentTurn == TeamSide.Player ? TeamSide.Enemy : TeamSide.Player;
         }
     }
 
