@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using Code.Systems.Locator;
 using Code.Systems.LoadingScene.VFX;
 using System.Linq;
+using System;
 
 namespace Code.Systems.LoadingScene
 {
@@ -31,6 +32,8 @@ namespace Code.Systems.LoadingScene
         private bool m_fadeIn = true;
         private bool m_fadeOut = true;
         private bool m_enableFakeTime = true;
+
+        public static event Action OnSceneLoaded;
 
         private void Awake()
         {
@@ -129,6 +132,8 @@ namespace Code.Systems.LoadingScene
             m_fadeIn = true;
             m_fadeOut = true;
             m_enableFakeTime = true;
+
+            OnSceneLoaded?.Invoke();
         }
 
         private IEnumerator UnloadScenesRoutine(HashSet<string> preserveSet)
