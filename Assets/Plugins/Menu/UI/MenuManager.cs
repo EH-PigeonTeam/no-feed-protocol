@@ -53,21 +53,6 @@ namespace PsychoGarden.UI
         }
 
         #endregion
-
-        #region Public Methods
-
-        public void Quit()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        }
-
-        public void LoadScene(string sceneName) => UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-
-        #endregion
     }
 
     [Serializable]

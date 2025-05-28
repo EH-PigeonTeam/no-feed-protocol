@@ -179,6 +179,53 @@ MonoBehaviour:
   m_speed: 0.2
   m_ease: 1
   m_pauseDuration: 1
+--- !u!1 &268392713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268392715}
+  - component: {fileID: 268392714}
+  m_Layer: 0
+  m_Name: StartGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &268392714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268392713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28247814b39a8064a8af7b690a7e7053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioMixer: {fileID: 24100000, guid: 1fbb660ffcaa0d7469680de34d6f8efa, type: 2}
+  m_graphicsVolume: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  m_accessibilityVolume: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+--- !u!4 &268392715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268392713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287822755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d85678eedc46e849a26169b88b59791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_firstScene: CharacterSelection
+  m_firstScene: Logo
   m_sceneData: {fileID: 11400000, guid: ecb5ab22bcfa49e47a604507b02df06a, type: 2}
 --- !u!1 &1832847047
 GameObject:
@@ -1920,6 +1967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_audioSources: []
+  m_audioMixer: {fileID: 24100000, guid: 1fbb660ffcaa0d7469680de34d6f8efa, type: 2}
 --- !u!1 &2036519702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,6 +2167,7 @@ SceneRoots:
   - {fileID: 749723340}
   - {fileID: 822641982}
   - {fileID: 558900847}
+  - {fileID: 268392715}
   - {fileID: 1832847048}
   - {fileID: 768405083}
   - {fileID: 2036519705}

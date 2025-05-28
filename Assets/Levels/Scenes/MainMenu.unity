@@ -1311,7 +1311,7 @@ PrefabInstance:
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2060010666}
+      objectReference: {fileID: 590858776}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1322,7 +1322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PsychoGarden.UI.MenuManager, Assembly-CSharp-firstpass
+      value: NoFeedProtocol.Runtime.UI.QuitGame, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1335,7 +1335,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7451258426942251306, guid: 56b267c314612544b9fef0426c369698, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590858776}
   m_SourcePrefab: {fileID: 100100000, guid: 56b267c314612544b9fef0426c369698, type: 3}
 --- !u!224 &590858773 stripped
 RectTransform:
@@ -1347,10 +1350,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
   m_PrefabInstance: {fileID: 590858772}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 590858775}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 954e16e074bb2a34187d3d7753833cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &590858775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7451258426942251306, guid: 56b267c314612544b9fef0426c369698, type: 3}
+  m_PrefabInstance: {fileID: 590858772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &590858776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590858775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d31efbcc40924478b7314560af2412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &657052730

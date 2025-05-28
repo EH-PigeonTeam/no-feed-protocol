@@ -49,6 +49,7 @@ namespace PsychoGarden.UI
 
         private int m_selectedResolutionIndex;
         private FullScreenMode m_screenMode = FullScreenMode.FullScreenWindow;
+        private int m_selectedFrameRateIndex;
         private int m_selectedQualityIndex;
         private int m_targetFrameRate = 60;
         private float m_brightness = 0.75f;
@@ -83,8 +84,9 @@ namespace PsychoGarden.UI
             this.m_dropdownResolution.onValueChanged.AddListener(this.OnResolutionChanged);
 
             this.m_dropdownScreenMode.ClearOptions();
-            this.m_dropdownScreenMode.AddOptions(new List<string> { "Fullscreen", "Windowed", "Borderless" });
-            this.m_dropdownScreenMode.SetValueWithoutNotify((int)this.m_screenMode);
+            this.m_dropdownScreenMode.AddOptions(new List<string> { "Windowed", "Fullscreen", "Borderless" });
+            int modeIndex = ModeToIndex(this.m_screenMode);
+            this.m_dropdownScreenMode.SetValueWithoutNotify(modeIndex);
             this.m_dropdownScreenMode.onValueChanged.AddListener(this.OnScreenModeChanged);
 
             this.m_dropdownQuality.ClearOptions();
@@ -92,9 +94,15 @@ namespace PsychoGarden.UI
             this.m_dropdownQuality.SetValueWithoutNotify(this.m_selectedQualityIndex);
             this.m_dropdownQuality.onValueChanged.AddListener(this.OnQualityChanged);
 
+            List<string> fpsOptions = FrameRateHelper.GetAvailableOptions();
             this.m_dropdownFrameRate.ClearOptions();
-            this.m_dropdownFrameRate.AddOptions(new List<string> { "30", "60", "120", "144", "Unlimited" });
-            this.m_dropdownFrameRate.SetValueWithoutNotify(this.FrameRateToIndex(this.m_targetFrameRate));
+            this.m_dropdownFrameRate.AddOptions(fpsOptions);
+
+            m_selectedFrameRateIndex = FrameRateHelper.RateToIndex(this.m_targetFrameRate);
+            if (m_selectedFrameRateIndex < 0)
+                m_selectedFrameRateIndex = 0;
+
+            this.m_dropdownFrameRate.SetValueWithoutNotify(m_selectedFrameRateIndex);
             this.m_dropdownFrameRate.onValueChanged.AddListener(this.OnFrameRateChanged);
 
             if (this.m_sliderBrightness != null)
@@ -129,6 +137,7 @@ namespace PsychoGarden.UI
         private void ApplyScreenMode()
         {
             Screen.fullScreenMode = this.m_screenMode;
+            Screen.fullScreen = this.m_screenMode != FullScreenMode.Windowed;
         }
 
         private void ApplyQuality()
@@ -194,7 +203,7 @@ namespace PsychoGarden.UI
 
         private void OnScreenModeChanged(int index)
         {
-            this.m_screenMode = (FullScreenMode)index;
+            this.m_screenMode = IndexToMode(index);
             this.ApplyScreenMode();
             this.SaveSettings();
         }
@@ -208,9 +217,10 @@ namespace PsychoGarden.UI
 
         private void OnFrameRateChanged(int index)
         {
-            this.m_targetFrameRate = this.IndexToFrameRate(index);
-            this.ApplyFrameRate();
-            this.SaveSettings();
+            m_selectedFrameRateIndex = index;
+            m_targetFrameRate = FrameRateHelper.IndexToRate(index);
+            ApplyFrameRate();
+            SaveSettings();
         }
 
         private void OnBrightnessChanged(float value)
@@ -222,32 +232,27 @@ namespace PsychoGarden.UI
 
         #endregion
 
-        #region Helpers
-
-        private int FrameRateToIndex(int frameRate)
+        private int ModeToIndex(FullScreenMode mode)
         {
-            return frameRate switch
+            return mode switch
             {
-                30 => 0,
-                60 => 1,
-                120 => 2,
-                144 => 3,
-                _ => 4 // Unlimited
+                FullScreenMode.Windowed => 0,
+                FullScreenMode.ExclusiveFullScreen => 1,
+                FullScreenMode.FullScreenWindow => 2,
+                _ => 0
             };
         }
 
-        private int IndexToFrameRate(int index)
+        private FullScreenMode IndexToMode(int index)
         {
             return index switch
             {
-                0 => 30,
-                1 => 60,
-                2 => 120,
-                3 => 144,
-                _ => -1 // Unlimited
+                0 => FullScreenMode.Windowed,
+                1 => FullScreenMode.ExclusiveFullScreen,
+                2 => FullScreenMode.FullScreenWindow,
+                _ => FullScreenMode.Windowed
             };
         }
 
-        #endregion
     }
 }

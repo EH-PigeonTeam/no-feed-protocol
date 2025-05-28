@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using PsychoGarden.Utils;
 using PsychoGarden.Systems.Save;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace PsychoGarden.UI
 {
@@ -106,7 +107,7 @@ namespace PsychoGarden.UI
         {
             if (!AudioController.MixerParameterMap.TryGetValue(groupType, out var parameter)) return;
 
-            float volumeDb = Mathf.Lerp(-80f, 0f, value);
+            float volumeDb = AudioHelper.NormalizedToDecibels(value);
             this.m_audioMixer.SetFloat(parameter, volumeDb);
         }
 
@@ -116,11 +117,12 @@ namespace PsychoGarden.UI
 
             if (mute)
             {
+
                 this.m_audioMixer.SetFloat(parameter, -80f);
             }
             else
             {
-                float volumeDb = Mathf.Lerp(-80f, 0f, lastVolume);
+                float volumeDb = AudioHelper.NormalizedToDecibels(lastVolume);
                 this.m_audioMixer.SetFloat(parameter, volumeDb);
             }
         }
