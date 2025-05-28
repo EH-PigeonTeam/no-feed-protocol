@@ -95,7 +95,7 @@ namespace NoFeedProtocol.Authoring.Events
         [FoldoutGroup("@m_title")]
         [Tooltip("The chooses of the item")]
         [SerializeField]
-        private EventOption[] m_conditions;
+        private EventOption[] m_options;
 
         #endregion
 
@@ -105,7 +105,7 @@ namespace NoFeedProtocol.Authoring.Events
         public Sprite Icon => m_icon;
         public string Text => m_text;
         public float Percent => m_Percent;
-        public EventOption[] Options => m_conditions;
+        public EventOption[] Options => m_options;
 
         #endregion
     }
@@ -150,7 +150,7 @@ namespace NoFeedProtocol.Authoring.Events
         [FoldoutGroup("Option")]
         [Tooltip("The outcome of selecting this option.")]
         [SerializeField, InlineProperty, HideLabel]
-        private EventConsequence m_consequence;
+        private EventConsequence[] m_consequence;
 
         [FoldoutGroup("Option")]
         [Tooltip("Optional item granted if this option succeeds.")]
@@ -158,7 +158,7 @@ namespace NoFeedProtocol.Authoring.Events
         private string m_itemID;
 
         public string Text => m_text;
-        public EventConsequence Consequence => m_consequence;
+        public EventConsequence[] Consequence => m_consequence;
         public string ItemReward => m_itemID;
     }
 }
