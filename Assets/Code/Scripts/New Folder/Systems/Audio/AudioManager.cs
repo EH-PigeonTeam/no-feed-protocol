@@ -109,11 +109,11 @@ namespace Code.Systems.Audio
             {
                 AudioSource audioSource = (audioGroup == AudioGroupType.Music) ? this.m_audioSourceMusic : this.m_audioSourceSFX;
 
-                //if ((audioSource.clip == audioClip || m_currentMusicClip == audioClip) && audioSource.isPlaying)
-                //{
-                //    Debug.Log("AudioManager: music already playing, skip replay");
-                //    return;
-                //}
+                if ((audioSource.clip == audioClip) && audioSource.isPlaying)
+                {
+                    Debug.Log("AudioManager: music already playing, skip replay");
+                    return;
+                }
 
                 audioSource.SetScheduledEndTime(0); // Stop playback immediately
                 audioSource.volume = volume;

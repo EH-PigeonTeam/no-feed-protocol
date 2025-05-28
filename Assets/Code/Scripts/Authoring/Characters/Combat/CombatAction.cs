@@ -8,13 +8,8 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
     public class CombatAction
     {
         [FoldoutGroup("@GetName()")]
-        [Tooltip("Type of the action to execute")]
-        [SerializeField]
-        private CombatActionType m_type;
-
-        [FoldoutGroup("@GetName()")]
         [Tooltip("Target affected by the action")]
-        [SerializeField]
+        [SerializeField, OnValueChanged("OnTargetChanged")]
         private CombatTargetType m_target;
 
         [HorizontalGroup("@GetName()/value", width: 16f)]
@@ -32,7 +27,6 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
         [SerializeField]
         private float m_modifier = 1f;
 
-        public CombatActionType Type => this.m_type;
         public CombatTargetType Target => this.m_target;
         public bool OverrideValue => this.m_overrideValue;
         public int Value => this.m_value;
@@ -44,9 +38,18 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
             return (int)(this.m_value * this.m_modifier);
         }
 
+        private void OnTargetChanged()
+        {
+            if (this.m_target == CombatTargetType.SelfShield 
+                || this.m_target == CombatTargetType.AllyLowestHP)
+            {
+                this.m_overrideValue = true;
+            }
+        }
+
         private string GetName()
         {
-            return this.m_type + " | " + this.m_target + (this.m_overrideValue ? $" | {GetValueNormalized()}" : "");
+            return this.m_target + (this.m_overrideValue ? $" | {GetValueNormalized()}" : "");
         }
 #endif
     }

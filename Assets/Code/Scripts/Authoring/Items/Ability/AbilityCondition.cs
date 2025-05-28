@@ -2,9 +2,6 @@ using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-#if UNITY_EDITOR
-#endif
-
 namespace NoFeedProtocol.Authoring.Items.Abilities
 {
     [Serializable]

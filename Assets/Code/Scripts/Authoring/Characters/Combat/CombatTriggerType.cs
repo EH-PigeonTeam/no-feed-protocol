@@ -4,8 +4,8 @@
     {
         OnAttackReady,
         OnHit,
-        OnTurnStart,
-        OnTurnEnd,
-        OnDeath
+        //OnTurnStart,
+        //OnTurnEnd,
+        //OnDeath
     }
 }

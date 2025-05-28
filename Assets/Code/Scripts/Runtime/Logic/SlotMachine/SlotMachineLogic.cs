@@ -163,7 +163,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
             // - Add new symbols
             // - Modify symbol weights
 
-            // This is where Ability.Condition / AbilityEffect could be checked
+            // This is where ItemAbility.Condition / AbilityAction could be checked
         }
     }
 }

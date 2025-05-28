@@ -5,6 +5,7 @@ namespace NoFeedProtocol.Authoring.Items.Abilities
 {
     public enum AbilityTriggerMoment
     {
-        Always
+        Always,
+        //OnUse // When the ability is used
     }
 }

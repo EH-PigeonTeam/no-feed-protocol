@@ -3,6 +3,7 @@
     public enum CombatTargetType
     {
         Self,
+        SelfShield,
         EnemyTargeted,
         EnemyOther,
         EnemyAll,

@@ -10,7 +10,7 @@ using UnityEditor;
 namespace NoFeedProtocol.Authoring.Items
 {
     [Serializable]
-    public class Item : ISerializationCallbackReceiver
+    public class Item
     {
         #region Unique ID ---------------------------------------------------
 
@@ -34,9 +34,6 @@ namespace NoFeedProtocol.Authoring.Items
         }
 #endif
 
-        public void OnBeforeSerialize() { }
-        public void OnAfterDeserialize() { }
-
         #endregion
 
         #region Basic Info --------------------------------------------------
@@ -59,13 +56,17 @@ namespace NoFeedProtocol.Authoring.Items
         [FoldoutGroup("@m_name")]
         [Tooltip("The percentage of the item can appear")]
         [SerializeField, Range(0, 1)]
-        private float m_Percent = 1f;
+        private float m_percent = 1f;
 
-        // Logic
+        [FoldoutGroup("@m_name")]
+        [Tooltip("The rarity of the item")]
+        [SerializeField]
+        private ItemRarity m_rarity;
+
         [FoldoutGroup("@m_name")]
         [Tooltip("The percentage of the item can appear")]
         [SerializeField, InlineProperty, HideLabel]
-        private Ability ability;
+        private ItemAbility ability;
 
         #endregion
 
@@ -74,8 +75,9 @@ namespace NoFeedProtocol.Authoring.Items
         public string Name => m_name;
         public Sprite Icon => m_icon;
         public string Description => m_description;
-        public float Percent => m_Percent;
-        public Ability GetAbility => ability;
+        public float Percent => m_percent;
+        public ItemRarity Rarity => m_rarity;
+        public ItemAbility GetAbility => ability;
 
         #endregion
     }
