@@ -8,18 +8,18 @@ using NoFeedProtocol.Authoring.Characters;
 namespace NoFeedProtocol.Runtime.Services.Characters
 {
     [HideMonoScript]
-    public class CharacterResolver : MonoBehaviour
+    public class CharacterEnemyResolver : MonoBehaviour
     {
         [BoxGroup("References")]
         [SerializeField, InlineEditor]
-        private CharactersData m_database;
+        private CharactersEnemyData m_database;
 
         /// <summary>
         /// Resolves a single character by its unique ID.
         /// </summary>
-        public CharacterData GetById(string id)
+        public CharacterEnemyData GetById(string id)
         {
-            CharacterData character = m_database.Characters.FirstOrDefault(i => i.Id == id);
+            CharacterEnemyData character = m_database.Characters.FirstOrDefault(i => i.Id == id);
 #if UNITY_EDITOR
             if (character == null)
                 Debug.LogWarning($"[ItemResolver] Item with ID '{id}' not found.");
@@ -31,12 +31,17 @@ namespace NoFeedProtocol.Runtime.Services.Characters
         /// <summary>
         /// Resolves multiple items by their unique IDs.
         /// </summary>
-        public List<CharacterData> GetByIds(List<string> ids)
+        public List<CharacterEnemyData> GetByIds(List<string> ids)
         {
             return ids
                 .Select(GetById)
                 .Where(characters => characters != null)
                 .ToList();
+        }
+
+        public List<CharacterEnemyData> GetAll()
+        {
+            return m_database.Characters.ToList();
         }
 
         private void OnEnable()
@@ -46,7 +51,7 @@ namespace NoFeedProtocol.Runtime.Services.Characters
 
         private void OnDisable()
         {
-            ServiceLocator.Unregister<CharacterResolver>();
+            ServiceLocator.Unregister<CharacterEnemyResolver>();
         }
     }
 }

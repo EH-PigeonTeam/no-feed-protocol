@@ -55,26 +55,24 @@ namespace NoFeedProtocol.Runtime.UI
 
         #endregion
 
-        public void Init(CharacterRuntimeData data, CharactersData charactersData)
+        public void Init(CharacterData config, CharacterRuntimeData runtime)
         {
-            Health(data.Health.ToString());
+            Health(runtime.Health.ToString());
+            Attack(config.AttackPoints.ToString());
+            AttackToShield(config.AttackPointsShield.ToString());
+            EnergyMax(config.EnergyRequired);
+            Energy(runtime.Energy);
+            SetAnimator(config.Anim);
+        }
 
-            var character = charactersData.GetById(data.Id);
-            if (character == null)
-                return;
-
-            Attack(character.AttackPoints.ToString());
-            AttackToShield(character.AttackPointsShield.ToString());
-            EnergyMax(character.EnergyRequired);
-            Energy(character.EnergyRequired);
-            SetAnimator(character.Anim);
-
-            if (this.m_isEnemy)
-            {
-                this.m_battleManager = ServiceLocator.Get<BattleManager>();
-
-                this.m_battleManager.OnPlayerAiming += SetViewfinderActive;
-            }
+        public void Init(CharacterEnemyData config, CharacterRuntimeData runtime)
+        {
+            Health(runtime.Health.ToString());
+            Attack(config.AttackPoints.ToString());
+            AttackToShield(config.AttackPointsShield.ToString());
+            EnergyMax(config.EnergyRequired);
+            Energy(runtime.Energy);
+            SetAnimator(config.Anim);
         }
 
         private void OnDisable()

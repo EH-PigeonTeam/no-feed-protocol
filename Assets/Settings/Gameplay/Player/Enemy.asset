@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9925dbeafb4e148a63ea9287a41230, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  m_characters:
+  - m_id: 3644385a-734a-40a0-aafc-ff3421e5d77f
+    m_name: test1
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 7400000, guid: 5783ca327098b6a47b556b7fa7258288, type: 2}
+      m_attack: {fileID: 7400000, guid: d77e16027c341d045a899c7af5abc53a, type: 2}
+      m_damage: {fileID: 7400000, guid: d77e16027c341d045a899c7af5abc53a, type: 2}
+      m_death: {fileID: 7400000, guid: 560d3037765cabf4abc0c05257b72ed5, type: 2}
+    m_maxHealth: 20
+    m_attackPointsShield: 20
+    m_attackPoints: 20
+    m_shield: 20
+    m_energyRequired: 3
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: c409d48a-01af-4d12-9813-de7f60d80396
+    m_name: test2
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 7400000, guid: 4847044766e5da447a95d9b1f9473c1a, type: 2}
+      m_attack: {fileID: 7400000, guid: 2e01b0ab78db09648ab0cc4181c42630, type: 2}
+      m_damage: {fileID: 7400000, guid: 3e1e68bd290b5404eb62f3549a6b87a7, type: 2}
+      m_death: {fileID: 7400000, guid: 80c359b991234fc46935815924ec9cfc, type: 2}
+    m_maxHealth: 60
+    m_attackPointsShield: 60
+    m_attackPoints: 60
+    m_shield: 60
+    m_energyRequired: 2
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5

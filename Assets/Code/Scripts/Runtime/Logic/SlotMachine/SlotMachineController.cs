@@ -6,6 +6,7 @@ using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Authoring.Items;
 using Code.Systems.Locator;
 using NoFeedProtocol.Runtime.Logic.Battle;
+using Sirenix.Utilities;
 
 namespace NoFeedProtocol.Runtime.Logic.Slot
 {
@@ -148,8 +149,13 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         [Button]
         public void Reset()
         {
-            m_logic.Reset();
-            m_view.Restore(m_wheels, m_indicators);
+            if (m_wheels.IsNullOrEmpty() || m_indicators.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            m_logic?.Reset();
+            m_view?.Restore(m_wheels, m_indicators);
         }
 
         private List<int> GetLockedIndexes()

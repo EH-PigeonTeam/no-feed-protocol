@@ -11,7 +11,7 @@ using UnityEditor;
 namespace NoFeedProtocol.Authoring.Characters
 {
     [Serializable]
-    public class CharacterData
+    public class CharacterEnemyData : CharacterWrapper
     {
         #region Unique ID ---------------------------------------------------
 
@@ -35,9 +35,6 @@ namespace NoFeedProtocol.Authoring.Characters
         }
 #endif
 
-        public void OnBeforeSerialize() { }
-        public void OnAfterDeserialize() { }
-
         #endregion
 
         #region Basic Info --------------------------------------------------
@@ -48,19 +45,9 @@ namespace NoFeedProtocol.Authoring.Characters
         private string m_name;
 
         [FoldoutGroup("@m_name")]
-        [Tooltip("Main icon for UI display.")]
-        [SerializeField, PreviewField(100)]
-        private Sprite m_icon;
-
-        [FoldoutGroup("@m_name")]
-        [Tooltip("Alternate icon variant.")]
-        [SerializeField, PreviewField(100)]
-        private Sprite m_icon2;
-
-        [FoldoutGroup("@m_name")]
-        [Tooltip("Flavor text or lore description.")]
-        [SerializeField, TextArea(4, 10)]
-        private string m_description;
+        [Tooltip("The percentage chance of this character appearing in the game.")]
+        [SerializeField, Range(0f, 1f)]
+        private float m_percent = 1f;
 
         #endregion
 
@@ -102,21 +89,24 @@ namespace NoFeedProtocol.Authoring.Characters
 
         #endregion
 
-        #region Combat Behavior ---------------------------------------------
+        #region Behaviors ---------------------------------------------------
 
         [FoldoutGroup("@m_name/Combat")]
         [Tooltip("Passive or reactive combat behavior.")]
         [SerializeField, InlineProperty, HideLabel]
         private CombatBehavior m_combatBehavior;
 
+        [FoldoutGroup("@m_name/Aiming")]
+        [Tooltip("Passive or reactive combat behavior.")]
+        [SerializeField, InlineProperty, HideLabel]
+        private AimingBehavior m_aimingBehavior;
+
         #endregion
 
         #region Public Properties -------------------------------------------
 
         public string Name => this.m_name;
-        public Sprite Icon => this.m_icon;
-        public Sprite Icon2 => this.m_icon2;
-        public string Description => this.m_description;
+        public float Percent => this.m_percent;
         public CharacterAnimationSet Anim => this.m_anim;
         public int MaxHealth => this.m_maxHealth;
         public int AttackPointsShield => this.m_attackPointsShield;
@@ -124,7 +114,10 @@ namespace NoFeedProtocol.Authoring.Characters
         public int Shield => this.m_shield;
         public int EnergyRequired => this.m_energyRequired;
         public CombatBehavior CombatBehavior => this.m_combatBehavior;
+        public AimingBehavior AimingBehavior => this.m_aimingBehavior;
 
         #endregion
     }
+
+    public class CharacterWrapper { }
 }

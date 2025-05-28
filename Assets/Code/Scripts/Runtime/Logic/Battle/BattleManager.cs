@@ -81,8 +81,6 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
         private void InitializeBattle()
         {
-            m_battleData.InitializeFromRuntime();
-
             m_playerSlot.Setup(m_slotMachineConfig, m_itemResolver.GetByIds(m_battleData.PlayerTeam.Items));
             m_playerSlot.OnSpinCompleted += OnPlayerSpinCompleted;
 
@@ -115,6 +113,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
             return this.m_battleData.PlayerTeam.CharactersAreAlive() && !this.m_battleData.EnemyTeam.CharactersAreAlive();
         }
 
+        public BattleRuntimeData BattleRuntimeData => m_battleData;
         public bool IsPlayerTurn => m_turnManager.CurrentTurn == TeamSide.Player;
 
         #endregion
