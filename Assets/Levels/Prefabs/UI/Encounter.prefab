@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4096699047460215126}
   - component: {fileID: 8033807256671809299}
   - component: {fileID: 5827501793871791384}
+  - component: {fileID: 7261114294832847819}
   m_Layer: 5
   m_Name: Encounter
   m_TagString: Untagged
@@ -122,3 +123,15 @@ MonoBehaviour:
       m_Calls: []
   m_onHoverSound: 
   m_onClickSound: 
+--- !u!114 &7261114294832847819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4314923488756626892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6179c00e8309b7345ba4b2cb54f5f130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
