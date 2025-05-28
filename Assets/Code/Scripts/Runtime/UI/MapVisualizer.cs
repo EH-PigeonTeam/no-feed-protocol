@@ -6,6 +6,8 @@ using NoFeedProtocol.Authoring.Map;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Runtime.Logic.Map;
 using NoFeedProtocol.Runtime.UI.Utilities;
+using Code.Systems.Locator;
+using NoFeedProtocol.Runtime.Logic.Data;
 
 public static class MapVisualizer
 {
@@ -31,9 +33,28 @@ public static class MapVisualizer
 
         Dictionary<GridPosition, ButtonAudio> activeButtons = new();
 
+        Dictionary<int, int> columnHeights = new();
         foreach (var node in nodes)
         {
-            Vector2 anchoredPos = GetNodeLocalPosition(node.Position, cellWidth, cellHeight) + offset;
+            if (!columnHeights.ContainsKey(node.Position.X))
+                columnHeights[node.Position.X] = 0;
+
+            columnHeights[node.Position.X]++;
+        }
+
+        Dictionary<int, int> columnOffsets = new();
+        foreach (var kvp in columnHeights)
+        {
+            int x = kvp.Key;
+            int height = kvp.Value;
+            int offsett = (maxRows - height) / 2;
+            columnOffsets[x] = offsett;
+        }
+
+        foreach (var node in nodes)
+        {
+            int yOffset = columnOffsets[node.Position.X];
+            Vector2 anchoredPos = GetNodeLocalPosition(node.Position, cellWidth, cellHeight, yOffset) + offset;
 
             var instance = UnityEngine.Object.Instantiate(reference.NodePrefab, reference.NodeParent);
             var rectTransform = instance.GetComponent<RectTransform>();
@@ -45,7 +66,8 @@ public static class MapVisualizer
 
             foreach (var target in node.Connections)
             {
-                Vector2 to = GetNodeLocalPosition(target, cellWidth, cellHeight) + offset;
+                int toYOffset = columnOffsets[target.X];
+                Vector2 to = GetNodeLocalPosition(target, cellWidth, cellHeight, toYOffset) + offset;
 
                 var line = UnityEngine.Object.Instantiate(reference.ConnectionPrefab, reference.ConnectionParent);
                 var uiLine = line.GetComponent<UILineRenderer>();
@@ -71,14 +93,19 @@ public static class MapVisualizer
         if (!lastNode.HasValue)
             return current.X == 0;
 
-        var previous = nodes.Find(n => n.Position.Equals(lastNode.Value));
+        var map = ServiceLocator.Get<RuntimeDataStore>().GameData.Run.Map;
+
+        if (!map.LastNodeCompleted)
+            return current.Equals(map.LastNode);
+
+        var previous = nodes.Find(n => n.Position.Equals(map.LastNode));
         return previous != null && previous.Connections.Contains(current);
     }
 
-    private static Vector2 GetNodeLocalPosition(GridPosition pos, float cellWidth, float cellHeight)
+    private static Vector2 GetNodeLocalPosition(GridPosition pos, float cellWidth, float cellHeight, int verticalOffset)
     {
         float x = (cellWidth * pos.X) + cellWidth / 2f;
-        float y = (cellHeight * pos.Y) + cellHeight / 2f;
+        float y = (cellHeight * (pos.Y + verticalOffset)) + cellHeight / 2f;
         return new Vector2(x, y);
     }
 

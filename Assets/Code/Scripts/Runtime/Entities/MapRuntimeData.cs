@@ -12,7 +12,8 @@ namespace NoFeedProtocol.Runtime.Entities
     {
         [SerializeField]
         private GridPosition? m_lastNode = null;
-        public List<NodeRuntimeData> Nodes = new();
+        public List<NodeRuntimeData> Nodes = new(); 
+        public bool LastNodeCompleted = false;
 
         [ShowInInspector]
         public bool HasLastNode => LastNode.HasValue;
@@ -34,7 +35,8 @@ namespace NoFeedProtocol.Runtime.Entities
             return new MapSaveData
             {
                 LastNode = new OptionalGridPosition(nodeToSave),
-                Nodes = Nodes.Select(n => n.ToSaveData()).ToList()
+                Nodes = Nodes.Select(n => n.ToSaveData()).ToList(),
+                LastNodeCompleted = LastNodeCompleted
             };
         }
 
@@ -43,7 +45,8 @@ namespace NoFeedProtocol.Runtime.Entities
             return new MapRuntimeData
             {
                 LastNode = save.LastNode.ToNullable,
-                Nodes = save.Nodes.Select(NodeRuntimeData.FromSaveData).ToList()
+                Nodes = save.Nodes.Select(NodeRuntimeData.FromSaveData).ToList(),
+                LastNodeCompleted = save.LastNodeCompleted
             };
         }
     }

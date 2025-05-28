@@ -67,20 +67,52 @@ namespace NoFeedProtocol.Runtime.Logic.Map
                 int currHeight = rowsPerColumn[x];
                 int nextHeight = rowsPerColumn[x + 1];
 
+                HashSet<int> reachedInNextColumn = new();
+
                 for (int y = 0; y < currHeight; y++)
                 {
                     var current = nodes[x, y];
-                    int connectionCount = UnityEngine.Random.Range(1, Mathf.Min(3, nextHeight) + 1);
+                    var possibleTargets = new List<int>();
 
-                    HashSet<int> targets = new();
-                    while (targets.Count < connectionCount)
+                    // Add nearby targets: same row, above, below (if within bounds)
+                    if (y > 0 && y - 1 < nextHeight) possibleTargets.Add(y - 1);
+                    if (y < nextHeight) possibleTargets.Add(y);
+                    if (y + 1 < nextHeight) possibleTargets.Add(y + 1);
+
+                    // If still empty (e.g., more nodes in current col than next), fallback to all
+                    if (possibleTargets.Count == 0)
                     {
-                        int targetY = UnityEngine.Random.Range(0, nextHeight);
-                        if (targets.Add(targetY))
+                        for (int t = 0; t < nextHeight; t++)
+                            possibleTargets.Add(t);
+                    }
+
+                    Shuffle(possibleTargets);
+
+                    int connectionCount = UnityEngine.Random.Range(1, Mathf.Min(3, possibleTargets.Count + 1));
+                    for (int i = 0; i < connectionCount; i++)
+                    {
+                        int targetY = possibleTargets[i];
+                        var targetPos = new GridPosition(x + 1, targetY);
+
+                        current.Connections.Add(targetPos);
+                        reachable.Add(targetPos);
+                        reachedInNextColumn.Add(targetY);
+                    }
+                }
+
+                // Ensure every node in x+1 is reachable
+                for (int y = 0; y < nextHeight; y++)
+                {
+                    if (!reachedInNextColumn.Contains(y))
+                    {
+                        int sourceY = UnityEngine.Random.Range(0, currHeight);
+                        var sourceNode = nodes[x, sourceY];
+                        var forcedTarget = new GridPosition(x + 1, y);
+
+                        if (!sourceNode.Connections.Contains(forcedTarget))
                         {
-                            var targetPos = new GridPosition(x + 1, targetY);
-                            current.Connections.Add(targetPos);
-                            reachable.Add(targetPos);
+                            sourceNode.Connections.Add(forcedTarget);
+                            reachable.Add(forcedTarget);
                         }
                     }
                 }
@@ -111,6 +143,15 @@ namespace NoFeedProtocol.Runtime.Logic.Map
             if (filtered.Count == 0)
                 throw new Exception($"No encounters found for type {type}");
             return filtered[UnityEngine.Random.Range(0, filtered.Count)];
+        }
+
+        private static void Shuffle(List<int> list)
+        {
+            for (int i = list.Count - 1; i > 0; i--)
+            {
+                int j = UnityEngine.Random.Range(0, i + 1);
+                (list[i], list[j]) = (list[j], list[i]);
+            }
         }
 
         private static EncounterData SelectEncounterWeighted(List<EncounterData> encounters, float totalWeight)

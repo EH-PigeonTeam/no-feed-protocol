@@ -32,9 +32,10 @@ namespace NoFeedProtocol.Runtime.Logic.Map
 
             if (m_dataStore.GameData.Run.Map?.Nodes?.Count > 0)
             {
-                Debug.Log("Loading existing map...");
+                int width = m_structure.Columns;
+                int height = m_structure.Rows.y;
 
-                //m_nodes = m_dataStore.GameData.Run.Map.Nodes // convert back
+                m_nodes = ReconstructMatrix(m_dataStore.GameData.Run.Map.Nodes, width, height);
             }
             else
             {
@@ -61,6 +62,19 @@ namespace NoFeedProtocol.Runtime.Logic.Map
                     if (node != null)
                         result.Add(node);
                 }
+            }
+
+            return result;
+        }
+
+        private static NodeRuntimeData[,] ReconstructMatrix(List<NodeRuntimeData> flatList, int width, int height)
+        {
+            NodeRuntimeData[,] result = new NodeRuntimeData[width, height];
+
+            foreach (var node in flatList)
+            {
+                if (node != null)
+                    result[node.Position.X, node.Position.Y] = node;
             }
 
             return result;
@@ -99,6 +113,7 @@ namespace NoFeedProtocol.Runtime.Logic.Map
             Debug.Log($"Clicked node at X: {position.X}, Y: {position.Y}");
 
             m_dataStore.GameData.Run.Map.LastNode = position;
+            m_dataStore.GameData.Run.Map.LastNodeCompleted = false;
 
             // load scene
             ServiceLocator.Get<ScenesManager>()

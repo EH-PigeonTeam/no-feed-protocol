@@ -8,5 +8,6 @@ namespace NoFeedProtocol.Persistence.Map
     {
         public OptionalGridPosition LastNode;
         public List<NodeSaveData> Nodes;
+        public bool LastNodeCompleted;
     }
 }
