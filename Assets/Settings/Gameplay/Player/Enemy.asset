@@ -156,3 +156,37 @@ MonoBehaviour:
     m_aimingBehavior:
       m_targetStrategy: 0
       m_value: 0.5
+  - m_id: 59bfd0a8-e05a-4a29-9a37-2fe117419739
+    m_name: ThornAlien
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 45
+    m_attackPointsShield: 25
+    m_attackPoints: 25
+    m_shield: 10
+    m_energyRequired: 4
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 5
+            m_overrideValue: 1
+            m_value: 10
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
