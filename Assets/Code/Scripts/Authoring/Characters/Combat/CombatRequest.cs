@@ -50,17 +50,14 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
     /// </summary>
     public static class CombatResolver
     {
-        public static CombatResult Resolve(CombatRequest request, CombatTriggerType situation = CombatTriggerType.OnAttackReady)
+        public static void Resolve(CombatRequest request, CombatTriggerType situation = CombatTriggerType.OnAttackReady)
         {
-            Debug.Log("Combat request: " + request);
-
             var attackerStatic = request.AttackerTeam.Resolver.GetById(request.Attacker.Id);
             var defenderStatic = request.DefenderTeam.Resolver.GetById(request.Defender.Id);
             var behavior = attackerStatic.CombatBehavior;
 
-            int damageTop = 0;
-            int damageBottom = 0;
-            int shieldChange = 0;
+            int dmgTopDef = 0, dmgBottomDef = 0, shieldDef = 0;
+            int dmgTopAtk = 0, dmgBottomAtk = 0, shieldAtk = 0;
 
             foreach (var trigger in behavior.Triggers)
             {
@@ -74,7 +71,11 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                     foreach (var action in block.Sequence)
                     {
-                        int value = action.OverrideValue ? action.Value : attackerStatic.AttackPoints;
+                        int baseValue = action.OverrideValue
+                            ? action.Value
+                            : attackerStatic.AttackPoints;
+
+                        int modified = Mathf.RoundToInt(baseValue * action.Modifier);
 
                         switch (action.Target)
                         {
@@ -85,62 +86,26 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                         ? action.Value
                                         : GetContextualValue(attackerStatic, block.Conditions, defenderHasShield);
 
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
+                                    int val = Mathf.RoundToInt(finalValue * action.Modifier);
 
                                     if (defenderHasShield && !action.OverrideValue)
                                     {
-                                        // Attacco va allo scudo
-                                        shieldChange -= modified;
+                                        shieldDef -= val;
                                     }
                                     else
                                     {
                                         if (request.Defender == request.DefenderTeam.RuntimeData.CharacterTop)
-                                            damageTop -= modified;
+                                            dmgTopDef -= val;
                                         else
-                                            damageBottom -= modified;
+                                            dmgBottomDef -= val;
                                     }
                                     break;
                                 }
 
                             case CombatTargetType.EnemyAll:
-                                {
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : attackerStatic.AttackPoints;
-
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
-
-                                    damageTop -= modified;
-                                    damageBottom -= modified;
-                                    break;
-                                }
-
-                            case CombatTargetType.SelfShield:
-                                {
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : attackerStatic.AttackPointsShield;
-
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
-                                    shieldChange += modified;
-                                    break;
-                                }
-
-                            case CombatTargetType.Self:
-                                {
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : attackerStatic.AttackPoints;
-
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
-
-                                    // Self-damage (e.g. sacrifice effects)
-                                    if (request.Attacker == request.AttackerTeam.RuntimeData.CharacterTop)
-                                        damageTop += modified; // positive = heal
-                                    else
-                                        damageBottom += modified;
-                                    break;
-                                }
+                                dmgTopDef -= modified;
+                                dmgBottomDef -= modified;
+                                break;
 
                             case CombatTargetType.EnemyOther:
                                 {
@@ -148,57 +113,47 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                         ? request.DefenderTeam.RuntimeData.CharacterBottom
                                         : request.DefenderTeam.RuntimeData.CharacterTop;
 
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : attackerStatic.AttackPoints;
-
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
-
                                     if (other == request.DefenderTeam.RuntimeData.CharacterTop)
-                                        damageTop -= modified;
+                                        dmgTopDef -= modified;
                                     else
-                                        damageBottom -= modified;
-
-                                    break;
-                                }
-
-                            case CombatTargetType.AllyLowestHP:
-                                {
-                                    var top = request.AttackerTeam.RuntimeData.CharacterTop;
-                                    var bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
-
-                                    var target = (top.Health <= bottom.Health) ? top : bottom;
-
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : attackerStatic.AttackPoints;
-
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
-
-                                    if (target == top)
-                                        damageTop += modified;
-                                    else
-                                        damageBottom += modified;
-
+                                        dmgBottomDef -= modified;
                                     break;
                                 }
 
                             case CombatTargetType.EnemyAttacker:
                                 {
-                                    // Used for counterattacks: hits whoever attacked you
                                     var target = request.Defender;
 
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : attackerStatic.AttackPoints;
-
-                                    int modified = Mathf.RoundToInt(finalValue * action.Modifier);
-
                                     if (target == request.DefenderTeam.RuntimeData.CharacterTop)
-                                        damageTop -= modified;
+                                        dmgTopDef -= modified;
                                     else
-                                        damageBottom -= modified;
+                                        dmgBottomDef -= modified;
+                                    break;
+                                }
 
+                            case CombatTargetType.Self:
+                                {
+                                    if (request.Attacker == request.AttackerTeam.RuntimeData.CharacterTop)
+                                        dmgTopAtk += modified;
+                                    else
+                                        dmgBottomAtk += modified;
+                                    break;
+                                }
+
+                            case CombatTargetType.SelfShield:
+                                shieldAtk += modified;
+                                break;
+
+                            case CombatTargetType.AllyLowestHP:
+                                {
+                                    var top = request.AttackerTeam.RuntimeData.CharacterTop;
+                                    var bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
+                                    var target = (top.Health <= bottom.Health) ? top : bottom;
+
+                                    if (target == top)
+                                        dmgTopAtk += modified;
+                                    else
+                                        dmgBottomAtk += modified;
                                     break;
                                 }
                         }
@@ -206,7 +161,8 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                 }
             }
 
-            return new CombatResult(damageTop, damageBottom, shieldChange);
+            request.DefenderTeam.ApplyCombatDeltas(new CombatResult(dmgTopDef, dmgBottomDef, shieldDef));
+            request.AttackerTeam.ApplyCombatDeltas(new CombatResult(dmgTopAtk, dmgBottomAtk, shieldAtk));
         }
 
         private static int GetContextualValue(

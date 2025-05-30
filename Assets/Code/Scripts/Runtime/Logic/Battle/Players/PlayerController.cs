@@ -112,6 +112,8 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         public void ApplyCombatDeltas(CombatResult result)
         {
+            Debug.LogWarning($"Damage ===============================");
+
             RuntimeData.CharacterTop.Health = Mathf.Max(0, RuntimeData.CharacterTop.Health + result.HealthTop);
             RuntimeData.CharacterBottom.Health = Mathf.Max(0, RuntimeData.CharacterBottom.Health + result.HealthBottom);
             RuntimeData.CurrentShield = Mathf.Max(0, RuntimeData.CurrentShield + result.ShieldChange);
