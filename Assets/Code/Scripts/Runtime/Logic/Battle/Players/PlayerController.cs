@@ -68,7 +68,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         #region Private Members --------------------------------
 
-        [HideInInspector]
+        //[HideInInspector]
         public PlayerRuntimeData RuntimeData;
 
         [HideInInspector]

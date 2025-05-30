@@ -29,7 +29,16 @@ MonoBehaviour:
     m_shield: 200
     m_energyRequired: 5
     m_combatBehavior:
-      m_triggers: []
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
   - m_id: c976a871-24b4-486a-a62a-92f88a9e5f44
     m_name: Assault
     m_icon: {fileID: 1955355303, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
@@ -46,7 +55,16 @@ MonoBehaviour:
     m_shield: 75
     m_energyRequired: 2
     m_combatBehavior:
-      m_triggers: []
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
   - m_id: 1de477d4-d06a-46d4-a23e-c5456f2e6e02
     m_name: Engineer
     m_icon: {fileID: 86781572, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
@@ -63,7 +81,16 @@ MonoBehaviour:
     m_shield: 170
     m_energyRequired: 3
     m_combatBehavior:
-      m_triggers: []
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
   - m_id: b9e53ea2-c6d0-4a7c-bac7-7f907761b5dc
     m_name: Medic
     m_icon: {fileID: -862002870, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
@@ -83,14 +110,14 @@ MonoBehaviour:
       m_triggers:
       - m_trigger: 0
         m_actions:
-        - m_conditions: 1
+        - m_conditions: 0
           m_value: 0
           m_sequence:
-          - m_target: 1
+          - m_target: 2
             m_overrideValue: 0
             m_value: 10
             m_modifier: 1
-          - m_target: 5
+          - m_target: 1
             m_overrideValue: 1
             m_value: 10
             m_modifier: 1
