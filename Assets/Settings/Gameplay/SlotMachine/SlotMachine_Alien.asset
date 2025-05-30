@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_name: Husband
     m_sprite: {fileID: 21300000, guid: 3f14024a86bf5f743a217a98605dc474, type: 3}
     m_multiplier: 1
-    m_target: 1
+    m_target: 0
     m_percent: 1
   - m_name: I'am Chocco
     m_sprite: {fileID: 21300000, guid: fcda77696d710b14b8aa952175d3e0dc, type: 3}
@@ -26,7 +26,7 @@ MonoBehaviour:
   - m_name: I love Chocco Ice Cream
     m_sprite: {fileID: 21300000, guid: 229b1eba0a36c174a9db4256b0903da5, type: 3}
     m_multiplier: 1
-    m_target: 1
+    m_target: 2
     m_percent: 0.202
   m_slotWheelsCount: 5
   m_chances: 1
