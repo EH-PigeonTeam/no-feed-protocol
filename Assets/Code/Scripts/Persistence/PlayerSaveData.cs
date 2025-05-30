@@ -10,6 +10,7 @@ namespace NoFeedProtocol.Persistence.Player
         public CharacterSaveData CharacterTop;
         public CharacterSaveData CharacterBottom;
 
+        public int MaxShield;
         public int Shield;
 
         public int Coins;

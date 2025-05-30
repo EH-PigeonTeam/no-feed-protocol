@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bc0c80713d52054d8dec8f5f6a41329, type: 3}
-  m_Name: SlotSymbol
+  m_Name: SlotMachine_Hero
   m_EditorClassIdentifier: 
   m_symbols:
   - m_name: Husband

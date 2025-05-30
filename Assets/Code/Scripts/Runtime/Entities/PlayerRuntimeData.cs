@@ -9,6 +9,7 @@ namespace NoFeedProtocol.Runtime.Entities
     {
         public CharacterRuntimeData CharacterTop;
         public CharacterRuntimeData CharacterBottom;
+        public int MaxShield;
         public int CurrentShield;
         public int Coins;
         public List<string> Items = new();
@@ -19,6 +20,7 @@ namespace NoFeedProtocol.Runtime.Entities
             {
                 CharacterTop = CharacterTop.ToSaveData(),
                 CharacterBottom = CharacterBottom.ToSaveData(),
+                MaxShield = MaxShield,
                 Shield = CurrentShield,
                 Coins = Coins,
                 OwnedItemIDs = new List<string>(Items)
@@ -31,6 +33,7 @@ namespace NoFeedProtocol.Runtime.Entities
             {
                 CharacterTop = CharacterRuntimeData.FromSaveData(save.CharacterTop),
                 CharacterBottom = CharacterRuntimeData.FromSaveData(save.CharacterBottom),
+                MaxShield = save.MaxShield,
                 CurrentShield = save.Shield,
                 Coins = save.Coins,
                 Items = new List<string>(save.OwnedItemIDs)

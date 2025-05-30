@@ -4,13 +4,13 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
     /// Represents the outcome of a slot machine spin.
     /// Contains energy gains and shield recovery values.
     /// </summary>
-    public readonly struct SlotResult
+    public readonly struct SpinResult
     {
         public int EnergyTop { get; }
         public int EnergyBottom { get; }
         public int ShieldRecovery { get; }
 
-        public SlotResult(int energyTop, int energyBottom, int shieldRecovery)
+        public SpinResult(int energyTop, int energyBottom, int shieldRecovery)
         {
             EnergyTop = energyTop;
             EnergyBottom = energyBottom;

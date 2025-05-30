@@ -46,6 +46,7 @@ namespace NoFeedProtocol.Runtime.Logic.Player
             {
                 CharacterTop = new CharacterRuntimeData { Id = top.Id, Health = top.MaxHealth },
                 CharacterBottom = new CharacterRuntimeData { Id = bottom.Id, Health = bottom.MaxHealth },
+                MaxShield = top.Shield + bottom.Shield,
                 CurrentShield = top.Shield + bottom.Shield,
                 Coins = 0,
                 Items = new System.Collections.Generic.List<string>()

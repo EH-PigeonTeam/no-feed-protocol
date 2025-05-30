@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using Core.Gameplay.SlotMachine;
 using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Authoring.Items;
-using Code.Systems.Locator;
-using NoFeedProtocol.Runtime.Logic.Battle;
-using Sirenix.Utilities;
 
 namespace NoFeedProtocol.Runtime.Logic.Slot
 {
@@ -16,7 +14,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
     [HideMonoScript]
     public class SlotMachineController : MonoBehaviour
     {
-        public delegate void SpinResultHandler(SlotResult result);
+        public delegate void SpinResultHandler(SpinResult result);
         public event SpinResultHandler OnSpinCompleted;
 
         [BoxGroup("Slot Configuration")]
@@ -77,22 +75,9 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
                 : new List<Indicator>();
         }
 
-        private void OnEnable()
-        {
-            if (m_isPlayerControlled)
-            {
-                BattleManager.OnPlayerTurn += Reset;
-            }
-        }
-
         private void OnDisable()
         {
             m_logic.OnSpinCompleted -= HandleSpinComplete;
-
-            if (m_isPlayerControlled)
-            {
-                BattleManager.OnPlayerTurn -= Reset;
-            }
         }
 
         #endregion
@@ -102,6 +87,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// <summary>
         /// Spins the slot machine and updates the view.
         /// </summary>
+        [Button]
         public void Spin()
         {
             if (m_isPlayerControlled)
@@ -138,7 +124,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// <summary>
         /// Returns the aggregated result from the current symbols.
         /// </summary>
-        public SlotResult GetResult()
+        public SpinResult GetResult()
         {
             return m_logic.CalculateResult();
         }
@@ -176,7 +162,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
         #region Event Handlers --------------------------------------------------
 
-        private void HandleSpinComplete(SlotResult result)
+        private void HandleSpinComplete(SpinResult result)
         {
             OnSpinCompleted?.Invoke(result);
         }

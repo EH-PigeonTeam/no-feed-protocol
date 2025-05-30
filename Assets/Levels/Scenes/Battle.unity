@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 19933263}
   - component: {fileID: 19933264}
   m_Layer: 5
-  m_Name: Slider | Health - Player
+  m_Name: Slider | Shield Heros
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,6 +446,91 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &300635250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300635252}
+  - component: {fileID: 300635253}
+  m_Layer: 0
+  m_Name: '- Player | Team Aliens'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300635252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300635250}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300635253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300635250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c403dbefb83a9408adc6767f8148e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewController:
+    m_shieldBar: {fileID: 1702663388}
+  m_builder:
+    m_topTransform:
+      Position: {x: 2, y: 0, z: 5}
+      Rotation: {x: 0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+    m_bottomTransform:
+      Position: {x: 4, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+    m_characterPrefab: {fileID: 7998539078406814515, guid: ec837b708aea23a4ab5288dfbce198da, type: 3}
+  m_inputHandler:
+    rid: 83453609305178208
+  m_aimingHandler:
+    rid: 83453609305178209
+  RuntimeData:
+    CharacterTop:
+      Id: 
+      Health: 0
+      Energy: 0
+    CharacterBottom:
+      Id: 
+      Health: 0
+      Energy: 0
+    MaxShield: 0
+    CurrentShield: 0
+    Coins: 0
+    Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 83453609305178208
+      type: {class: BotInputHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
+      data:
+        m_slotMachineConfig: {fileID: 11400000, guid: 401a8a64476494e4aa262324b91a4ecd, type: 2}
+        m_slotMachine: {fileID: 338130294}
+        m_spinDelay: 2.5
+    - rid: 83453609305178209
+      type: {class: BotAimingHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
+      data: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +544,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Battle Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,6 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338130292}
   - component: {fileID: 338130294}
+  - component: {fileID: 338130296}
   - component: {fileID: 338130295}
   m_Layer: 5
   m_Name: SlotMachine | Bot
@@ -674,8 +760,20 @@ MonoBehaviour:
   m_indicatorPrefab: {fileID: 0}
   m_wheelContainer: {fileID: 915517271}
   m_indicatorContainer: {fileID: 0}
-  m_view: {fileID: 338130295}
---- !u!114 &338130295
+  m_view: {fileID: 338130296}
+--- !u!225 &338130295
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338130291}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &338130296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -684,10 +782,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 338130291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf3846dcce4ca0d4db38a64f73318823, type: 3}
+  m_Script: {fileID: 11500000, guid: 743a86210cb105147a6064a9e9683598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_symbolRevealDelay: 0.1
+  m_symbolRevealEase: 1
+  m_slotMachineRevealTime: 1
 --- !u!1 &558900846
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,6 +813,90 @@ Transform:
   m_GameObject: {fileID: 558900846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &568946376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568946378}
+  - component: {fileID: 568946377}
+  m_Layer: 0
+  m_Name: '- Player | Team Heros'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &568946377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568946376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c403dbefb83a9408adc6767f8148e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_viewController:
+    m_shieldBar: {fileID: 19933264}
+  m_builder:
+    m_topTransform:
+      Position: {x: -2, y: 0, z: 5}
+      Rotation: {x: 0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+    m_bottomTransform:
+      Position: {x: -4, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
+      Scale: {x: 1, y: 1, z: 1}
+    m_characterPrefab: {fileID: 7998539078406814515, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+  m_inputHandler:
+    rid: 83453609305178227
+  m_aimingHandler:
+    rid: 83453609305178213
+  RuntimeData:
+    CharacterTop:
+      Id: 
+      Health: 0
+      Energy: 0
+    CharacterBottom:
+      Id: 
+      Health: 0
+      Energy: 0
+    MaxShield: 0
+    CurrentShield: 0
+    Coins: 0
+    Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 83453609305178213
+      type: {class: HumanAimingHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
+      data: 
+    - rid: 83453609305178227
+      type: {class: HumanInputHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
+      data:
+        m_slotMachineConfig: {fileID: 11400000, guid: feeb86a50939e494da7ced17c6cbf448, type: 2}
+        m_slotMachine: {fileID: 1753518343}
+--- !u!4 &568946378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568946376}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1693,7 +1877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &949426619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,38 +1890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6594b4aa0c98634d9e0de0eac410e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_battleData: {fileID: 1805208825}
-  m_playerLeft:
-    rid: 83453463927980162
-  m_playerRight:
-    rid: 83453463927980161
-  references:
-    version: 2
-    RefIds:
-    - rid: 83453463927980161
-      type: {class: MakeAIPlayer, ns: NoFeedProtocol.Runtime.Logic, asm: Assembly-CSharp}
-      data:
-        m_topTransform:
-          Position: {x: 2.5, y: 0, z: 5}
-          Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 1, y: 1, z: 1}
-        m_bottomTransform:
-          Position: {x: 5, y: 0, z: 0}
-          Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 1, y: 1, z: 1}
-        m_characterPrefab: {fileID: 7998539078406814515, guid: ec837b708aea23a4ab5288dfbce198da, type: 3}
-    - rid: 83453463927980162
-      type: {class: MakeHumanPlayer, ns: NoFeedProtocol.Runtime.Logic, asm: Assembly-CSharp}
-      data:
-        m_topTransform:
-          Position: {x: -2.5, y: 0, z: 5}
-          Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 1, y: 1, z: 1}
-        m_bottomTransform:
-          Position: {x: -5, y: 0, z: 0}
-          Rotation: {x: 0, y: 0, z: 0}
-          Scale: {x: 1, y: 1, z: 1}
-        m_characterPrefab: {fileID: 7998539078406814515, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
 --- !u!4 &949426620
 Transform:
   m_ObjectHideFlags: 0
@@ -2360,7 +2512,7 @@ GameObject:
   - component: {fileID: 1702663387}
   - component: {fileID: 1702663388}
   m_Layer: 5
-  m_Name: Slider | Health - Enemy
+  m_Name: Slider | Shield Aliens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2509,6 +2661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_symbolRevealDelay: 0.1
+  m_symbolRevealEase: 1
 --- !u!1 &1805208823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2520,6 +2673,7 @@ GameObject:
   - component: {fileID: 1805208824}
   - component: {fileID: 1805208825}
   - component: {fileID: 1805208826}
+  - component: {fileID: 1805208827}
   m_Layer: 0
   m_Name: '- Battle Manager'
   m_TagString: Untagged
@@ -2554,9 +2708,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11aee9285281d05429438a5d1c978e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_slotMachineConfig: {fileID: 11400000, guid: feeb86a50939e494da7ced17c6cbf448, type: 2}
-  m_playerSlot: {fileID: 1753518343}
-  m_enemySlot: {fileID: 338130294}
+  m_PlayerController: {fileID: 568946377}
+  m_EnemyController: {fileID: 300635253}
+  m_enemyTeamGenerator: {fileID: 1805208827}
   m_bannerController: {fileID: 38527396}
 --- !u!114 &1805208826
 MonoBehaviour:
@@ -2570,6 +2724,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1677598872126f4ca8e49f4d05d0f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1805208827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805208823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51165ef239a8dfe47ba08409a81f8289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemyDatabase: {fileID: 11400000, guid: c05bdbef92868a448a605bc9c13a871c, type: 2}
+  m_manualOverride: 0
+  m_overrideTop:
+    m_id: 
+    m_name: 
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 0
+    m_attackPointsShield: 0
+    m_attackPoints: 0
+    m_shield: 0
+    m_energyRequired: 1
+    m_combatBehavior:
+      m_triggers: []
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  m_overrideBottom:
+    m_id: 
+    m_name: 
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 0
+    m_attackPointsShield: 0
+    m_attackPoints: 0
+    m_shield: 0
+    m_energyRequired: 1
+    m_combatBehavior:
+      m_triggers: []
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
 --- !u!1 &1832847047
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,6 +3032,8 @@ SceneRoots:
   - {fileID: 1539051042}
   - {fileID: 558900847}
   - {fileID: 1805208824}
+  - {fileID: 568946378}
+  - {fileID: 300635252}
   - {fileID: 949426620}
   - {fileID: 1832847048}
   - {fileID: 2110119751}

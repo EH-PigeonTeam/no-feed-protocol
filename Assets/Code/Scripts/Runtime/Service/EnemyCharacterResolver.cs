@@ -8,27 +8,22 @@ using System.Linq;
 namespace NoFeedProtocol.Runtime.Services.Characters
 {
     [HideMonoScript]
-    public class CharacterResolver : GenericResolver<CharacterData, CharactersData>, ICharacterResolver
+    public class EnemyCharacterResolver : GenericResolver<CharacterEnemyData, CharactersEnemyData>, ICharacterResolver
     {
         private void OnEnable() => ServiceLocator.Register(this);
-        private void OnDisable() => ServiceLocator.Unregister<CharacterResolver>();
+        private void OnDisable() => ServiceLocator.Unregister<EnemyCharacterResolver>();
 
-        public override CharacterData GetById(string id)
+        public override CharacterEnemyData GetById(string id)
         {
             var character = m_database.Characters.FirstOrDefault(c => c.Id == id);
 
 #if UNITY_EDITOR
             if (character == null)
-                Debug.LogWarning($"[CharacterResolver] Character with ID '{id}' not found.");
+                Debug.LogWarning($"[EnemyCharacterResolver] Enemy Character with ID '{id}' not found.");
 #endif
             return character;
         }
 
         ICharacterStaticData ICharacterResolver.GetById(string id) => GetById(id);
-    }
-
-    public interface ICharacterResolver
-    {
-        ICharacterStaticData GetById(string id);
     }
 }

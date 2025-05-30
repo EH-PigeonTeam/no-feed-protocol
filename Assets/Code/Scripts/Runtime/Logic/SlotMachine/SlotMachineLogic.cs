@@ -12,7 +12,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
     /// </summary>
     public class SlotMachineLogic
     {
-        public delegate void SpinCompletedHandler(SlotResult result);
+        public delegate void SpinCompletedHandler(SpinResult result);
         public event SpinCompletedHandler OnSpinCompleted;
 
         private List<SlotSymbolData> m_symbolPool;
@@ -52,9 +52,9 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// </summary>
         public void Spin(List<int> lockedIndexes = null)
         {
-            m_lockedIndexes = lockedIndexes;
+            m_lockedIndexes = lockedIndexes ?? new List<int>();
 
-            if (IsSpinLimitReached || AllWheelsLocked())
+            if (AllWheelsLocked())
             {
                 m_spinCount = m_spinLimit;
                 return;
@@ -99,7 +99,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         /// <summary>
         /// Analyzes the current symbol configuration and returns the outcome.
         /// </summary>
-        public SlotResult CalculateResult()
+        public SpinResult CalculateResult()
         {
             int energyTop = 0;
             int energyBottom = 0;
@@ -128,7 +128,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
                 }
             }
 
-            return new SlotResult(energyTop, energyBottom, shieldRecovery);
+            return new SpinResult(energyTop, energyBottom, shieldRecovery);
         }
 
         private bool AllWheelsLocked()

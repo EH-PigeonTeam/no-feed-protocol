@@ -18,12 +18,17 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         [BoxGroup("Settings")]
         [Tooltip("The delay between each symbol's reveal animation."), Unit(Units.Second)]
         [SerializeField, MinValue(0f)]
-        private float m_symbolRevealDelay = 0.1f;
+        protected float m_symbolRevealDelay = 0.1f;
+
+        [BoxGroup("Settings")]
+        [Tooltip("The easing curve for symbol reveal animations.")]
+        [SerializeField]
+        protected Ease m_symbolRevealEase = Ease.Linear;
 
         /// <summary>
         /// Displays the current symbols by updating each wheel's sprite.
         /// </summary>
-        public void DisplaySymbols(IReadOnlyList<SlotSymbolData> symbols, List<SlotWheel> slotWheels)
+        public virtual void DisplaySymbols(IReadOnlyList<SlotSymbolData> symbols, List<SlotWheel> slotWheels)
         {
             for (int i = 0; i < slotWheels.Count; i++)
             {
@@ -34,7 +39,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
                 {
                     image.DOFade(0f, 0f); // fade-out instantly
                     image.sprite = symbols[i].Sprite;
-                    image.DOFade(1f, m_symbolRevealDelay); // fade-in animata
+                    image.DOFade(1f, m_symbolRevealDelay).SetEase(m_symbolRevealEase); // fade-in animata
                 }
             }
         }

@@ -11,18 +11,13 @@ using UnityEditor;
 namespace NoFeedProtocol.Authoring.Characters
 {
     [Serializable]
-    public class CharacterData : CharacterWrapper
+    public class CharacterData : ICharacterStaticData
     {
         #region Unique ID ---------------------------------------------------
 
         [FoldoutGroup("@m_name")]
         [SerializeField, ReadOnly]
         private string m_id;
-
-        /// <summary>
-        /// Unique, non-editable ID used for lookup and save data.
-        /// </summary>
-        public string Id => this.m_id;
 
 #if UNITY_EDITOR
         public void OnValidate()
@@ -110,6 +105,7 @@ namespace NoFeedProtocol.Authoring.Characters
 
         #region Public Properties -------------------------------------------
 
+        public string Id => this.m_id;
         public string Name => this.m_name;
         public Sprite Icon => this.m_icon;
         public Sprite Icon2 => this.m_icon2;
@@ -123,5 +119,18 @@ namespace NoFeedProtocol.Authoring.Characters
         public CombatBehavior CombatBehavior => this.m_combatBehavior;
 
         #endregion
+    }
+
+    public interface ICharacterStaticData
+    {
+        string Id { get; }
+        string Name { get; }
+        CharacterAnimationSet Anim { get; }
+        int MaxHealth { get; }
+        int AttackPoints { get; }
+        int AttackPointsShield { get; }
+        int Shield { get; }
+        int EnergyRequired { get; }
+        CombatBehavior CombatBehavior { get; }
     }
 }

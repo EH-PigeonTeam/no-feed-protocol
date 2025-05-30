@@ -1,15 +1,16 @@
+using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using NoFeedProtocol.Runtime.Logic.Turns;
-using NoFeedProtocol.Runtime.Logic.Data;
-using NoFeedProtocol.Runtime.Logic.Slot;
-using Core.Gameplay.SlotMachine.Data;
 using Code.Systems.Locator;
-using NoFeedProtocol.Runtime.Services.Items;
-using NoFeedProtocol.Runtime.Logic.Enums;
-using System;
+using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Runtime.Entities;
+using NoFeedProtocol.Runtime.Logic.Battle.Players;
+using NoFeedProtocol.Runtime.Logic.Data;
+using NoFeedProtocol.Runtime.Logic.Enums;
+using NoFeedProtocol.Runtime.Logic.Slot;
+using NoFeedProtocol.Runtime.Logic.Turns;
 using NoFeedProtocol.Runtime.Services.Characters;
+using NoFeedProtocol.Runtime.Services.Items;
 
 namespace NoFeedProtocol.Runtime.Logic.Battle
 {
@@ -18,27 +19,28 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
     {
         #region Serialized References ----------------------------------------
 
+        [BoxGroup("Battle", ShowLabel = false)]
+        [BoxGroup("Battle/Data", ShowLabel = false)]
         [SerializeField, Required]
         private BattleRuntimeData m_battleData;
 
-        [FoldoutGroup("Slot Machine Configuration", expanded: true)]
-        [Tooltip("The configuration for the slot machines.")]
-        [SerializeField]
-        private SlotMachineData m_slotMachineConfig;
+        [BoxGroup("Battle/Player", ShowLabel = false)]
+        [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private PlayerController m_PlayerController;
 
-        [FoldoutGroup("Slot Machine Configuration")]
-        [Tooltip("The player's slot machine controller.")]
-        [SerializeField]
-        private SlotMachineController m_playerSlot;
+        [BoxGroup("Battle/Enemy", ShowLabel = false)]
+        [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private PlayerController m_EnemyController;
 
-        [FoldoutGroup("Slot Machine Configuration")]
-        [Tooltip("The enemy's slot machine controller.")]
-        [SerializeField]
-        private SlotMachineController m_enemySlot;
+        [BoxGroup("Battle/Enemy", ShowLabel = false)]
+        [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private EnemyTeamGenerator m_enemyTeamGenerator;
 
-        [SerializeField, Required]
+        [BoxGroup("Battle")]
+        [SerializeField, Required, InlineProperty, HideLabel]
         private TurnManager m_turnManager;
 
+        [BoxGroup("Battle")]
         [SerializeField, Required]
         private BannerController m_bannerController;
 
@@ -47,20 +49,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
         #endregion
 
-        public event Action<bool> OnPlayerAiming;
-        public static event Action OnPlayerTurn;
-
         #region Unity Lifecycle ----------------------------------------------
-
-        private void Start()
-        {
-            m_itemResolver = ServiceLocator.Get<ItemResolver>();
-            m_phaseManager = ServiceLocator.Get<BattlePhaseManager>();
-
-            m_phaseManager.OnPhaseChanged += HandlePhaseChanged;
-
-            InitializeBattle();
-        }
 
         private void OnEnable()
         {
@@ -75,17 +64,28 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
             ServiceLocator.Unregister<BattleManager>();
         }
 
+        private void Start()
+        {
+            m_phaseManager = ServiceLocator.Get<BattlePhaseManager>();
+
+            m_phaseManager.OnPhaseChanged += HandlePhaseChanged;
+
+            m_battleData.Set(
+                ServiceLocator.Get<RuntimeDataStore>().GameData.Run.Player,
+                m_enemyTeamGenerator.Generate()
+            );
+
+            InitializeBattle();
+        }
+
         #endregion
 
         #region Initialization and State Setup -------------------------------
 
         private void InitializeBattle()
         {
-            m_playerSlot.Setup(m_slotMachineConfig, m_itemResolver.GetByIds(m_battleData.PlayerTeam.Items));
-            m_playerSlot.OnSpinCompleted += OnPlayerSpinCompleted;
-
-            m_enemySlot.Setup(m_slotMachineConfig, m_itemResolver.GetByIds(m_battleData.EnemyTeam.Items));
-            m_enemySlot.OnSpinCompleted += OnEnemySpinCompleted;
+            m_PlayerController.Initialize(m_battleData.PlayerTeam, ServiceLocator.Get<CharacterResolver>());
+            m_EnemyController.Initialize(m_battleData.EnemyTeam, ServiceLocator.Get<EnemyCharacterResolver>());
 
             m_phaseManager.ChangePhase(BattlePhase.Setup);
         }
@@ -102,15 +102,14 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
         public void EndTurn()
         {
-            OnPlayerAiming?.Invoke(false);
-
             m_turnManager.NextTurn();
             m_phaseManager.ChangePhase(BattlePhase.TurnStart);
         }
 
         public bool IsPlayerWinning()
         {
-            return this.m_battleData.PlayerTeam.CharactersAreAlive() && !this.m_battleData.EnemyTeam.CharactersAreAlive();
+            return m_battleData.PlayerTeam.CharactersAreAlive() &&
+                   !m_battleData.EnemyTeam.CharactersAreAlive();
         }
 
         public BattleRuntimeData BattleRuntimeData => m_battleData;
@@ -122,6 +121,10 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
         private void HandlePhaseChanged(BattlePhase phase)
         {
+            PlayerController playerController = IsPlayerTurn ? m_PlayerController : m_EnemyController;
+
+            //playerController.UpdateUI(IsPlayerTurn ? m_battleData.PlayerTeam : m_battleData.EnemyTeam);
+
             switch (phase)
             {
                 case BattlePhase.Setup:
@@ -129,62 +132,23 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
                     break;
 
                 case BattlePhase.TurnStart:
-                    this.m_phaseManager.ChangePhase(BattlePhase.Slot);
-
-
+                    playerController.OnTurnStart();
+                    m_phaseManager.ChangePhase(BattlePhase.Slot);
                     break;
 
                 case BattlePhase.Slot:
-                    this.m_turnManager.NextTurn();
-                    OnPlayerTurn?.Invoke();
-                    break;
-
-                case BattlePhase.Target:
-
-                    OnPlayerAiming?.Invoke(IsPlayerTurn);
+                    playerController.OnSlot();
                     break;
 
                 case BattlePhase.TurnEnd:
+                    playerController.OnTurnEnd();
                     EndTurn();
                     break;
 
                 case BattlePhase.BattleEnd:
-                    this.m_bannerController.ShowScreen(IsPlayerWinning());
+                    m_bannerController.ShowScreen(IsPlayerWinning());
                     break;
             }
-        }
-
-        private void OnPlayerSpinCompleted(SlotResult result)
-        {
-            Debug.Log("PLAYER Spin done: " + result);
-
-            if (HasCharacterRequiredEnergy(m_battleData.PlayerTeam.CharacterTop))
-            {
-                m_phaseManager.ChangePhase(BattlePhase.Target);
-            }
-            else if (HasCharacterRequiredEnergy(m_battleData.PlayerTeam.CharacterBottom))
-            {
-                m_phaseManager.ChangePhase(BattlePhase.Target);
-            }
-        }
-
-        private void OnEnemySpinCompleted(SlotResult result)
-        {
-            Debug.Log("ENEMY Spin done: " + result);
-
-            if (HasCharacterRequiredEnergy(m_battleData.EnemyTeam.CharacterTop))
-            {
-                m_phaseManager.ChangePhase(BattlePhase.Target);
-            }
-            else if (HasCharacterRequiredEnergy(m_battleData.EnemyTeam.CharacterBottom))
-            {
-                m_phaseManager.ChangePhase(BattlePhase.Target);
-            }
-        }
-
-        private bool HasCharacterRequiredEnergy(CharacterRuntimeData character)
-        {
-            return character.Energy >= ServiceLocator.Get<CharacterResolver>().GetById(character.Id).EnergyRequired;
         }
 
         #endregion

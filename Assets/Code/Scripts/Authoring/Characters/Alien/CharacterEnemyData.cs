@@ -11,18 +11,13 @@ using UnityEditor;
 namespace NoFeedProtocol.Authoring.Characters
 {
     [Serializable]
-    public class CharacterEnemyData : CharacterWrapper
+    public class CharacterEnemyData : ICharacterStaticData
     {
         #region Unique ID ---------------------------------------------------
 
         [FoldoutGroup("@m_name")]
         [SerializeField, ReadOnly]
         private string m_id;
-
-        /// <summary>
-        /// Unique, non-editable ID used for lookup and save data.
-        /// </summary>
-        public string Id => this.m_id;
 
 #if UNITY_EDITOR
         public void OnValidate()
@@ -105,6 +100,7 @@ namespace NoFeedProtocol.Authoring.Characters
 
         #region Public Properties -------------------------------------------
 
+        public string Id => this.m_id;
         public string Name => this.m_name;
         public float Percent => this.m_percent;
         public CharacterAnimationSet Anim => this.m_anim;
@@ -118,6 +114,4 @@ namespace NoFeedProtocol.Authoring.Characters
 
         #endregion
     }
-
-    public class CharacterWrapper { }
 }

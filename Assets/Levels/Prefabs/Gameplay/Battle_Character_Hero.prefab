@@ -1360,7 +1360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2204638170213343365}
-  - component: {fileID: 2604204812571927088}
+  - component: {fileID: 4117714513134953885}
   m_Layer: 0
   m_Name: Battle_Character_Hero
   m_TagString: Untagged
@@ -1385,7 +1385,7 @@ Transform:
   - {fileID: 1450405869472086917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2604204812571927088
+--- !u!114 &4117714513134953885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1394,13 +1394,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7998539078406814515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a7781205788da42b9f9cf4d1ebc2b3, type: 3}
+  m_Script: {fileID: 11500000, guid: d66a2e843de6acb48a826e8eb315dd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: {fileID: 4480013846654034545}
   m_attack: {fileID: 6574151793072595470}
   m_attackToShield: {fileID: 5873062644330898775}
   m_energy: {fileID: 7954251928602583693}
-  m_animator: {fileID: 4968551301504082658}
   m_viewfinder: {fileID: 0}
-  m_isEnemy: 0
+  m_animator: {fileID: 4968551301504082658}
