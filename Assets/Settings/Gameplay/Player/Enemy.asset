@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characters:
   - m_id: ebba0cbc-7800-484d-8f0f-2d5dbd627819
-    m_name: test 1
+    m_name: BaseAlien
     m_percent: 1
     m_anim:
       m_idle: {fileID: 7400000, guid: 42b6d18e5661597498ba0daeabe32b1e, type: 2}
       m_attack: {fileID: 7400000, guid: 3c0d25a9c486f094fbf6c78d28e6dc9e, type: 2}
       m_damage: {fileID: 7400000, guid: 78a312c94e0b68045b693452c77567e1, type: 2}
       m_death: {fileID: 7400000, guid: a742812f9c789824aa79ccd6effa8cf1, type: 2}
-    m_maxHealth: 20
-    m_attackPointsShield: 20
+    m_maxHealth: 30
+    m_attackPointsShield: 25
     m_attackPoints: 20
-    m_shield: 22
-    m_energyRequired: 2
+    m_shield: 10
+    m_energyRequired: 3
     m_combatBehavior:
       m_triggers:
       - m_trigger: 0
@@ -41,18 +41,18 @@ MonoBehaviour:
       m_targetStrategy: 0
       m_value: 0.5
   - m_id: 164672be-5332-4b3f-8854-9ab0d21bf7fb
-    m_name: test 2
+    m_name: BaseAlien+
     m_percent: 1
     m_anim:
       m_idle: {fileID: 7400000, guid: bdc0d8f058a598b46a11d2abaddca854, type: 2}
       m_attack: {fileID: 7400000, guid: c2176c7feff316945a4dc595eaf7a5cd, type: 2}
       m_damage: {fileID: 7400000, guid: cb12b7561ed4e534fb0f6dcf39b76159, type: 2}
       m_death: {fileID: 7400000, guid: 1bc521f59789b6b409311425be83172e, type: 2}
-    m_maxHealth: 10
-    m_attackPointsShield: 10
-    m_attackPoints: 11
-    m_shield: 10
-    m_energyRequired: 2
+    m_maxHealth: 50
+    m_attackPointsShield: 30
+    m_attackPoints: 20
+    m_shield: 20
+    m_energyRequired: 3
     m_combatBehavior:
       m_triggers:
       - m_trigger: 0
@@ -63,6 +63,129 @@ MonoBehaviour:
           - m_target: 2
             m_overrideValue: 0
             m_value: 0
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: 8df03607-9c0e-4492-a65c-ae8541528dd5
+    m_name: AreaAlien
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 25
+    m_attackPointsShield: 20
+    m_attackPoints: 20
+    m_shield: 15
+    m_energyRequired: 4
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 4
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: 8836ac10-166c-4ada-a887-433a758260d9
+    m_name: ShieldAlien
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 30
+    m_attackPointsShield: 35
+    m_attackPoints: 20
+    m_shield: 40
+    m_energyRequired: 4
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+          - m_target: 1
+            m_overrideValue: 1
+            m_value: 10
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: 87a1b10c-29d6-4b4a-ba46-3187c7412dc5
+    m_name: AlienMedic
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 20
+    m_attackPointsShield: 20
+    m_attackPoints: 10
+    m_shield: 15
+    m_energyRequired: 3
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+          - m_target: 6
+            m_overrideValue: 1
+            m_value: 10
+            m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: 59bfd0a8-e05a-4a29-9a37-2fe117419739
+    m_name: ThornAlien
+    m_percent: 1
+    m_anim:
+      m_idle: {fileID: 0}
+      m_attack: {fileID: 0}
+      m_damage: {fileID: 0}
+      m_death: {fileID: 0}
+    m_maxHealth: 45
+    m_attackPointsShield: 25
+    m_attackPoints: 25
+    m_shield: 10
+    m_energyRequired: 4
+    m_combatBehavior:
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 5
+            m_overrideValue: 1
+            m_value: 10
             m_modifier: 1
     m_aimingBehavior:
       m_targetStrategy: 0
