@@ -27,5 +27,8 @@ namespace NoFeedProtocol.Runtime.Entities
                 Health = save.Health
             };
         }
+
+        public bool IsAlive => Health > 0;
+        public bool HasReadyToAttack(int energyCost) => Energy >= energyCost;
     }
 }

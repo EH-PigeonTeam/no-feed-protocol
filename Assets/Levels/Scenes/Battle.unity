@@ -501,6 +501,7 @@ MonoBehaviour:
       Position: {x: 4, y: 0, z: 0}
       Rotation: {x: 0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
+    m_uiCamera: {fileID: 330585545}
     m_characterPrefab: {fileID: 7998539078406814515, guid: ec837b708aea23a4ab5288dfbce198da, type: 3}
   m_inputHandler:
     rid: 83453609305178208
@@ -530,7 +531,8 @@ MonoBehaviour:
         m_spinDelay: 2.5
     - rid: 83453609305178209
       type: {class: BotAimingHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
-      data: 
+      data:
+        m_opponent: {fileID: 568946377}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +861,7 @@ MonoBehaviour:
       Position: {x: -4, y: 0, z: 0}
       Rotation: {x: 0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
+    m_uiCamera: {fileID: 0}
     m_characterPrefab: {fileID: 7998539078406814515, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
   m_inputHandler:
     rid: 83453609305178227
@@ -882,7 +885,8 @@ MonoBehaviour:
     RefIds:
     - rid: 83453609305178213
       type: {class: HumanAimingHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
-      data: 
+      data:
+        m_opponent: {fileID: 300635253}
     - rid: 83453609305178227
       type: {class: HumanInputHandler, ns: NoFeedProtocol.Runtime.Logic.Battle.Players, asm: Assembly-CSharp}
       data:

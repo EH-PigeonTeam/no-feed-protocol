@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Authoring.Items;
+using UnityEngine;
 
 namespace NoFeedProtocol.Runtime.Logic.Slot
 {
@@ -22,7 +23,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         private List<int> m_lockedIndexes;
         private List<SlotSymbolData> m_currentSymbols;
 
-        private Random m_rng;
+        private System.Random m_rng;
 
         public IReadOnlyList<SlotSymbolData> CurrentSymbols => m_currentSymbols;
         public bool IsSpinLimitReached => m_spinCount >= m_spinLimit;
@@ -42,7 +43,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
             m_lockedIndexes = new List<int>();
             m_currentSymbols = new List<SlotSymbolData>(new SlotSymbolData[m_wheelCount]);
             m_spinCount = 0;
-            m_rng = new Random();
+            m_rng = new System.Random(Guid.NewGuid().GetHashCode());
 
             ApplyItemModifiers(items);
         }
@@ -54,9 +55,10 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         {
             m_lockedIndexes = lockedIndexes ?? new List<int>();
 
-            if (AllWheelsLocked())
+            if (AllWheelsLocked() || IsSpinLimitReached)
             {
                 m_spinCount = m_spinLimit;
+                OnSpinCompleted?.Invoke(CalculateResult());
                 return;
             }
 
@@ -70,10 +72,9 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
             m_spinCount++;
 
-            if (IsSpinLimitReached || AllWheelsLocked())
+            if (IsSpinLimitReached)
             {
-                var result = CalculateResult();
-                OnSpinCompleted?.Invoke(result);
+                OnSpinCompleted?.Invoke(CalculateResult());
             }
         }
 
@@ -93,7 +94,9 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         {
             m_spinCount = 0;
             m_lockedIndexes.Clear();
+
             m_currentSymbols = new List<SlotSymbolData>(new SlotSymbolData[m_wheelCount]);
+
         }
 
         /// <summary>

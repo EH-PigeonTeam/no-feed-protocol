@@ -1611,11 +1611,13 @@ MonoBehaviour:
           Id: 
           Health: 0
           Energy: 0
+        MaxShield: 0
         CurrentShield: 0
         Coins: 0
         Items: []
       Map:
         Nodes: []
+        LastNodeCompleted: 0
     ItemIDsUnlocked: []
 --- !u!1 &1789239286
 GameObject:

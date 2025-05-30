@@ -117,6 +117,7 @@ namespace NoFeedProtocol.Authoring.Characters
         public int Shield => this.m_shield;
         public int EnergyRequired => this.m_energyRequired;
         public CombatBehavior CombatBehavior => this.m_combatBehavior;
+        public AimingBehavior AimingBehavior => null;
 
         #endregion
     }
@@ -132,5 +133,6 @@ namespace NoFeedProtocol.Authoring.Characters
         int Shield { get; }
         int EnergyRequired { get; }
         CombatBehavior CombatBehavior { get; }
+        AimingBehavior AimingBehavior { get; }
     }
 }

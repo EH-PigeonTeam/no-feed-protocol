@@ -107,7 +107,6 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
                 if (m_logic.IsSpinLimitReached)
                 {
-                    Debug.Log("Spin limit reached!");
                     m_view.Lock(m_wheels, m_indicators);
                     return;
                 }
@@ -135,7 +134,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         [Button]
         public void Reset()
         {
-            if (m_wheels.IsNullOrEmpty() || m_indicators.IsNullOrEmpty())
+            if (m_wheels.IsNullOrEmpty() /*|| m_indicators.IsNullOrEmpty()*/)
             {
                 return;
             }

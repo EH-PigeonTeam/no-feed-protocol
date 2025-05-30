@@ -34,7 +34,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         [SerializeField, InlineProperty, HideLabel]
         private PlayerBuilder m_builder;
 
-        [BoxGroup("Settings")]
+        [BoxGroup("Settings/Input", showLabel: false)]
         [Tooltip("")]
         [SerializeReference, InlineProperty, HideLabel, TypeFilter("GetInputHandlerTypes")]
         private InputHandler m_inputHandler;
@@ -49,10 +49,20 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
                 !t.IsInterface);
         }
 
-        [BoxGroup("Settings")]
+        [BoxGroup("Settings/Aiming", showLabel: false)]
         [Tooltip("")]
-        [SerializeReference, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-        private IPlayerAimingHandler m_aimingHandler;
+        [SerializeReference, InlineProperty, HideLabel, TypeFilter("GetAimingHandlerTypes")]
+        private AimingHandler m_aimingHandler;
+
+        private IEnumerable<Type> GetAimingHandlerTypes()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t =>
+                t.IsSubclassOf(typeof(AimingHandler)) &&
+                !t.IsAbstract &&
+                !t.IsInterface);
+        }
 
         #endregion
 
@@ -63,6 +73,8 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         [HideInInspector]
         public ICharacterResolver Resolver;
+
+        public PlayerViewController PlayerView => m_viewController;
 
         #endregion
 
@@ -81,6 +93,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             );
 
             this.m_inputHandler.Setup(this);
+            this.m_aimingHandler.Setup(this);
 
             this.Resolver = resolver;
         }
@@ -88,6 +101,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         private void OnDisable()
         {
             this.m_inputHandler.OnDispose();
+            this.m_aimingHandler.OnDispose();
         }
 
         #endregion
@@ -103,6 +117,11 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         public void OnSlot()
         {
             this.m_inputHandler.OnSlot();
+        }
+
+        public void OnAiming()
+        {
+            this.m_aimingHandler.EnterTargetPhase();
         }
 
         public void OnTurnEnd() { }
@@ -190,6 +209,10 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             }
         }
 
+        public Button GetCharacterTop() => m_characterTop?.GetComponentInChildren<Button>(true);
+
+        public Button GetCharacterBottom() => m_characterBottom?.GetComponentInChildren<Button>(true);
+
         #endregion
     }
 
@@ -205,6 +228,10 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         [FoldoutGroup("Builder/Bottom Character Transform")]
         [SerializeField, InlineProperty, HideLabel]
         private TransformData m_bottomTransform = TransformData.Default();
+
+        [FoldoutGroup("Builder")]
+        [SerializeField, SceneObjectsOnly] 
+        private Camera m_uiCamera;
 
         [FoldoutGroup("Builder")]
         [SerializeField, AssetsOnly, Required]
@@ -245,6 +272,12 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
                 Quaternion.Euler(transform.Rotation)
             );
             character.transform.localScale = transform.Scale;
+
+            if (character.transform.TryGetComponentInChildren(out Canvas canvas, true))
+            {
+                canvas.worldCamera = this.m_uiCamera;
+            }
+
             return character;
         }
 
@@ -264,13 +297,20 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         #endregion
     }
 
+    public static class ComponentExtensions
+    {
+        public static bool TryGetComponentInChildren<T>(this Component parent, out T result, bool includeInactive = false) where T : Component
+        {
+            result = parent.GetComponentInChildren<T>(includeInactive);
+            return result != null;
+        }
+    }
+
     public class InputHandler
     {
-        [FoldoutGroup("Slot Machine Configuration")]
         [SerializeField]
         protected SlotMachineData m_slotMachineConfig;
 
-        [FoldoutGroup("Slot Machine Configuration")]
         [SerializeField]
         protected SlotMachineController m_slotMachine;
 
@@ -281,7 +321,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             this.Player = player;
 
             this.m_slotMachine.Setup(
-                this.m_slotMachineConfig, 
+                this.m_slotMachineConfig,
                 ServiceLocator.Get<ItemResolver>().GetByIds(this.Player.RuntimeData.Items));
             this.m_slotMachine.OnSpinCompleted += OnSpinCompleted;
         }
@@ -351,9 +391,12 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         }
     }
 
-    public class HumanInputHandler : InputHandler
-    {
-        
+    public class HumanInputHandler : InputHandler { 
+    
+        public override void OnSlot()
+        {
+            base.OnSlot();
+        }
     }
 
     public class BotInputHandler : InputHandler
@@ -366,18 +409,189 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         {
             base.OnSlot();
 
-            DOVirtual.DelayedCall(m_spinDelay, () => m_slotMachine.Spin(), ignoreTimeScale: false);
+            DOVirtual.DelayedCall(m_spinDelay, () =>
+            {
+                m_slotMachine.Spin();
+            });
         }
     }
 
-    public interface IPlayerAimingHandler { }
-
-    public class HumanAimingHandler : IPlayerAimingHandler
+    public class AimingHandler
     {
+        [Tooltip("Opponent controller reference (used for targeting logic).")]
+        [SerializeField, Required]
+        protected PlayerController m_opponent;
+
+        protected PlayerController Owner { get; private set; }
+        public CharacterRuntimeData Attacker { get; protected set; }
+
+        protected PlayerController Opponent => m_opponent;
+
+        protected readonly Queue<CharacterRuntimeData> m_attackQueue = new();
+
+        public virtual void Setup(PlayerController owner)
+        {
+            Owner = owner;
+        }
+
+        public virtual void EnterTargetPhase()
+        {
+            m_attackQueue.Clear();
+
+            if (HasReadyToAttack(Owner.RuntimeData.CharacterTop))
+                m_attackQueue.Enqueue(Owner.RuntimeData.CharacterTop);
+
+            if (HasReadyToAttack(Owner.RuntimeData.CharacterBottom))
+                m_attackQueue.Enqueue(Owner.RuntimeData.CharacterBottom);
+
+            ProcessNextAttacker();
+        }
+
+        public virtual void OnDispose() { }
+
+        protected virtual bool HasReadyToAttack(CharacterRuntimeData character)
+        {
+            return character.HasReadyToAttack(Owner.Resolver.GetById(character.Id).EnergyRequired);
+        }
+
+        protected virtual void TargetSelected(CharacterRuntimeData opponent) { }
+        protected virtual void AttackSelected(CharacterRuntimeData attacker)
+        {
+            Attacker = attacker;
+        }
+        protected virtual void ProcessNextAttacker() { }
     }
 
-    public class BotAimingHandler : IPlayerAimingHandler
+    public class HumanAimingHandler : AimingHandler
     {
+        [ShowInInspector, ReadOnly]
+        private Button m_top;
+
+        [ShowInInspector, ReadOnly]
+        private Button m_bottom;
+
+        public override void Setup(PlayerController owner)
+        {
+            base.Setup(owner);
+
+            CharacterRuntimeData top = Opponent?.RuntimeData?.CharacterTop;
+            CharacterRuntimeData bottom = Opponent?.RuntimeData?.CharacterBottom;
+
+            m_top = top != null ? Opponent.PlayerView.GetCharacterTop() : null;
+            m_bottom = bottom != null ? Opponent.PlayerView.GetCharacterBottom() : null;
+
+            m_top?.onClick.AddListener(() => TargetSelected(top));
+            m_bottom?.onClick.AddListener(() => TargetSelected(bottom));
+        }
+
+        protected override void AttackSelected(CharacterRuntimeData attacker)
+        {
+            base.AttackSelected(attacker);
+            TargetShow(true);
+        }
+
+        private void TargetShow(bool show)
+        {
+            m_top?.transform?.parent?.gameObject.SetActive(show);
+            m_bottom?.transform?.parent?.gameObject.SetActive(show);
+        }
+
+        public override void OnDispose()
+        {
+            m_top?.onClick.RemoveAllListeners();
+            m_bottom?.onClick.RemoveAllListeners();
+        }
+        protected override void ProcessNextAttacker()
+        {
+            if (m_attackQueue.Count == 0)
+            {
+                TargetShow(false);
+                Debug.Log("All attacks processed. Ending target phase.");
+                return;
+            }
+
+            Attacker = m_attackQueue.Dequeue();
+            Debug.Log($"Attacker Ready: {Attacker.Id}");
+
+            TargetShow(true);
+        }
+        protected override void TargetSelected(CharacterRuntimeData opponent)
+        {
+            Debug.Log($"Target Selected: {opponent?.Id}");
+
+            Attacker.Energy = 0;
+            Owner.PlayerView.UpdateUI(Owner.RuntimeData);
+
+            ProcessNextAttacker();
+        }
+    }
+
+    public class BotAimingHandler : AimingHandler
+    {
+        protected override void ProcessNextAttacker()
+        {
+            if (m_attackQueue.Count == 0)
+            {
+                Debug.Log("Bot finished all attacks");
+                return;
+            }
+
+            Attacker = m_attackQueue.Dequeue();
+
+            var attackerData = Owner.Resolver.GetById(Attacker.Id);
+            var aiming = attackerData.AimingBehavior;
+
+            var target = PickTarget(aiming);
+            if (target == null)
+            {
+                Debug.LogWarning("Bot found no valid target.");
+                ProcessNextAttacker();
+                return;
+            }
+
+            TargetSelected(target);
+        }
+
+        private CharacterRuntimeData PickTarget(AimingBehavior aiming)
+        {
+            var top = Opponent.RuntimeData.CharacterTop;
+            var bottom = Opponent.RuntimeData.CharacterBottom;
+
+            return aiming.TargetStrategy switch
+            {
+                TargetStrategy.RandomSplit => UnityEngine.Random.value < aiming.Value ? top : bottom,
+                TargetStrategy.PreferLowestHP => GetLowerHP(top, bottom),
+                TargetStrategy.PreferHighestHP => GetHigherHP(top, bottom),
+                TargetStrategy.All => top ?? bottom, // fallback for now
+                _ => null,
+            };
+        }
+
+        private CharacterRuntimeData GetLowerHP(CharacterRuntimeData a, CharacterRuntimeData b)
+        {
+            if (a == null) return b;
+            if (b == null) return a;
+            return a.Health <= b.Health ? a : b;
+        }
+
+        private CharacterRuntimeData GetHigherHP(CharacterRuntimeData a, CharacterRuntimeData b)
+        {
+            if (a == null) return b;
+            if (b == null) return a;
+            return a.Health >= b.Health ? a : b;
+        }
+
+        protected override void TargetSelected(CharacterRuntimeData opponent)
+        {
+            Debug.Log($"[BOT] Target Selected: {opponent?.Id}");
+
+            Attacker.Energy = 0;
+            Owner.PlayerView.UpdateUI(Owner.RuntimeData);
+
+            // TODO: Passa a CombatResolver
+
+            ProcessNextAttacker();
+        }
     }
 
     public struct CharactersBuilder

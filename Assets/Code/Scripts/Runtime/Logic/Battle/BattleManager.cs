@@ -84,8 +84,8 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
         private void InitializeBattle()
         {
-            m_PlayerController.Initialize(m_battleData.PlayerTeam, ServiceLocator.Get<CharacterResolver>());
             m_EnemyController.Initialize(m_battleData.EnemyTeam, ServiceLocator.Get<EnemyCharacterResolver>());
+            m_PlayerController.Initialize(m_battleData.PlayerTeam, ServiceLocator.Get<CharacterResolver>());
 
             m_phaseManager.ChangePhase(BattlePhase.Setup);
         }
@@ -138,6 +138,10 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
                 case BattlePhase.Slot:
                     playerController.OnSlot();
+                    break;
+
+                case BattlePhase.Target:
+                    playerController.OnAiming();
                     break;
 
                 case BattlePhase.TurnEnd:

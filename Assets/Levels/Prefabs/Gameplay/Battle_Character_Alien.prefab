@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1548,7 +1548,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2204638170213343365}
   - component: {fileID: 2604204812571927088}
-  - component: {fileID: 528245248132702809}
   m_Layer: 0
   m_Name: Battle_Character_Alien
   m_TagString: Untagged
@@ -1591,16 +1590,3 @@ MonoBehaviour:
   m_energy: {fileID: 7954251928602583693}
   m_viewfinder: {fileID: 3039792737178803940}
   m_animator: {fileID: 4968551301504082658}
---- !u!114 &528245248132702809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7998539078406814515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a8effa90dc5ce4eb1d4e4191571c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_button: {fileID: 8506760834806303722}
