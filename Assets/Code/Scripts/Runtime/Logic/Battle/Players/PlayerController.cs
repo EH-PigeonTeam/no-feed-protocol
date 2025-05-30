@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using PsychoGarden.Utils;
 using Code.Systems.Locator;
 using NoFeedProtocol.Authoring.Characters;
 using NoFeedProtocol.Runtime.Entities;
@@ -15,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NoFeedProtocol.Runtime.Logic.Enums;
 using DG.Tweening;
+using NoFeedProtocol.Authoring.Characters.Combat;
 
 namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 {
@@ -110,9 +110,16 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         public void UpdateUI(PlayerRuntimeData data) => m_viewController.UpdateUI(data);
 
-        public void OnTurnStart()
+        public void ApplyCombatDeltas(CombatResult result)
         {
+            RuntimeData.CharacterTop.Health = Mathf.Max(0, RuntimeData.CharacterTop.Health + result.HealthTop);
+            RuntimeData.CharacterBottom.Health = Mathf.Max(0, RuntimeData.CharacterBottom.Health + result.HealthBottom);
+            RuntimeData.CurrentShield = Mathf.Max(0, RuntimeData.CurrentShield + result.ShieldChange);
+
+            PlayerView?.UpdateUI(RuntimeData);
         }
+
+        public void OnTurnStart() { }
 
         public void OnSlot()
         {
@@ -454,7 +461,16 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             return character.HasReadyToAttack(Owner.Resolver.GetById(character.Id).EnergyRequired);
         }
 
-        protected virtual void TargetSelected(CharacterRuntimeData opponent) { }
+        protected virtual void TargetSelected(CharacterRuntimeData opponent)
+        {
+            Attacker.Energy = 0;
+            Owner.PlayerView.UpdateUI(Owner.RuntimeData);
+
+            CombatResolver.Resolve(new CombatRequest(Attacker, Owner, opponent, Opponent));
+
+            ProcessNextAttacker();
+        }
+
         protected virtual void AttackSelected(CharacterRuntimeData attacker)
         {
             Attacker = attacker;
@@ -506,6 +522,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             if (m_attackQueue.Count == 0)
             {
                 TargetShow(false);
+                ServiceLocator.Get<BattlePhaseManager>().ChangePhase(BattlePhase.TurnEnd);
                 Debug.Log("All attacks processed. Ending target phase.");
                 return;
             }
@@ -515,14 +532,12 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
             TargetShow(true);
         }
+
         protected override void TargetSelected(CharacterRuntimeData opponent)
         {
             Debug.Log($"Target Selected: {opponent?.Id}");
 
-            Attacker.Energy = 0;
-            Owner.PlayerView.UpdateUI(Owner.RuntimeData);
-
-            ProcessNextAttacker();
+            base.TargetSelected(opponent);
         }
     }
 
@@ -533,6 +548,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             if (m_attackQueue.Count == 0)
             {
                 Debug.Log("Bot finished all attacks");
+                ServiceLocator.Get<BattlePhaseManager>().ChangePhase(BattlePhase.TurnEnd);
                 return;
             }
 
@@ -585,12 +601,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         {
             Debug.Log($"[BOT] Target Selected: {opponent?.Id}");
 
-            Attacker.Energy = 0;
-            Owner.PlayerView.UpdateUI(Owner.RuntimeData);
-
-            // TODO: Passa a CombatResolver
-
-            ProcessNextAttacker();
+            base.TargetSelected(opponent);
         }
     }
 
