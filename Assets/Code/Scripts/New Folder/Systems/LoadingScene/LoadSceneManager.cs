@@ -33,7 +33,8 @@ namespace Code.Systems.LoadingScene
         private bool m_fadeOut = true;
         private bool m_enableFakeTime = true;
 
-        public static event Action OnSceneLoaded;
+        public static event Action OnSceneLoadStart;
+        public static event Action OnSceneLoadFinished;
 
         private void Awake()
         {
@@ -66,8 +67,10 @@ namespace Code.Systems.LoadingScene
             bool hasSingle = toLoad.Any(s => s.Mode == LoadSceneMode.Single);
 
             // Build the set of scenes to preserve during unloading
-            HashSet<string> preserveSet = new();
-            preserveSet.Add(CoreSystemsScene); // CoreSystems is always preserved
+            HashSet<string> preserveSet = new()
+            {
+                CoreSystemsScene // CoreSystems is always preserved
+            };
 
             if (hasSingle)
             {
@@ -96,6 +99,8 @@ namespace Code.Systems.LoadingScene
                 yield return new WaitUntil(() => done);
             }
 
+            OnSceneLoadStart?.Invoke();
+
             // Unload all loaded scenes not in the preserve set
             yield return UnloadScenesRoutine(preserveSet);
 
@@ -116,6 +121,8 @@ namespace Code.Systems.LoadingScene
             if (m_enableFakeTime)
                 yield return new WaitForSeconds(m_loadingTime);
 
+            OnSceneLoadFinished?.Invoke();
+
             // Play fade-out transition
             if (m_fadeOut && m_transitionController != null)
             {
@@ -132,8 +139,6 @@ namespace Code.Systems.LoadingScene
             m_fadeIn = true;
             m_fadeOut = true;
             m_enableFakeTime = true;
-
-            OnSceneLoaded?.Invoke();
         }
 
         private IEnumerator UnloadScenesRoutine(HashSet<string> preserveSet)

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Logo Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,9 +257,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93b0d625e5e524ea4d333812c9a021, type: 3}
+  m_Script: {fileID: 11500000, guid: 56d026380574a0e48aa0c1d9134572ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_priorityFromTop: 1
+  m_override: 1
 --- !u!1 &558900846
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Menu
+  maxVideoDuration: 30
 --- !u!1 &1832847047
 GameObject:
   m_ObjectHideFlags: 0

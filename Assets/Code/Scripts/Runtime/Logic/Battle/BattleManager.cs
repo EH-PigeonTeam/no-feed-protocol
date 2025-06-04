@@ -102,6 +102,11 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
         public void EndTurn()
         {
+            if (!m_battleData.PlayerTeam.CharactersAreAlive() || !m_battleData.EnemyTeam.CharactersAreAlive())
+            {
+                m_phaseManager.ChangePhase(BattlePhase.BattleEnd);
+            }
+
             m_turnManager.NextTurn();
             m_phaseManager.ChangePhase(BattlePhase.TurnStart);
         }

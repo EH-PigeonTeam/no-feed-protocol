@@ -49,12 +49,12 @@ namespace NoFeedProtocol.Runtime.UI
 
         private void OnEnable()
         {
-            LoadSceneManager.OnSceneLoaded += UpdateInfo;
+            LoadSceneManager.OnSceneLoadFinished += UpdateInfo;
         }
 
         private void OnDisable()
         {
-            LoadSceneManager.OnSceneLoaded -= UpdateInfo;
+            LoadSceneManager.OnSceneLoadFinished -= UpdateInfo;
         }
 
         private void UpdateInfo()

@@ -180,6 +180,8 @@ MonoBehaviour:
             m_overrideValue: 0
             m_value: 0
             m_modifier: 1
+      - m_trigger: 1
+        m_actions:
         - m_conditions: 0
           m_value: 0
           m_sequence:

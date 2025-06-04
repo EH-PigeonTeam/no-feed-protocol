@@ -222,6 +222,10 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         public Button GetCharacterBottom() => m_characterBottom?.GetComponentInChildren<Button>(true);
 
+        public CharacterViewController CharacterTopViewController => m_characterTop;
+
+        public CharacterViewController CharacterBottomViewController => m_characterBottom;
+
         #endregion
     }
 
@@ -239,7 +243,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         private TransformData m_bottomTransform = TransformData.Default();
 
         [FoldoutGroup("Builder")]
-        [SerializeField, SceneObjectsOnly] 
+        [SerializeField, SceneObjectsOnly]
         private Camera m_uiCamera;
 
         [FoldoutGroup("Builder")]
@@ -400,8 +404,9 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
         }
     }
 
-    public class HumanInputHandler : InputHandler { 
-    
+    public class HumanInputHandler : InputHandler
+    {
+
         public override void OnSlot()
         {
             base.OnSlot();
@@ -468,6 +473,15 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             Attacker.Energy = 0;
             Owner.PlayerView.UpdateUI(Owner.RuntimeData);
 
+            if (Owner.RuntimeData.CharacterTop == Attacker)
+            {
+                Owner.PlayerView.CharacterTopViewController.PlayAttack();
+            }
+            else
+            {
+                Owner.PlayerView.CharacterBottomViewController.PlayAttack();
+            }
+
             CombatResolver.Resolve(new CombatRequest(Attacker, Owner, opponent, Opponent));
 
             ProcessNextAttacker();
@@ -510,8 +524,15 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         private void TargetShow(bool show)
         {
-            m_top?.transform?.parent?.gameObject.SetActive(show);
-            m_bottom?.transform?.parent?.gameObject.SetActive(show);
+            if (Owner.RuntimeData.CharacterTop.IsAlive)
+            {
+                m_top?.transform?.parent?.gameObject.SetActive(show);
+            }
+
+            if (Owner.RuntimeData.CharacterBottom.IsAlive)
+            {
+                m_bottom?.transform?.parent?.gameObject.SetActive(show);
+            }
         }
 
         public override void OnDispose()
@@ -587,8 +608,9 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         private CharacterRuntimeData GetLowerHP(CharacterRuntimeData a, CharacterRuntimeData b)
         {
-            if (a == null) return b;
-            if (b == null) return a;
+            if (a == null || a.Health <= 0f) return b;
+            if (b == null || b.Health <= 0f) return a;
+
             return a.Health <= b.Health ? a : b;
         }
 
@@ -618,17 +640,20 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
     {
         public readonly int Health;
         public readonly int Energy;
+        public readonly bool HasShield;
 
-        public CharacterUIState(int health, int energy)
+        public CharacterUIState(int health, int energy, bool hasShield = false)
         {
             Health = health;
             Energy = energy;
+            HasShield = hasShield;
         }
 
         public CharacterUIState(CharacterStats stats)
         {
             Health = stats.Health;
             Energy = stats.Energy;
+            HasShield = true;
         }
     }
 }

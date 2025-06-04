@@ -42,7 +42,7 @@ namespace NoFeedProtocol.Runtime.Entities
 
         public bool CharactersAreAlive()
         {
-            return CharacterTop.Health > 0 && CharacterBottom.Health > 0;
+            return CharacterTop.Health > 0 || CharacterBottom.Health > 0;
         }
     }
 }

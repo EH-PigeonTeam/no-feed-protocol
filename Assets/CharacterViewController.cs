@@ -8,6 +8,7 @@ using NoFeedProtocol.Authoring.Characters.Animation;
 using NoFeedProtocol.Authoring.Characters;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Runtime.Logic.Battle.Players;
+using DG.Tweening;
 
 namespace NoFeedProtocol.Runtime.UI
 {
@@ -21,7 +22,37 @@ namespace NoFeedProtocol.Runtime.UI
         [SerializeField] private GameObject m_viewfinder;
         [SerializeField] private Animator m_animator;
 
+        [FoldoutGroup("Shield Animation")]
+        [Tooltip("The time it takes to fade in the shield")]
+        [SerializeField, ChildGameObjectsOnly] 
+        private Image m_shield;
+
+        [FoldoutGroup("Shield Animation")]
+        [Tooltip("The time it takes to fade in the shield"), Unit(Units.Second)]
+        [SerializeField, MinValue(0f)] 
+        private float m_fadeInDuration = 0.5f;
+
+        [FoldoutGroup("Shield Animation")]
+        [Tooltip("The time it takes to fade out the shield"), Unit(Units.Second)]
+        [SerializeField, MinValue(0f)] 
+        private float m_fadeOutDuration = 0.5f;
+
+        [FoldoutGroup("Shield Animation")]
+        [Tooltip("The time it takes to wait between the shield fade in and fade out"), Unit(Units.Second)]
+        [SerializeField, MinValue(0f)] 
+        private float m_delayBetween = 2f;
+
         private int m_energyMax;
+
+        private void Start()
+        {
+            if(m_shield!= null)
+            {
+                Color color = m_shield.color;
+                color.a = 0f;
+                m_shield.color = color;
+            }
+        }
 
         /// <summary>
         /// Set static data only once: attack, energy required, etc.
@@ -48,6 +79,26 @@ namespace NoFeedProtocol.Runtime.UI
         {
             Debug.Log("UpdateState");
 
+            if (state.HasShield && state.Health < int.Parse(m_health.text))
+            {
+                m_shield.DOFade(1f, m_fadeInDuration)
+                    .SetEase(Ease.InOutSine)
+                    .OnComplete(() =>
+                    {
+                        DOVirtual.DelayedCall(m_delayBetween, () =>
+                        {
+                            m_shield.DOFade(0f, m_fadeOutDuration)
+                            .SetEase(Ease.InOutSine);
+                        });
+                    });
+
+                PlayDamage();
+            }
+            else if (state.Health < int.Parse(m_health.text))
+            {
+                PlayDamage();
+            }
+
             if (m_health.text != state.Health.ToString())
             {
                 m_health.text = state.Health.ToString();
@@ -57,6 +108,8 @@ namespace NoFeedProtocol.Runtime.UI
             {
                 m_energy.value = state.Energy;
             }
+
+            if (state.Health <= 0) PlayDeath();
         }
 
         public void SetViewfinder(bool active)

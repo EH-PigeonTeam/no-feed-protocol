@@ -1,53 +1,93 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using Code.Systems.LoadingScene;
 
-namespace Code.Systems.LoadingScene.VFX
+namespace NoFeedProtocol.Runtime.Logic.VFX
 {
     [HideMonoScript]
-    public class EnsureUICameraOnTop : MonoBehaviour
+    [RequireComponent(typeof(Camera))]
+    public class UIStackOrderManager : MonoBehaviour
     {
         [BoxGroup("Settings")]
-        [Tooltip("")]
         [SerializeField, Min(1)]
-        private int m_priority = 1;
+        private int m_priorityFromTop = 1;
 
-        private Camera m_baseCamera;
+        [BoxGroup("Settings")]
+        [Tooltip("If true, this script bypass OnSceneLoadFinished event.")]
+        [SerializeField]
+        private bool m_override = false;
+
         private Camera m_uiCamera;
+        private Camera m_baseCamera;
 
-        private UniversalAdditionalCameraData m_baseCamData;
+        #region Initialization and State Setup --------------------------
 
         private void Awake()
         {
-            this.m_uiCamera = this.GetComponent<Camera>();
-            this.m_baseCamera = Camera.main;
+            m_uiCamera = GetComponent<Camera>();
 
-            if (this.m_baseCamera == null)
-                this.m_baseCamera = Camera.main;
-
-            if (this.m_baseCamera != null)
-                this.m_baseCamData = this.m_baseCamera.GetUniversalAdditionalCameraData();
+            if (m_override)
+            {
+                HandleSceneLoadFinished();
+            }
         }
 
-        private void LateUpdate()
+        private void OnEnable()
         {
-            if (this.m_baseCamData == null || this.m_uiCamera == null)
+            LoadSceneManager.OnSceneLoadFinished += HandleSceneLoadFinished;
+        }
+
+        private void OnDisable()
+        {
+            LoadSceneManager.OnSceneLoadFinished -= HandleSceneLoadFinished;
+        
+#if UNITY_EDITOR
+            if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+                return;
+#endif
+
+            if (m_uiCamera == null)
                 return;
 
-            var stack = this.m_baseCamData.cameraStack;
+            var baseCameraObj = Camera.main;
+            if (baseCameraObj == null) return;
 
-            if (stack.Contains(this.m_uiCamera))
+            var baseCamera = baseCameraObj.GetUniversalAdditionalCameraData();
+            if (baseCamera == null) return;
+
+            if (baseCamera.cameraStack.Contains(m_uiCamera))
             {
-                if (stack[^this.m_priority] != this.m_uiCamera)
-                {
-                    stack.Remove(this.m_uiCamera);
-                    stack.Add(this.m_uiCamera);
-                }
-            }
-            else
-            {
-                stack.Add(this.m_uiCamera);
+                baseCamera.cameraStack.Remove(m_uiCamera);
             }
         }
+
+        #endregion
+
+        #region Camera Stack Ordering -----------------------------------
+
+        [Button]
+        private void HandleSceneLoadFinished()
+        {
+            m_baseCamera = Camera.main;
+
+            if (m_baseCamera == null || m_uiCamera == null)
+                return;
+
+            var baseData = m_baseCamera.GetUniversalAdditionalCameraData();
+            var stack = baseData.cameraStack;
+
+            stack.Remove(m_uiCamera);
+
+            int insertIndex = Mathf.Clamp(stack.Count - m_priorityFromTop, 0, stack.Count);
+
+            stack.Insert(insertIndex, m_uiCamera);
+
+#if UNITY_EDITOR
+            Debug.Log($"[UIStackOrderManager] Inserted {m_uiCamera.name} at stack index {insertIndex} (PriorityFromTop={m_priorityFromTop})");
+#endif
+        }
+
+        #endregion
     }
 }
