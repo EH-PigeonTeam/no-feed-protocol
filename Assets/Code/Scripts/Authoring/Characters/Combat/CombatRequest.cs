@@ -66,45 +66,44 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                 foreach (var block in trigger.Actions)
                 {
-                    if (!IsConditionMet(block, request.AttackerTeam, request.DefenderTeam, request.Attacker))
+                    var mode = GetAttackMode(block, request.AttackerTeam, request.DefenderTeam, request.Attacker);
+                    if (mode == AttackMode.Invalid)
                         continue;
 
                     foreach (var action in block.Sequence)
                     {
-                        int baseValue = action.OverrideValue
+                        int finalValue = action.OverrideValue
                             ? action.Value
-                            : attackerStatic.AttackPoints;
+                            : GetContextualValue(attackerStatic, mode);
 
-                        int modified = Mathf.RoundToInt(baseValue * action.Modifier);
+                        int val = Mathf.RoundToInt(finalValue * action.Modifier);
 
                         switch (action.Target)
                         {
                             case CombatTargetType.EnemyTargeted:
                                 {
                                     bool defenderHasShield = request.DefenderTeam.RuntimeData.CurrentShield > 0;
-                                    int finalValue = action.OverrideValue
-                                        ? action.Value
-                                        : GetContextualValue(attackerStatic, block.Conditions, defenderHasShield);
 
-                                    int val = Mathf.RoundToInt(finalValue * action.Modifier);
-
-                                    if (defenderHasShield && !action.OverrideValue)
+                                    if (mode == AttackMode.ShieldOnly)
                                     {
                                         shieldDef -= val;
                                     }
                                     else
                                     {
-                                        if (request.Defender == request.DefenderTeam.RuntimeData.CharacterTop)
+                                        if (defenderHasShield && mode == AttackMode.Normal)
+                                            shieldDef -= val;
+                                        else if (request.Defender == request.DefenderTeam.RuntimeData.CharacterTop)
                                             dmgTopDef -= val;
                                         else
                                             dmgBottomDef -= val;
                                     }
+
                                     break;
                                 }
 
                             case CombatTargetType.EnemyAll:
-                                dmgTopDef -= modified;
-                                dmgBottomDef -= modified;
+                                dmgTopDef -= val;
+                                dmgBottomDef -= val;
                                 break;
 
                             case CombatTargetType.EnemyOther:
@@ -114,34 +113,32 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                         : request.DefenderTeam.RuntimeData.CharacterTop;
 
                                     if (other == request.DefenderTeam.RuntimeData.CharacterTop)
-                                        dmgTopDef -= modified;
+                                        dmgTopDef -= val;
                                     else
-                                        dmgBottomDef -= modified;
+                                        dmgBottomDef -= val;
                                     break;
                                 }
 
                             case CombatTargetType.EnemyAttacker:
                                 {
-                                    var target = request.Defender;
-
-                                    if (target == request.DefenderTeam.RuntimeData.CharacterTop)
-                                        dmgTopDef -= modified;
+                                    if (request.Defender == request.DefenderTeam.RuntimeData.CharacterTop)
+                                        dmgTopDef -= val;
                                     else
-                                        dmgBottomDef -= modified;
+                                        dmgBottomDef -= val;
                                     break;
                                 }
 
                             case CombatTargetType.Self:
                                 {
                                     if (request.Attacker == request.AttackerTeam.RuntimeData.CharacterTop)
-                                        dmgTopAtk += modified;
+                                        dmgTopAtk += val;
                                     else
-                                        dmgBottomAtk += modified;
+                                        dmgBottomAtk += val;
                                     break;
                                 }
 
                             case CombatTargetType.SelfShield:
-                                shieldAtk += modified;
+                                shieldAtk += val;
                                 break;
 
                             case CombatTargetType.AllyLowestHP:
@@ -151,9 +148,9 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                     var target = (top.Health <= bottom.Health) ? top : bottom;
 
                                     if (target == top)
-                                        dmgTopAtk += modified;
+                                        dmgTopAtk += val;
                                     else
-                                        dmgBottomAtk += modified;
+                                        dmgBottomAtk += val;
                                     break;
                                 }
                         }
@@ -167,23 +164,18 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
         private static int GetContextualValue(
             ICharacterStaticData attackerStatic,
-            CombatConditionType conditions,
-            bool targetHasShield)
+            AttackMode mode)
         {
-            bool explicitWithShield = conditions.HasFlag(CombatConditionType.WithShield);
-            bool explicitWithoutShield = conditions.HasFlag(CombatConditionType.WithOutShield);
-
-            if (explicitWithShield)
-                return attackerStatic.AttackPointsShield;
-
-            if (explicitWithoutShield)
-                return attackerStatic.AttackPoints;
-
-            // Implicit runtime decision
-            return targetHasShield ? attackerStatic.AttackPointsShield : attackerStatic.AttackPoints;
+            return mode switch
+            {
+                AttackMode.Override => 0, // già gestito altrove
+                AttackMode.ShieldOnly => attackerStatic.AttackPointsShield,
+                AttackMode.Normal => attackerStatic.AttackPoints,
+                _ => attackerStatic.AttackPoints
+            };
         }
 
-        private static bool IsConditionMet(
+        private static AttackMode GetAttackMode(
             CombatActionBlock block,
             PlayerController attackerTeam,
             PlayerController defenderTeam,
@@ -192,44 +184,44 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
             var type = block.Conditions;
 
             if (type == CombatConditionType.Always)
-                return true;
+                return block.Conditions == CombatConditionType.SelfHpBelow ? AttackMode.Override : AttackMode.Normal;
 
-            bool hasShield = attackerTeam.RuntimeData.CurrentShield > 0;
+            bool defenderHasShield = defenderTeam.RuntimeData.CurrentShield > 0;
 
-            if (type.HasFlag(CombatConditionType.WithShield) && !hasShield)
-                return false;
+            if (type.HasFlag(CombatConditionType.WithShield))
+                return defenderHasShield ? AttackMode.ShieldOnly : AttackMode.Invalid;
 
-            if (type.HasFlag(CombatConditionType.WithOutShield) && hasShield)
-                return false;
+            if (type.HasFlag(CombatConditionType.WithOutShield))
+                return defenderHasShield ? AttackMode.Invalid : AttackMode.Normal;
 
             if (type.HasFlag(CombatConditionType.SelfHpBelow) && self.Health >= block.Value)
-                return false;
+                return AttackMode.Invalid;
 
             if (type.HasFlag(CombatConditionType.HasEnemyAtLeast))
             {
                 int alive = 0;
-                if (defenderTeam.RuntimeData.CharacterTop?.Health > 0)
-                    alive++;
-                if (defenderTeam.RuntimeData.CharacterBottom?.Health > 0)
-                    alive++;
-
-                if (alive < block.Value)
-                    return false;
+                if (defenderTeam.RuntimeData.CharacterTop?.IsAlive == true) alive++;
+                if (defenderTeam.RuntimeData.CharacterBottom?.IsAlive == true) alive++;
+                if (alive < block.Value) return AttackMode.Invalid;
             }
 
             if (type.HasFlag(CombatConditionType.HasAllyAtLeast))
             {
                 int alive = 0;
-                if (attackerTeam.RuntimeData.CharacterTop?.Health > 0)
-                    alive++;
-                if (attackerTeam.RuntimeData.CharacterBottom?.Health > 0)
-                    alive++;
-
-                if (alive < block.Value)
-                    return false;
+                if (attackerTeam.RuntimeData.CharacterTop?.IsAlive == true) alive++;
+                if (attackerTeam.RuntimeData.CharacterBottom?.IsAlive == true) alive++;
+                if (alive < block.Value) return AttackMode.Invalid;
             }
 
-            return true;
+            return block.Conditions == CombatConditionType.SelfHpBelow ? AttackMode.Override : AttackMode.Normal;
         }
+    }
+
+    public enum AttackMode
+    {
+        Invalid,
+        Normal,
+        ShieldOnly,
+        Override
     }
 }
