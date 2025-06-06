@@ -5,6 +5,7 @@ using PsychoGarden.Systems.Save;
 using Code.Systems.Locator;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Persistence.Game;
+using Sirenix.Utilities;
 
 namespace NoFeedProtocol.Runtime.Logic.Data
 {
@@ -183,6 +184,15 @@ namespace NoFeedProtocol.Runtime.Logic.Data
                 ItemIDsUnlocked = save.ItemIDsUnlocked ?? new List<string>()
             };
         }
+
+        #endregion
+
+        #region Public Methods -----------------------------------------------
+
+        public bool HasItem(string id) => m_gameData.ItemIDsUnlocked.Contains(id);
+        public bool HasData => m_gameData != null;
+        public bool HasRun => m_gameData?.Run?.Map?.Nodes is { Count: > 0 };
+        public void ClearRun() => m_gameData.Run = null;
 
         #endregion
     }
