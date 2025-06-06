@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using Core.Gameplay.SlotMachine;
@@ -31,9 +30,11 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
                 if (i >= symbols.Count || symbols[i] == null)
                     continue;
 
-                if (slotWheels[i].TryGetComponent<Image>(out var image))
+                if (slotWheels[i].Display != null)
                 {
-                    image.sprite = symbols[i].Sprite;
+                    slotWheels[i].Display.DOFade(0f, 0f); // fade-out instantly
+                    slotWheels[i].Display.sprite = symbols[i].Sprite;
+                    slotWheels[i].Display.DOFade(1f, m_symbolRevealDelay).SetEase(m_symbolRevealEase); // fade-in animata
                 }
             }
 

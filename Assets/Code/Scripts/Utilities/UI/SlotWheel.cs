@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Core.Gameplay.SlotMachine
 {
     public class SlotWheel : ButtonAudio
     {
         [Header("Slot Wheel")]
+        [SerializeField] private Image m_display;
         [SerializeField] private GameObject m_wheelObject;
+        [SerializeField] private GameObject m_wheelObjectActive;
 
         public bool IsLocked => m_wheelObject != null && this.m_wheelObject.activeSelf;
 
@@ -27,10 +30,8 @@ namespace Core.Gameplay.SlotMachine
 
         public void SetWheel(bool state)
         {
-            if (this.m_wheelObject == null)
-                return;
-
-            this.m_wheelObject.SetActive(state);
+            this.m_wheelObject?.SetActive(state);
+            this.m_wheelObjectActive?.SetActive(!state);
         }
 
         /// <summary>
@@ -38,6 +39,8 @@ namespace Core.Gameplay.SlotMachine
         /// </summary>
         /// <param name="state">If true, the wheel is locked</param>
         public void Lock(bool state) => SetWheel(state);
+
+        public Image Display => this.m_display;
     }
 
     public interface IResettable

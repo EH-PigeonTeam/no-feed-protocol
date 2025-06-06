@@ -13,21 +13,36 @@ MonoBehaviour:
   m_Name: SlotMachine_Hero
   m_EditorClassIdentifier: 
   m_symbols:
-  - m_name: Husband
-    m_sprite: {fileID: 21300000, guid: 3f14024a86bf5f743a217a98605dc474, type: 3}
+  - m_name: top
+    m_sprite: {fileID: 21300000, guid: 24b342123feb58a47b35c67da7c7f8fd, type: 3}
     m_multiplier: 1
     m_target: 0
     m_percent: 1
-  - m_name: I'am Chocco
-    m_sprite: {fileID: 21300000, guid: fcda77696d710b14b8aa952175d3e0dc, type: 3}
+  - m_name: shield
+    m_sprite: {fileID: 21300000, guid: 64ad5b80dff108a4c964d180f913ae83, type: 3}
     m_multiplier: 1
     m_target: 1
-    m_percent: 0.753
-  - m_name: I love Chocco Ice Cream
-    m_sprite: {fileID: 21300000, guid: 229b1eba0a36c174a9db4256b0903da5, type: 3}
+    m_percent: 0.85
+  - m_name: bottom
+    m_sprite: {fileID: 21300000, guid: 156b0f3966948464ba6bc7aae5197634, type: 3}
     m_multiplier: 1
     m_target: 2
-    m_percent: 0.202
+    m_percent: 1
+  - m_name: top x2
+    m_sprite: {fileID: 21300000, guid: 66377e5de1e2f22448d4aa2627edc8a7, type: 3}
+    m_multiplier: 2
+    m_target: 0
+    m_percent: 0.75
+  - m_name: shield x2
+    m_sprite: {fileID: 21300000, guid: 1aef060417a633c4a9e4164f043a8f99, type: 3}
+    m_multiplier: 2
+    m_target: 1
+    m_percent: 0.5
+  - m_name: bottom x2
+    m_sprite: {fileID: 21300000, guid: 452fc5f7698ff974dbb08565ca8ff9ed, type: 3}
+    m_multiplier: 2
+    m_target: 2
+    m_percent: 0.75
   m_slotWheelsCount: 5
   m_chances: 3
   m_delay: 1

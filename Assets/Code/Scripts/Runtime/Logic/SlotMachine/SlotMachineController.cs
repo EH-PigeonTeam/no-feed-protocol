@@ -5,6 +5,7 @@ using Sirenix.Utilities;
 using Core.Gameplay.SlotMachine;
 using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Authoring.Items;
+using NoFeedProtocol.Runtime.UI;
 
 namespace NoFeedProtocol.Runtime.Logic.Slot
 {
@@ -27,11 +28,6 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         private GameObject m_slotWheelPrefab;
 
         [FoldoutGroup("Slot Structure")]
-        [Tooltip("The indicator prefab to instantiate.")]
-        [SerializeField, AssetsOnly]
-        private GameObject m_indicatorPrefab;
-
-        [FoldoutGroup("Slot Structure")]
         [Tooltip("The container for slot wheels.")]
         [SerializeField, ChildGameObjectsOnly]
         private Transform m_wheelContainer;
@@ -39,7 +35,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         [FoldoutGroup("Slot Structure")]
         [Tooltip("The container for spin indicators.")]
         [SerializeField, ChildGameObjectsOnly]
-        private Transform m_indicatorContainer;
+        private IndicatorManager m_indicatorManager;
 
         [BoxGroup("References")]
         [SerializeField] private SlotMachineView m_view;
@@ -48,7 +44,12 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         private SlotMachineBuilder m_builder;
 
         private List<SlotWheel> m_wheels;
-        private List<Indicator> m_indicators;
+
+        [Button]
+        private void Test(SlotMachineData data)
+        {
+            Setup(data, null);
+        }
 
         #region Initialization --------------------------------------------------
 
@@ -63,16 +64,10 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
             m_builder = new SlotMachineBuilder(
                 m_slotWheelPrefab,
-                m_indicatorPrefab,
-                m_wheelContainer,
-                m_indicatorContainer
+                m_wheelContainer
             );
 
             m_wheels = m_builder.CreateWheels(data.SlotWheelCount);
-
-            m_indicators = m_isPlayerControlled && m_indicatorContainer != null
-                ? m_builder.CreateIndicators(data.SpinCount)
-                : new List<Indicator>();
         }
 
         private void OnDisable()
@@ -107,11 +102,12 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 
                 if (m_logic.IsSpinLimitReached)
                 {
-                    m_view.Lock(m_wheels, m_indicators);
+                    m_view.Lock(m_wheels);
+                    this.m_indicatorManager?.UseAll();
                     return;
                 }
 
-                m_view.SetActiveIndicator(m_logic.Count - 1, m_indicators);
+                this.m_indicatorManager?.UseNext();
             }
             else
             {
@@ -140,7 +136,9 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
             }
 
             m_logic?.Reset();
-            m_view?.Restore(m_wheels, m_indicators);
+            m_view?.Restore(m_wheels);
+
+            this.m_indicatorManager?.Restore();
         }
 
         private List<int> GetLockedIndexes()

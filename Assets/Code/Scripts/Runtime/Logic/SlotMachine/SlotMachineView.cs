@@ -10,7 +10,7 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
 {
     /// <summary>
     /// Manages the visual representation of the slot machine:
-    /// wheels, indicators, and animations.
+    /// wheels, m_indicators, and animations.
     /// </summary>
     [HideMonoScript]
     public class SlotMachineView : MonoBehaviour
@@ -35,31 +35,24 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
                 if (i >= symbols.Count || symbols[i] == null)
                     continue;
 
-                if (slotWheels[i].TryGetComponent<Image>(out var image))
+                if (slotWheels[i].Display != null)
                 {
-                    image.DOFade(0f, 0f); // fade-out instantly
-                    image.sprite = symbols[i].Sprite;
-                    image.DOFade(1f, m_symbolRevealDelay).SetEase(m_symbolRevealEase); // fade-in animata
+                    slotWheels[i].Display.DOFade(0f, 0f); // fade-out instantly
+                    slotWheels[i].Display.sprite = symbols[i].Sprite;
+                    slotWheels[i].Display.DOFade(1f, m_symbolRevealDelay).SetEase(m_symbolRevealEase); // fade-in animata
                 }
             }
         }
 
-        public void Restore(List<SlotWheel> slotWheels, List<Indicator> indicators)
+        public void Restore(List<SlotWheel> slotWheels)
         {
             LockView(slotWheels, false);
-
-            RestoreIndicators(indicators);
         }
 
-        public void Lock(List<SlotWheel> slotWheels, List<Indicator> indicators)
+        public void Lock(List<SlotWheel> slotWheels)
         {
             LockLogic(slotWheels, true);
             LockView(slotWheels, true);
-
-            foreach (var indicator in indicators)
-            {
-                indicator.Activate();
-            }
         }
 
         public void LockLogic(List<SlotWheel> slotWheels, bool isLocked)

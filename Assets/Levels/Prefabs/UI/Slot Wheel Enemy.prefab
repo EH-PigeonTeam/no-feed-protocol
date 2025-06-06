@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 5480081186105747092}
   - component: {fileID: -5137258148028208183}
   m_Layer: 5
-  m_Name: Slot Wheel
+  m_Name: Slot Wheel Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
+  m_FlexibleHeight: 0
   m_LayoutPriority: 1
 --- !u!114 &5480081186105747092
 MonoBehaviour:
