@@ -12,4 +12,114 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75715d14ab57e2a40bc228f95114c133, type: 3}
   m_Name: ItemsData
   m_EditorClassIdentifier: 
-  m_items: []
+  m_items:
+  - m_id: 16324191-b1d5-4469-a039-6dd2633c5d45
+    m_name: Bayonet
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 3
+  - m_id: e95f35ef-100b-4d18-bfc4-ad7196cf7c46
+    m_name: Taser
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 3
+  - m_id: d156f4a7-754d-46ae-af39-cdbf01706753
+    m_name: ' Thermal viewer'
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 1
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 5
+  - m_id: 252e4a57-5fd3-4571-9374-c04ce3176124
+    m_name: Medium piercing bullets
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 1
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 5
+  - m_id: c9330567-5da2-481c-a6b7-9bb6e25faf4d
+    m_name: Ace of spades
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 3
+        m_value: 1
+  - m_id: 01199751-65f2-4078-a9ad-07337c5b9f94
+    m_name: Crystalline Crystal
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 1
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 3
+        m_value: 1
+  - m_id: ddaff33e-a455-42dc-a6b2-c103936a7ba1
+    m_name: Uranium reactor
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 2
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 3
+        m_value: 1
+  - m_id: 3edfbbe1-923c-46b4-9a17-1a8c28555eec
+    m_name: Superior piercing bullets
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 2
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 7
+  - m_id: 64f0df1f-1045-4068-a6c8-f89f48c62fbb
+    m_name: Anticoagulant Bullets
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 7
+  - m_id: c45d192f-3adf-49e7-aed0-59482a21b058
+    m_name: Super stimulant
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 3
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 2
+        m_value: 1
