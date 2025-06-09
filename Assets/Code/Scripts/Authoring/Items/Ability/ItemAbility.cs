@@ -59,7 +59,8 @@ namespace NoFeedProtocol.Authoring.Items
     public enum AbilityTriggerMoment
     {
         Always,
-        //OnUse
+        //OnUse,
+        //OnCharacterDeath
     }
 
     /// <summary>
@@ -67,8 +68,8 @@ namespace NoFeedProtocol.Authoring.Items
     /// </summary>
     public enum StatType
     {
-        //Hp,
-        //Shield,
+        Hp,
+        Shield,
         HpDamage,
         ShieldDamage,
         //Coins,
