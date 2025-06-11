@@ -15,10 +15,11 @@ MonoBehaviour:
   m_items:
   - m_id: 16324191-b1d5-4469-a039-6dd2633c5d45
     m_name: Bayonet
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: 9e37f70498e6d0745854d90e57e0534b, type: 3}
+    m_description: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     m_percent: 1
     m_rarity: 0
+    m_price: 444
     ability:
       m_trigger: 0
       m_effects:
@@ -26,10 +27,11 @@ MonoBehaviour:
         m_value: 3
   - m_id: e95f35ef-100b-4d18-bfc4-ad7196cf7c46
     m_name: Taser
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: ee6f9938530d5c1479692b96338873db, type: 3}
+    m_description: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     m_percent: 1
     m_rarity: 0
+    m_price: 4055
     ability:
       m_trigger: 0
       m_effects:
@@ -37,10 +39,11 @@ MonoBehaviour:
         m_value: 3
   - m_id: d156f4a7-754d-46ae-af39-cdbf01706753
     m_name: ' Thermal viewer'
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: e83ca51366cde2948a72d1d4d061b03b, type: 3}
+    m_description: ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
     m_percent: 1
     m_rarity: 1
+    m_price: 40
     ability:
       m_trigger: 0
       m_effects:
@@ -48,10 +51,11 @@ MonoBehaviour:
         m_value: 5
   - m_id: 252e4a57-5fd3-4571-9374-c04ce3176124
     m_name: Medium piercing bullets
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: d252415093092ce48b5a8f167e2aa8fd, type: 3}
+    m_description: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     m_percent: 1
     m_rarity: 1
+    m_price: 150
     ability:
       m_trigger: 0
       m_effects:
@@ -59,10 +63,11 @@ MonoBehaviour:
         m_value: 5
   - m_id: c9330567-5da2-481c-a6b7-9bb6e25faf4d
     m_name: Ace of spades
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: bbc65b3358d09534e8dbf65bc698a7e6, type: 3}
+    m_description: ffffffffffffffffffffffffffffffffffffffffffffffffffff
     m_percent: 1
     m_rarity: 0
+    m_price: 100
     ability:
       m_trigger: 0
       m_effects:
@@ -70,10 +75,11 @@ MonoBehaviour:
         m_value: 1
   - m_id: 01199751-65f2-4078-a9ad-07337c5b9f94
     m_name: Crystalline Crystal
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: 117da17865a062a498f21e458f93d6be, type: 3}
+    m_description: ggggggggggggggggggggggggggggggggggggggggggggggg
     m_percent: 1
     m_rarity: 1
+    m_price: 10
     ability:
       m_trigger: 0
       m_effects:
@@ -81,10 +87,11 @@ MonoBehaviour:
         m_value: 1
   - m_id: ddaff33e-a455-42dc-a6b2-c103936a7ba1
     m_name: Uranium reactor
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: e1894b926f8be424d8c307fa49dea890, type: 3}
+    m_description: hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     m_percent: 1
     m_rarity: 2
+    m_price: 985515
     ability:
       m_trigger: 0
       m_effects:
@@ -92,10 +99,11 @@ MonoBehaviour:
         m_value: 1
   - m_id: 3edfbbe1-923c-46b4-9a17-1a8c28555eec
     m_name: Superior piercing bullets
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: 5bad88645b087fb40bb9007538171bff, type: 3}
+    m_description: iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
     m_percent: 1
     m_rarity: 2
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -103,10 +111,11 @@ MonoBehaviour:
         m_value: 7
   - m_id: 64f0df1f-1045-4068-a6c8-f89f48c62fbb
     m_name: Anticoagulant Bullets
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: ceb44f0618c85b34b89a5cbcbd0ea72c, type: 3}
+    m_description: lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
     m_percent: 1
     m_rarity: 0
+    m_price: 300
     ability:
       m_trigger: 0
       m_effects:
@@ -114,10 +123,11 @@ MonoBehaviour:
         m_value: 7
   - m_id: c45d192f-3adf-49e7-aed0-59482a21b058
     m_name: Super stimulant
-    m_icon: {fileID: 0}
-    m_description: 
+    m_icon: {fileID: 21300000, guid: 1be210aac19a374499b0fc80ee179449, type: 3}
+    m_description: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     m_percent: 1
     m_rarity: 3
+    m_price: 999
     ability:
       m_trigger: 0
       m_effects:

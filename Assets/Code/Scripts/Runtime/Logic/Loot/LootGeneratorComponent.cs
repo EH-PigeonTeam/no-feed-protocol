@@ -115,6 +115,54 @@ namespace NoFeedProtocol.Runtime.Logic.Loot
             return new LootResult(coins, drops);
         }
 
+        public LootResult GenerateLoot(int currentLevel, int maxLevel, IEnumerable<string> existingItemIds, int numItems)
+        {
+            int coins = Random.Range(m_coinsRange.x, m_coinsRange.y + 1);
+            HashSet<string> existingSet = new(existingItemIds);
+            List<Item> pool = new();
+
+            foreach (var item in m_itemsData.Items)
+            {
+                if (existingSet.Contains(item.Id))
+                {
+                    continue;
+                }
+
+                if (item.Rarity == ItemRarity.OnlyInShop && !m_includeOnlyInShop)
+                {
+                    continue;
+                }
+
+                float rarityWeight = GetRarityWeight(item.Rarity, currentLevel, maxLevel);
+                float totalChance = item.Percent * rarityWeight;
+
+                if (totalChance <= 0f)
+                {
+                    continue;
+                }
+
+                // Add multiple entries proportional to chance
+                int entries = Mathf.CeilToInt(totalChance * 100);
+                for (int i = 0; i < entries; i++)
+                {
+                    pool.Add(item);
+                }
+            }
+
+            List<Item> drops = new();
+            for (int i = 0; i < numItems && pool.Count > 0; i++)
+            {
+                int idx = Random.Range(0, pool.Count);
+                Item selected = pool[idx];
+                drops.Add(selected);
+
+                // Remove all instances of this item for uniqueness
+                pool.RemoveAll(x => x.Id == selected.Id);
+            }
+
+            return new LootResult(coins, drops);
+        }
+
         private float GetRarityWeight(ItemRarity rarity, int currentLevel, int maxLevel)
         {
             float t = maxLevel > 0 ? (float)currentLevel / maxLevel : 0f;
