@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75715d14ab57e2a40bc228f95114c133, type: 3}
   m_Name: ItemsData
   m_EditorClassIdentifier: 
-  m_items: []
+  m_items:
+  - m_id: 669d068f-c591-4d6a-839e-a7226e1bc121
+    m_name: 
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects: []

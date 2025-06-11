@@ -64,6 +64,11 @@ namespace NoFeedProtocol.Authoring.Items
         private ItemRarity m_rarity;
 
         [FoldoutGroup("@m_name")]
+        [Tooltip("The price of the item (for sale in the shop)"), SuffixLabel("Valore", SdfIconType.CurrencyBitcoin)]
+        [SerializeField, MinValue(0f)]
+        private float m_price = 0f;
+
+        [FoldoutGroup("@m_name")]
         [Tooltip("The percentage of the item can appear")]
         [SerializeField, InlineProperty, HideLabel]
         private ItemAbility ability;
@@ -76,6 +81,7 @@ namespace NoFeedProtocol.Authoring.Items
         public Sprite Icon => m_icon;
         public string Description => m_description;
         public float Percent => m_percent;
+        public float Price => m_price;
         public ItemRarity Rarity => m_rarity;
         public ItemAbility GetAbility => ability;
 
