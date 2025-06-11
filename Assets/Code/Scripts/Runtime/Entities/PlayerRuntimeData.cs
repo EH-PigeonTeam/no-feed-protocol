@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using NoFeedProtocol.Authoring.Items;
 using NoFeedProtocol.Persistence.Player;
 
 namespace NoFeedProtocol.Runtime.Entities
@@ -44,5 +46,8 @@ namespace NoFeedProtocol.Runtime.Entities
         {
             return CharacterTop.Health > 0 || CharacterBottom.Health > 0;
         }
+
+        public void AddItems(IEnumerable<Item> items) => Items.AddRange(items.Select(i => i.Id));
+        public void AddCoins(int coins) => Coins += coins;
     }
 }
