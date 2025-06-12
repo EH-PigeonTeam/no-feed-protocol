@@ -209,12 +209,12 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
             if (m_characterTop != null && data.CharacterTop != null)
             {
-                m_characterTop.UpdateState(new CharacterUIState(data.CharacterTop.Health, data.CharacterTop.Energy));
+                m_characterTop.UpdateState(new CharacterUIState(data.CharacterTop.Health, data.CharacterTop.Energy, data.CurrentShield));
             }
 
             if (m_characterBottom != null && data.CharacterBottom != null)
             {
-                m_characterBottom.UpdateState(new CharacterUIState(data.CharacterBottom.Health, data.CharacterBottom.Energy));
+                m_characterBottom.UpdateState(new CharacterUIState(data.CharacterBottom.Health, data.CharacterBottom.Energy, data.CurrentShield));
             }
         }
 
@@ -640,20 +640,20 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
     {
         public readonly int Health;
         public readonly int Energy;
-        public readonly bool HasShield;
+        public readonly int Shield;
 
-        public CharacterUIState(int health, int energy, bool hasShield = false)
+        public CharacterUIState(int health, int energy, int hasShield)
         {
             Health = health;
             Energy = energy;
-            HasShield = hasShield;
+            Shield = hasShield;
         }
 
         public CharacterUIState(CharacterStats stats)
         {
             Health = stats.Health;
             Energy = stats.Energy;
-            HasShield = true;
+            Shield = 0;
         }
     }
 }
