@@ -133,3 +133,61 @@ MonoBehaviour:
       m_effects:
       - m_statType: 2
         m_value: 1
+  - m_id: b4c10d58-7742-460f-9a27-b5c6354570f7
+    m_name: Floppy shield module
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 5
+  - m_id: 75161033-8593-4025-baff-3f024301aaeb
+    m_name: Worn out bandaid
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 5
+  - m_id: d9f8bbc3-1262-4da9-8ddb-2ed376719b24
+    m_name: Low voltage battery
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 4
+  - m_id: aede49c0-e5af-400a-886d-174546161df4
+    m_name: HDD shield module
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 1
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 10
+  - m_id: 45e3b3a6-77a9-470b-85cd-d10cd1dc49cf
+    m_name: First aid bandages
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 1
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects: []
