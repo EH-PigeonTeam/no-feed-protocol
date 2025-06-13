@@ -9,8 +9,6 @@ using NoFeedProtocol.Authoring.Characters;
 using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Runtime.Logic.Battle.Players;
 using DG.Tweening;
-using Code.Systems.Locator;
-using NoFeedProtocol.Runtime.Logic.Battle;
 
 namespace NoFeedProtocol.Runtime.UI
 {
@@ -200,6 +198,15 @@ namespace NoFeedProtocol.Runtime.UI
             Attack = characterData.AttackPoints;
             AttackToShield = characterData.AttackPointsShield;
             EnergyRequired = characterData.EnergyRequired;
+            Energy = characterRuntimeData.Energy;
+        }
+
+        public CharacterStats(ICharacterStaticData characterData, CharacterRuntimeData characterRuntimeData, int energyRequired)
+        {
+            Health = characterRuntimeData.Health;
+            Attack = characterData.AttackPoints;
+            AttackToShield = characterData.AttackPointsShield;
+            EnergyRequired = energyRequired;
             Energy = characterRuntimeData.Energy;
         }
     }

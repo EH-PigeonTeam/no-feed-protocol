@@ -15,6 +15,8 @@ using System.Linq;
 using NoFeedProtocol.Runtime.Logic.Enums;
 using DG.Tweening;
 using NoFeedProtocol.Authoring.Characters.Combat;
+using NoFeedProtocol.Authoring.Items;
+using UnityEditor.PackageManager.Requests;
 
 namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 {
@@ -180,8 +182,30 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             ICharacterStaticData topData = resolver.GetById(data.CharacterTop.Id);
             ICharacterStaticData bottomData = resolver.GetById(data.CharacterBottom.Id);
 
-            m_characterTop?.Setup(topData.Anim, new CharacterStats(topData, data.CharacterTop));
-            m_characterBottom?.Setup(bottomData.Anim, new CharacterStats(bottomData, data.CharacterBottom));
+            ItemResolver resolverItem = ServiceLocator.Get<ItemResolver>();
+
+            int energyRequiredTop = topData.EnergyRequired + resolverItem.GetTotalValueForStat(data.Items, StatType.EnergyRequired);
+            int energyRequiredBottom = bottomData.EnergyRequired + resolverItem.GetTotalValueForStat(data.Items, StatType.EnergyRequired);
+
+            energyRequiredTop = Mathf.Max(1, energyRequiredTop);
+            energyRequiredBottom = Mathf.Max(1, energyRequiredBottom);
+
+            m_characterTop?.Setup(
+                topData.Anim, 
+                new CharacterStats(
+                    topData, 
+                    data.CharacterTop,
+                    energyRequiredTop
+                    )
+                );
+            m_characterBottom?.Setup(
+                bottomData.Anim, 
+                new CharacterStats(
+                    bottomData, 
+                    data.CharacterBottom,
+                    energyRequiredBottom
+                    )
+                );
 
             UpdateUI(data);
         }
@@ -524,15 +548,11 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
 
         private void TargetShow(bool show)
         {
-            if (Owner.RuntimeData.CharacterTop.IsAlive)
-            {
-                m_top?.transform?.parent?.gameObject.SetActive(show);
-            }
+            var topActive = show && Opponent.RuntimeData.CharacterTop.IsAlive;
+            var bottomActive = show && Opponent.RuntimeData.CharacterBottom.IsAlive;
 
-            if (Owner.RuntimeData.CharacterBottom.IsAlive)
-            {
-                m_bottom?.transform?.parent?.gameObject.SetActive(show);
-            }
+            m_top?.transform?.parent?.gameObject.SetActive(topActive);
+            m_bottom?.transform?.parent?.gameObject.SetActive(bottomActive);
         }
 
         public override void OnDispose()

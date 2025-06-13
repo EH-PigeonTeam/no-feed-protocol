@@ -4,7 +4,6 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using NoFeedProtocol.Authoring.Items;
 using Code.Systems.Locator;
-using NoFeedProtocol.Runtime.Entities;
 
 namespace NoFeedProtocol.Runtime.Services.Items
 {
@@ -31,12 +30,31 @@ namespace NoFeedProtocol.Runtime.Services.Items
         /// <summary>
         /// Resolves multiple items by their unique IDs.
         /// </summary>
-        public List<Item> GetByIds(List<string> ids)
+        public List<Item> GetByIds(IEnumerable<string> ids)
         {
             return ids
                 .Select(GetById)
                 .Where(item => item != null)
                 .ToList();
+        }
+
+        /// <summary>
+        /// Calculates the total value for a given <paramref name="statType"/> across the specified items.
+        /// </summary>
+        /// <param name="ids">A collection of item IDs to resolve.</param>
+        /// <param name="statType">The <see cref="StatType"/> whose effect values should be summed.</param>
+        /// <returns>
+        /// The sum of all <see cref="AbilityEffect.Value"/> where <see cref="AbilityEffect.Stat"/>
+        /// matches the provided <paramref name="statType"/>.
+        /// </returns>
+        public int GetTotalValueForStat(IEnumerable<string> ids, StatType statType)
+        {
+            return ids
+                .Select(id => GetById(id))
+                .Where(item => item != null)
+                .SelectMany(item => item.GetAbility.Effects)
+                .Where(effect => effect.Stat == statType)
+                .Sum(effect => effect.Value);
         }
 
         private void OnEnable()
