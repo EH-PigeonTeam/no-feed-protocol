@@ -177,7 +177,7 @@ namespace NoFeedProtocol.Runtime.Logic.Shop
 
         #region Public Methods -----------
 
-        public bool HasCash(int cash) => (Cash - Price) - cash > 0f;
+        public bool HasCash(int cash) => (Cash - Price) - cash >= 0f;
 
         public void AddItem(Item item)
         {

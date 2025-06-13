@@ -40,6 +40,6 @@ MonoBehaviour:
     m_icon: {fileID: 465941656, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}
   - m_id: 7e6ffdd2-8f67-46be-a237-b63ae3e82415
     m_type: 1
-    m_sceneName: ssss
-    m_percentage: 0
+    m_sceneName: Loot
+    m_percentage: 1
     m_icon: {fileID: -1664567529, guid: 812c4264f80c92d43b6c8dc0707a4697, type: 3}

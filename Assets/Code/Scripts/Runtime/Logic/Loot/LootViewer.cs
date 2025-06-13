@@ -57,8 +57,16 @@ namespace NoFeedProtocol.Runtime.Logic.Loot
                 run.Player.Items
                 );
 
-            GameObject coin = Instantiate(m_coinsPrefab, m_lootParent);
-            coin.GetComponent<LootGraphics>().SetItem(m_coinSprite, $"x{loot.Coins} Coins");
+            if(loot.Coins > 0)
+            {
+                GameObject coin = Instantiate(m_coinsPrefab, m_lootParent);
+                coin.GetComponent<LootGraphics>().SetItem(m_coinSprite, $"x{loot.Coins} Coins");
+            }
+
+            if (loot.Items.Count == 0)
+            {
+                return;
+            }
 
             foreach (Item item in loot.Items)
             {
