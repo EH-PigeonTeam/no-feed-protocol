@@ -2,12 +2,9 @@ using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Code.Systems.Locator;
-using Core.Gameplay.SlotMachine.Data;
-using NoFeedProtocol.Runtime.Entities;
 using NoFeedProtocol.Runtime.Logic.Battle.Players;
 using NoFeedProtocol.Runtime.Logic.Data;
 using NoFeedProtocol.Runtime.Logic.Enums;
-using NoFeedProtocol.Runtime.Logic.Slot;
 using NoFeedProtocol.Runtime.Logic.Turns;
 using NoFeedProtocol.Runtime.Services.Characters;
 using NoFeedProtocol.Runtime.Services.Items;
@@ -71,7 +68,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
             m_phaseManager.OnPhaseChanged += HandlePhaseChanged;
 
             m_battleData.Set(
-                ServiceLocator.Get<RuntimeDataStore>().GameData.Run.Player,
+                ServiceLocator.Get<RuntimeDataStore>().GameData.Run.Player.Clone(),
                 m_enemyTeamGenerator.Generate()
             );
 
@@ -156,6 +153,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
 
                 case BattlePhase.BattleEnd:
                     m_bannerController.ShowScreen(IsPlayerWinning());
+                    ServiceLocator.Get<RuntimeDataStore>().GameData.Run.Player = m_battleData.PlayerTeam;
                     break;
             }
         }

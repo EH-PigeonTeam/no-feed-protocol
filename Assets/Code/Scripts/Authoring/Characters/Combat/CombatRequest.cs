@@ -108,20 +108,21 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                     CharacterRuntimeData bottom = request.DefenderTeam.RuntimeData.CharacterBottom;
                                     CharacterRuntimeData target = (request.Defender == top) ? top : bottom;
 
+                                    int maxHp = ServiceLocator.Get<CharacterResolver>().GetById(target.Id).MaxHealth;
+
                                     if (mode == AttackMode.ShieldOnly || (defenderHasShield && mode == AttackMode.Normal))
                                     {
                                         int currentShield = request.DefenderTeam.RuntimeData.CurrentShield;
                                         int rawShieldDamage = val + shieldDamageBonus;
-                                        int clampedShield = Mathf.Clamp(currentShield - rawShieldDamage, 0, currentShield);
+                                        int clampedShield = Mathf.Clamp(currentShield - rawShieldDamage, 0, maxHp);
                                         int deltaShield = clampedShield - currentShield;
                                         shieldDef += deltaShield;
                                     }
-
                                     else
                                     {
                                         int currentHealth = target.Health;
                                         int rawHpDamage = val + hpDamageBonus;
-                                        int clampedHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, currentHealth);
+                                        int clampedHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, maxHp);
                                         int deltaHp = clampedHealth - currentHealth;
 
                                         if (target == top)
@@ -154,16 +155,18 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                                         {
                                             var top = request.DefenderTeam.RuntimeData.CharacterTop;
+                                            int maxHp = ServiceLocator.Get<CharacterResolver>().GetById(top.Id).MaxHealth;
                                             int currentHealth = top.Health;
-                                            int newHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, currentHealth);
+                                            int newHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, maxHp);
                                             int delta = newHealth - currentHealth;
                                             dmgTopDef += delta;
                                         }
 
                                         {
                                             var bottom = request.DefenderTeam.RuntimeData.CharacterBottom;
+                                            int maxHp = ServiceLocator.Get<CharacterResolver>().GetById(bottom.Id).MaxHealth;
                                             int currentHealth = bottom.Health;
-                                            int newHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, currentHealth);
+                                            int newHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, maxHp);
                                             int delta = newHealth - currentHealth;
                                             dmgBottomDef += delta;
                                         }
@@ -178,10 +181,12 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                         ? request.DefenderTeam.RuntimeData.CharacterBottom
                                         : request.DefenderTeam.RuntimeData.CharacterTop;
 
+                                    int maxHp = ServiceLocator.Get<CharacterResolver>().GetById(other.Id).MaxHealth;
+
                                     int currentHealth = other.Health;
                                     int rawDamage = val + hpDamageBonus;
                                     int rawNewHealth = currentHealth - rawDamage;
-                                    int clampedHealth = Mathf.Clamp(rawNewHealth, 0, currentHealth);
+                                    int clampedHealth = Mathf.Clamp(rawNewHealth, 0, maxHp);
                                     int delta = clampedHealth - currentHealth;
 
                                     if (other == request.DefenderTeam.RuntimeData.CharacterTop)
@@ -202,12 +207,15 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                     CharacterRuntimeData bottom = request.DefenderTeam.RuntimeData.CharacterBottom;
                                     CharacterRuntimeData target = (request.Defender == top) ? top : bottom;
 
+                                    int maxHp = ServiceLocator.Get<CharacterResolver>().GetById(target.Id).MaxHealth;
+
                                     int damage = val + hpDamageBonus;
                                     int currentHealth = target.Health;
 
-                                    int clampedHealth = Mathf.Clamp(currentHealth - damage, 0, currentHealth);
+                                    int clampedHealth = Mathf.Clamp(currentHealth - damage, 0, maxHp);
 
                                     int delta = clampedHealth - currentHealth;
+
                                     if (target == top)
                                     {
                                         dmgTopDef += delta;
@@ -226,11 +234,7 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                     CharacterRuntimeData bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
                                     CharacterRuntimeData target = request.Attacker;
 
-                                    int maxHealth = ServiceLocator
-                                        .Get<CharacterResolver>()
-                                        .GetById(target.Id)
-                                        .MaxHealth
-                                        + hpBonus;
+                                    int maxHealth = ServiceLocator.Get<CharacterResolver>().GetById(target.Id).MaxHealth + hpBonus;
 
                                     int clampedNewHealth = Mathf.Clamp(target.Health + val, 0, maxHealth);
                                     val = clampedNewHealth - target.Health;
