@@ -104,23 +104,33 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                         {
                             case CombatTargetType.EnemyTargeted:
                                 {
-                                    if (mode == AttackMode.ShieldOnly)
+                                    CharacterRuntimeData top = request.DefenderTeam.RuntimeData.CharacterTop;
+                                    CharacterRuntimeData bottom = request.DefenderTeam.RuntimeData.CharacterBottom;
+                                    CharacterRuntimeData target = (request.Defender == top) ? top : bottom;
+
+                                    if (mode == AttackMode.ShieldOnly || (defenderHasShield && mode == AttackMode.Normal))
                                     {
-                                        shieldDef -= val + shieldDamageBonus;
+                                        int currentShield = request.DefenderTeam.RuntimeData.CurrentShield;
+                                        int rawShieldDamage = val + shieldDamageBonus;
+                                        int clampedShield = Mathf.Clamp(currentShield - rawShieldDamage, 0, currentShield);
+                                        int deltaShield = clampedShield - currentShield;
+                                        shieldDef += deltaShield;
                                     }
+
                                     else
                                     {
-                                        if (defenderHasShield && mode == AttackMode.Normal)
+                                        int currentHealth = target.Health;
+                                        int rawHpDamage = val + hpDamageBonus;
+                                        int clampedHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, currentHealth);
+                                        int deltaHp = clampedHealth - currentHealth;
+
+                                        if (target == top)
                                         {
-                                            shieldDef -= val + shieldDamageBonus;
-                                        }
-                                        else if (request.Defender == request.DefenderTeam.RuntimeData.CharacterTop)
-                                        {
-                                            dmgTopDef -= val + hpDamageBonus;
+                                            dmgTopDef += deltaHp;
                                         }
                                         else
                                         {
-                                            dmgBottomDef -= val + hpDamageBonus;
+                                            dmgBottomDef += deltaHp;
                                         }
                                     }
 
@@ -129,20 +139,33 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                             case CombatTargetType.EnemyAll:
                                 {
-                                    if (mode == AttackMode.ShieldOnly)
+                                    if (mode == AttackMode.ShieldOnly ||
+                                        (defenderHasShield && mode == AttackMode.Normal))
                                     {
-                                        shieldDef -= val + shieldDamageBonus;
+                                        int currentShield = request.DefenderTeam.RuntimeData.CurrentShield;
+                                        int rawShieldDamage = val + shieldDamageBonus;
+                                        int newShield = Mathf.Clamp(currentShield - rawShieldDamage, 0, currentShield);
+                                        int shieldDelta = newShield - currentShield;
+                                        shieldDef += shieldDelta;
                                     }
                                     else
                                     {
-                                        if (defenderHasShield && mode == AttackMode.Normal)
+                                        int rawHpDamage = val + hpDamageBonus;
+
                                         {
-                                            shieldDef -= val + shieldDamageBonus;
+                                            var top = request.DefenderTeam.RuntimeData.CharacterTop;
+                                            int currentHealth = top.Health;
+                                            int newHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, currentHealth);
+                                            int delta = newHealth - currentHealth;
+                                            dmgTopDef += delta;
                                         }
-                                        else
+
                                         {
-                                            dmgTopDef -= val + hpDamageBonus;
-                                            dmgBottomDef -= val + hpDamageBonus;
+                                            var bottom = request.DefenderTeam.RuntimeData.CharacterBottom;
+                                            int currentHealth = bottom.Health;
+                                            int newHealth = Mathf.Clamp(currentHealth - rawHpDamage, 0, currentHealth);
+                                            int delta = newHealth - currentHealth;
+                                            dmgBottomDef += delta;
                                         }
                                     }
 
@@ -155,13 +178,19 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                         ? request.DefenderTeam.RuntimeData.CharacterBottom
                                         : request.DefenderTeam.RuntimeData.CharacterTop;
 
+                                    int currentHealth = other.Health;
+                                    int rawDamage = val + hpDamageBonus;
+                                    int rawNewHealth = currentHealth - rawDamage;
+                                    int clampedHealth = Mathf.Clamp(rawNewHealth, 0, currentHealth);
+                                    int delta = clampedHealth - currentHealth;
+
                                     if (other == request.DefenderTeam.RuntimeData.CharacterTop)
                                     {
-                                        dmgTopDef -= val + hpDamageBonus;
+                                        dmgTopDef += delta;
                                     }
                                     else
                                     {
-                                        dmgBottomDef -= val + hpDamageBonus;
+                                        dmgBottomDef += delta;
                                     }
 
                                     break;
@@ -169,13 +198,23 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                             case CombatTargetType.EnemyAttacker:
                                 {
-                                    if (request.Defender == request.DefenderTeam.RuntimeData.CharacterTop)
+                                    CharacterRuntimeData top = request.DefenderTeam.RuntimeData.CharacterTop;
+                                    CharacterRuntimeData bottom = request.DefenderTeam.RuntimeData.CharacterBottom;
+                                    CharacterRuntimeData target = (request.Defender == top) ? top : bottom;
+
+                                    int damage = val + hpDamageBonus;
+                                    int currentHealth = target.Health;
+
+                                    int clampedHealth = Mathf.Clamp(currentHealth - damage, 0, currentHealth);
+
+                                    int delta = clampedHealth - currentHealth;
+                                    if (target == top)
                                     {
-                                        dmgTopDef -= val + hpDamageBonus;
+                                        dmgTopDef += delta;
                                     }
                                     else
                                     {
-                                        dmgBottomDef -= val + hpDamageBonus;
+                                        dmgBottomDef += delta;
                                     }
 
                                     break;
@@ -183,7 +222,20 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                             case CombatTargetType.Self:
                                 {
-                                    if (request.Attacker == request.AttackerTeam.RuntimeData.CharacterTop)
+                                    CharacterRuntimeData top = request.AttackerTeam.RuntimeData.CharacterTop;
+                                    CharacterRuntimeData bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
+                                    CharacterRuntimeData target = request.Attacker;
+
+                                    int maxHealth = ServiceLocator
+                                        .Get<CharacterResolver>()
+                                        .GetById(target.Id)
+                                        .MaxHealth
+                                        + hpBonus;
+
+                                    int clampedNewHealth = Mathf.Clamp(target.Health + val, 0, maxHealth);
+                                    val = clampedNewHealth - target.Health;
+
+                                    if (target == top)
                                     {
                                         dmgTopAtk += val;
                                     }
@@ -197,19 +249,30 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
 
                             case CombatTargetType.SelfShield:
                                 {
-                                    shieldAtk += Mathf.Max(val, request.AttackerTeam.RuntimeData.MaxShield + shieldBonus);
+                                    int currentShield = request.AttackerTeam.RuntimeData.CurrentShield;
+                                    int maxShield = request.AttackerTeam.RuntimeData.MaxShield + shieldBonus;
+
+                                    int rawNewShield = currentShield + val;
+                                    int clampedShield = Mathf.Clamp(rawNewShield, 0, maxShield);
+
+                                    int delta = clampedShield - currentShield;
+                                    shieldAtk += delta;
                                     break;
                                 }
 
                             case CombatTargetType.AllyLowestHP:
                                 {
-                                    CharacterRuntimeData top = request.AttackerTeam.RuntimeData.CharacterTop;
-                                    CharacterRuntimeData bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
-                                    CharacterRuntimeData target = (top.Health <= bottom.Health && top.Health > 0) ? top : bottom;
+                                    var top = request.AttackerTeam.RuntimeData.CharacterTop;
+                                    var bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
+                                    var target = (top.Health <= bottom.Health && top.Health > 0) ? top : bottom;
 
-                                    int maxHealth = ServiceLocator.Get<CharacterResolver>().GetById(target.Id).MaxHealth + hpBonus;
+                                    int maxHealth = ServiceLocator.Get<CharacterResolver>()
+                                                                  .GetById(target.Id)
+                                                                  .MaxHealth
+                                                    + hpBonus;
 
-                                    val = Mathf.Max(val, maxHealth - target.Health);
+                                    int clampedNewHealth = Mathf.Clamp(target.Health + val, 0, maxHealth);
+                                    val = clampedNewHealth - target.Health;
 
                                     if (target == top)
                                     {
