@@ -5,9 +5,6 @@ namespace PsychoGarden.Utils
     /// <summary>
     /// Attribute to draw a horizontal line in the Unity Inspector.
     /// </summary>
-    /// <summary>
-    /// Attribute to draw a horizontal line in the Unity Inspector.
-    /// </summary>
     public class LineAttribute : PropertyAttribute
     {
         public float Thickness { get; private set; }
@@ -97,43 +94,4 @@ namespace PsychoGarden.Utils
             };
         }
     }
-
-    public enum LineColor
-    {
-        White,
-        Black,
-        Gray,
-        LightGray,
-        DarkGray,
-        Red,
-        LightRed,
-        DarkRed,
-        Green,
-        LightGreen,
-        DarkGreen,
-        Blue,
-        LightBlue,
-        DarkBlue,
-        Cyan,
-        LightCyan,
-        DarkCyan,
-        Magenta,
-        LightMagenta,
-        DarkMagenta,
-        Yellow,
-        LightYellow,
-        DarkYellow,
-        Orange,
-        LightOrange,
-        DarkOrange,
-        Brown,
-        Pink,
-        Purple,
-        Teal,
-        Lime,
-        Indigo,
-        Gold,
-        Silver
-    }
-
 }
