@@ -45,7 +45,7 @@ namespace NoFeedProtocol.Runtime.Entities
 
         public bool CharactersAreAlive()
         {
-            return CharacterTop.Health > 0 || CharacterBottom.Health > 0;
+            return CharacterTop.IsAlive || CharacterBottom.IsAlive;
         }
 
         public void AddItems(IEnumerable<Item> items) => Items.AddRange(items.Select(i => i.Id));

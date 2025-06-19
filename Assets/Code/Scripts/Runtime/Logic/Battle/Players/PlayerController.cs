@@ -190,17 +190,17 @@ namespace NoFeedProtocol.Runtime.Logic.Battle.Players
             energyRequiredBottom = Mathf.Max(1, energyRequiredBottom);
 
             m_characterTop?.Setup(
-                topData.Anim, 
+                topData.Anim,
                 new CharacterStats(
-                    topData, 
+                    topData,
                     data.CharacterTop,
                     energyRequiredTop
                     )
                 );
             m_characterBottom?.Setup(
-                bottomData.Anim, 
+                bottomData.Anim,
                 new CharacterStats(
-                    bottomData, 
+                    bottomData,
                     data.CharacterBottom,
                     energyRequiredBottom
                     )
