@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Systems.Locator;
 using Core.Gameplay.SlotMachine.Data;
 using NoFeedProtocol.Authoring.Items;
+using NoFeedProtocol.Runtime.Services.Items;
 using UnityEngine;
 
 namespace NoFeedProtocol.Runtime.Logic.Slot
@@ -37,7 +39,12 @@ namespace NoFeedProtocol.Runtime.Logic.Slot
         public void Setup(SlotMachineData baseData, List<Item> items)
         {
             m_symbolPool = new List<SlotSymbolData>(baseData.Symbols);
-            m_wheelCount = baseData.SlotWheelCount;
+
+            int wheelCountModifier = ServiceLocator
+                .Get<ItemResolver>()
+                .GetTotalValueForStat(items.Select(item => item.Id), StatType.WheelCount);
+
+            m_wheelCount = baseData.SlotWheelCount + wheelCountModifier;
             m_spinLimit = baseData.SpinCount;
 
             m_lockedIndexes = new List<int>();

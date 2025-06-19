@@ -1,76 +1,80 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
+using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-#if UNITY_EDITOR
 namespace PsychoGarden.TriggerEvents
 {
-    /// <summary>
-    /// Custom property drawer for TriggerEvent, allowing local override of visualization settings.
-    /// </summary>
     [CustomPropertyDrawer(typeof(TriggerEvent), true)]
     public class TriggerEventDrawer : PropertyDrawer
     {
         private object unityEventDrawer;
         private MethodInfo unityEventDrawerOnGUIMethod;
         private MethodInfo unityEventDrawerGetHeightMethod;
-        private bool initialized = false;
+        private bool initialized;
 
-        /// <summary>
-        /// Draws the custom inspector GUI for TriggerEvent.
-        /// </summary>
+        private static readonly Dictionary<string, bool> foldoutStates = new();
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.serializedObject.isEditingMultipleObjects)
             {
-                EditorGUI.HelpBox(position, "Multi-object editing not supported yet.", MessageType.Info);
+                EditorGUI.HelpBox(position, "Multi-object editing is not supported.", MessageType.Info);
                 return;
             }
 
             Initialize(property);
 
-            SerializedProperty colorProp = property.FindPropertyRelative("editorColor");
-            SerializedProperty showConnectionsProp = property.FindPropertyRelative("editorShowConnections");
-            SerializedProperty displayModeProp = property.FindPropertyRelative("editorDisplayMode");
+            string foldoutKey = property.propertyPath;
+            if (!foldoutStates.ContainsKey(foldoutKey))
+            {
+                foldoutStates[foldoutKey] = false;
+            }
 
             float lineHeight = EditorGUIUtility.singleLineHeight;
             float padding = 2f;
+            float y = position.y;
 
-            // Calculate rectangles
-            Rect showRect = new Rect(position.x, position.y, position.width, lineHeight);
-            Rect colorRect = new Rect(position.x, showRect.yMax + padding, position.width, lineHeight);
-            Rect modeRect = new Rect(position.x, colorRect.yMax + padding, position.width, lineHeight);
-            Rect separatorRect = new Rect(position.x, modeRect.yMax + padding, position.width, 1f);
-            Rect eventRect = new Rect(position.x, separatorRect.yMax + padding * 2, position.width, position.height - (lineHeight * 3 + padding * 5));
+            Rect foldoutRect = new Rect(position.x, y, position.width, lineHeight);
+            foldoutStates[foldoutKey] = EditorGUI.Foldout(foldoutRect, foldoutStates[foldoutKey], "Trigger Settings");
 
-            // Draw override toggle
-            EditorGUI.BeginChangeCheck();
-            bool overrideSettings = EditorGUI.Toggle(showRect, new GUIContent("Override Global Settings"), showConnectionsProp.boolValue);
-            if (EditorGUI.EndChangeCheck())
+            y += lineHeight + padding;
+
+            if (foldoutStates[foldoutKey])
             {
-                showConnectionsProp.boolValue = overrideSettings;
-                property.serializedObject.ApplyModifiedProperties();
+                SerializedProperty overrideProp = property.FindPropertyRelative("EditorOverrideGlobalSettings");
+                SerializedProperty modeProp = property.FindPropertyRelative("EditorDisplayMode");
+                SerializedProperty colorProp = property.FindPropertyRelative("EditorColor");
+
+                Rect overrideRect = new Rect(position.x, y, position.width, lineHeight);
+                overrideProp.boolValue = EditorGUI.ToggleLeft(overrideRect, "Override Global Settings", overrideProp.boolValue);
+                y += lineHeight + padding;
+
+                EditorGUI.BeginDisabledGroup(!overrideProp.boolValue);
+
+                if (modeProp != null)
+                {
+                    Rect modeRect = new Rect(position.x, y, position.width, lineHeight);
+                    EditorGUI.PropertyField(modeRect, modeProp, new GUIContent("Display Mode"));
+                    y += lineHeight + padding;
+                }
+
+                if (colorProp != null)
+                {
+                    Rect colorRect = new Rect(position.x, y, position.width, lineHeight);
+                    colorProp.colorValue = EditorGUI.ColorField(colorRect, new GUIContent("Connection Color"), colorProp.colorValue);
+                    y += lineHeight + padding;
+                }
+
+                EditorGUI.EndDisabledGroup();
+
+                y += 3f;
             }
 
-            // Draw color and display mode fields if override is active
-            EditorGUI.BeginDisabledGroup(!overrideSettings);
+            Rect eventRect = new Rect(position.x, y, position.width, position.yMax - y);
 
-            if (colorProp != null)
-                colorProp.colorValue = EditorGUI.ColorField(colorRect, new GUIContent("Connection Color"), colorProp.colorValue);
-
-            if (displayModeProp != null)
-                EditorGUI.PropertyField(modeRect, displayModeProp, new GUIContent("Display Mode"));
-
-            EditorGUI.EndDisabledGroup();
-
-            // Draw a separator line
-            EditorGUI.DrawRect(separatorRect, new Color(0.3f, 0.3f, 0.3f, 1f));
-
-            // Draw the actual UnityEvent using Unity internal drawer
             if (unityEventDrawer != null && unityEventDrawerOnGUIMethod != null)
             {
                 unityEventDrawerOnGUIMethod.Invoke(unityEventDrawer, new object[] { eventRect, property, label });
@@ -81,147 +85,73 @@ namespace PsychoGarden.TriggerEvents
             }
         }
 
-        /// <summary>
-        /// Calculates the total height needed for the TriggerEvent property.
-        /// </summary>
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             Initialize(property);
 
-            float lineHeight = EditorGUIUtility.singleLineHeight + 2f;
-            float baseHeight = (lineHeight * 3) + 8f; // Toggle + Color + Dropdown + Padding
+            const float padding = 2f;
+            float lineHeight = EditorGUIUtility.singleLineHeight;
 
-            if (unityEventDrawer != null && unityEventDrawerGetHeightMethod != null)
-            {
-                baseHeight += (float)unityEventDrawerGetHeightMethod.Invoke(unityEventDrawer, new object[] { property, label });
-            }
-            else
-            {
-                baseHeight += EditorGUI.GetPropertyHeight(property, label, true);
-            }
+            float height = lineHeight + padding;
 
-            return baseHeight;
+            string key = property.propertyPath;
+            bool open = foldoutStates.TryGetValue(key, out var v) && v;
+            if (open)
+                height += (lineHeight + padding) * 3 + 3f;
+
+            float eventHeight = unityEventDrawer != null && unityEventDrawerGetHeightMethod != null
+                ? (float)unityEventDrawerGetHeightMethod.Invoke(unityEventDrawer, new object[] { property, label })
+                : EditorGUI.GetPropertyHeight(property, label, true);
+
+            return height + eventHeight;
         }
 
-        /// <summary>
-        /// Initializes the internal UnityEventDrawer via reflection.
-        /// </summary>
         private void Initialize(SerializedProperty property)
         {
             if (initialized)
                 return;
 
-            var unityEditorInternal = typeof(Editor).Assembly.GetType("UnityEditorInternal.UnityEventDrawer");
-            if (unityEditorInternal != null)
+            Type unityEventDrawerType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditorInternal.UnityEventDrawer");
+            if (unityEventDrawerType != null)
             {
                 try
                 {
-                    unityEventDrawer = Activator.CreateInstance(unityEditorInternal, true);
+                    unityEventDrawer = Activator.CreateInstance(unityEventDrawerType, true);
                 }
                 catch
                 {
-                    Debug.LogWarning("[TriggerEvent] Could not instantiate UnityEventDrawer — using fallback editor");
+                    Debug.LogWarning("[TriggerEventDrawer] Could not instantiate internal UnityEventDrawer.");
                 }
 
-                unityEventDrawerOnGUIMethod = unityEditorInternal.GetMethod(
-                    "OnGUI",
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                    null,
-                    new Type[] { typeof(Rect), typeof(SerializedProperty), typeof(GUIContent) },
-                    null
-                );
-                unityEventDrawerGetHeightMethod = unityEditorInternal.GetMethod(
-                    "GetPropertyHeight",
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                    null,
-                    new Type[] { typeof(SerializedProperty), typeof(GUIContent) },
-                    null
-                );
+                unityEventDrawerOnGUIMethod = unityEventDrawerType.GetMethod(
+                    "OnGUI", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
+                    null, new[] { typeof(Rect), typeof(SerializedProperty), typeof(GUIContent) }, null);
+
+                unityEventDrawerGetHeightMethod = unityEventDrawerType.GetMethod(
+                    "GetPropertyHeight", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public,
+                    null, new[] { typeof(SerializedProperty), typeof(GUIContent) }, null);
             }
 
             initialized = true;
         }
 
-        /// <summary>
-        /// Determines if the TriggerEvent connections should be shown.
-        /// </summary>
-        public static bool ShouldShowConnections(TriggerEvent triggerEvent)
-        {
-            return triggerEvent != null && triggerEvent.editorShowConnections && triggerEvent.editorDisplayMode != TriggerEvent.DisplayMode.None;
-        }
+        // --- Evaluation Helpers ----------------------------------------------------------------
 
-        /// <summary>
-        /// Determines if a specific TriggerEvent should draw based on its local settings.
-        /// </summary>
-        public static bool ShouldDrawFor(TriggerEvent triggerEvent, GameObject owner)
-        {
-            if (triggerEvent == null)
-                return false;
-
-            return triggerEvent.editorDisplayMode switch
-            {
-                TriggerEvent.DisplayMode.All => true,
-                TriggerEvent.DisplayMode.None => false,
-                TriggerEvent.DisplayMode.OnSelected => Selection.activeGameObject == owner,
-                _ => true,
-            };
-        }
-
-        /// <summary>
-        /// Evaluates if connections should be shown, taking into account global fallback.
-        /// </summary>
-        public static bool EvaluateShowConnections(TriggerEvent triggerEvent)
-        {
-            if (triggerEvent == null)
-                return TriggerEventSettings.ShowConnections;
-
-            if (triggerEvent.editorShowConnections)
-            {
-                // Override ON, use local value
-                return true;
-            }
-            else
-            {
-                // Override OFF, use global settings
-                return TriggerEventSettings.ShowConnections;
-            }
-        }
-
-        /// <summary>
-        /// Evaluates if a specific TriggerEvent should draw for a given owner, considering global settings.
-        /// </summary>
         public static bool EvaluateShouldDrawFor(TriggerEvent triggerEvent, GameObject owner)
         {
-            if (triggerEvent == null)
-                return ShouldDrawForGlobal(owner);
-
-            if (triggerEvent.editorShowConnections)
-            {
-                return triggerEvent.editorDisplayMode switch
-                {
-                    TriggerEvent.DisplayMode.All => true,
-                    TriggerEvent.DisplayMode.None => false,
-                    TriggerEvent.DisplayMode.OnSelected => Selection.activeGameObject == owner,
-                    _ => true,
-                };
-            }
-            else
-            {
-                return ShouldDrawForGlobal(owner);
-            }
+            return triggerEvent != null && (triggerEvent.EditorOverrideGlobalSettings
+                ? ShouldDrawFor(triggerEvent.EditorDisplayMode, owner)
+                : ShouldDrawFor(TriggerEventSettings.GizmoMode, owner));
         }
 
-        /// <summary>
-        /// Evaluates global settings to determine if any TriggerEvent should be drawn.
-        /// </summary>
-        private static bool ShouldDrawForGlobal(GameObject owner)
+        private static bool ShouldDrawFor(TriggerEvent.DisplayMode mode, GameObject owner)
         {
-            return (TriggerEvent.DisplayMode)TriggerEventSettings.DisplayMode switch
+            return mode switch
             {
-                TriggerEvent.DisplayMode.All => true,
+                TriggerEvent.DisplayMode.Everything => true,
                 TriggerEvent.DisplayMode.None => false,
-                TriggerEvent.DisplayMode.OnSelected => Selection.activeGameObject == owner,
-                _ => true,
+                TriggerEvent.DisplayMode.Selected => Selection.activeGameObject == owner,
+                _ => false,
             };
         }
     }

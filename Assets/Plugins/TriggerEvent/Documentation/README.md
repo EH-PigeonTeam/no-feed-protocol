@@ -52,11 +52,12 @@ Assets/
     │   └── PsychoGarden.TriggerEvent.asmdef
     ├── Editor/
     │   ├── ColliderVisualizer.cs
+    │   ├── EditorPrefsUtils.CS
     │   ├── TriggerEventDrawer.cs
     │   ├── TriggerEventHandles.cs
     │   ├── TriggerEventHierarchyDrawer.cs
     │   ├── TriggerEventSettings.cs
-    │   ├── TriggerEventSettingsWindow.cs
+    │   ├── TriggerEventConnectionPopup.cs
     │   └── PsychoGarden.TriggerEvent.Editor.asmdef
     ├── Utils/
     │    ├── HandlesExtensions.cs

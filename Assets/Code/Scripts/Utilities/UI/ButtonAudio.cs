@@ -18,6 +18,11 @@ public class ButtonAudio : Button
         ServiceLocator.Get<AudioManager>().PlayAudioClip(this.m_onHoverSound);
     }
 
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
+    }
+
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);

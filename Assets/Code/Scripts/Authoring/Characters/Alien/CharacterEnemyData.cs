@@ -3,6 +3,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using NoFeedProtocol.Authoring.Characters.Combat;
 using NoFeedProtocol.Authoring.Characters.Animation;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;

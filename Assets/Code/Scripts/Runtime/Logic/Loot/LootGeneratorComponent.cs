@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -19,9 +18,9 @@ namespace NoFeedProtocol.Runtime.Logic.Loot
 
         [BoxGroup("Items")]
         [Tooltip("Number of items to drop")]
-        [MinValue(0)]
+        [MinValue(0), MinMaxSlider(0, 5, true)]
         [SerializeField]
-        private int m_itemDropCount = 1;
+        private Vector2Int m_itemDropCount = new Vector2Int(0, 1);
 
         [BoxGroup("Items")]
         [Tooltip("Item data source")]
@@ -56,6 +55,7 @@ namespace NoFeedProtocol.Runtime.Logic.Loot
         [Tooltip("Include OnlyInShop items when in shop mode?")]
         [SerializeField]
         private bool m_includeOnlyInShop = false;
+
         #endregion
 
         #region Methods and Generation --------------------
@@ -69,7 +69,7 @@ namespace NoFeedProtocol.Runtime.Logic.Loot
         /// <returns>LootResult containing coins and item drops</returns>
         public LootResult GenerateLoot(int currentLevel, int maxLevel, IEnumerable<string> existingItemIds)
         {
-            int coins = UnityEngine.Random.Range(m_coinsRange.x, m_coinsRange.y + 1);
+            int coins = Random.Range(m_coinsRange.x, m_coinsRange.y + 1);
             HashSet<string> existingSet = new(existingItemIds);
             List<Item> pool = new();
 
@@ -102,9 +102,57 @@ namespace NoFeedProtocol.Runtime.Logic.Loot
             }
 
             List<Item> drops = new();
-            for (int i = 0; i < m_itemDropCount && pool.Count > 0; i++)
+            for (int i = 0; i < Random.Range(m_itemDropCount.x, m_itemDropCount.y + 1) && pool.Count > 0; i++)
             {
-                int idx = UnityEngine.Random.Range(0, pool.Count);
+                int idx = Random.Range(0, pool.Count);
+                Item selected = pool[idx];
+                drops.Add(selected);
+
+                // Remove all instances of this item for uniqueness
+                pool.RemoveAll(x => x.Id == selected.Id);
+            }
+
+            return new LootResult(coins, drops);
+        }
+
+        public LootResult GenerateLoot(int currentLevel, int maxLevel, IEnumerable<string> existingItemIds, int numItems)
+        {
+            int coins = Random.Range(m_coinsRange.x, m_coinsRange.y + 1);
+            HashSet<string> existingSet = new(existingItemIds);
+            List<Item> pool = new();
+
+            foreach (var item in m_itemsData.Items)
+            {
+                if (existingSet.Contains(item.Id))
+                {
+                    continue;
+                }
+
+                if (item.Rarity == ItemRarity.OnlyInShop && !m_includeOnlyInShop)
+                {
+                    continue;
+                }
+
+                float rarityWeight = GetRarityWeight(item.Rarity, currentLevel, maxLevel);
+                float totalChance = item.Percent * rarityWeight;
+
+                if (totalChance <= 0f)
+                {
+                    continue;
+                }
+
+                // Add multiple entries proportional to chance
+                int entries = Mathf.CeilToInt(totalChance * 100);
+                for (int i = 0; i < entries; i++)
+                {
+                    pool.Add(item);
+                }
+            }
+
+            List<Item> drops = new();
+            for (int i = 0; i < numItems && pool.Count > 0; i++)
+            {
+                int idx = Random.Range(0, pool.Count);
                 Item selected = pool[idx];
                 drops.Add(selected);
 

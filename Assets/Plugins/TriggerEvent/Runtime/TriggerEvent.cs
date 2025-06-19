@@ -15,9 +15,9 @@ namespace PsychoGarden.TriggerEvents
         #region Fields ---------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [HideInInspector] public Color editorColor = Color.green;
-        [HideInInspector] public bool editorShowConnections = true;
-        [HideInInspector] public DisplayMode editorDisplayMode = DisplayMode.All;
+        [HideInInspector] public bool EditorOverrideGlobalSettings = true;
+        [HideInInspector] public DisplayMode EditorDisplayMode = DisplayMode.Everything;
+        [HideInInspector] public Color EditorColor = Color.green;
 #endif
 
         private const bool HARD_BLOCK_SELF_REFERENCE = true;
@@ -27,9 +27,9 @@ namespace PsychoGarden.TriggerEvents
         /// </summary>
         public enum DisplayMode
         {
-            All,
-            None,
-            OnSelected
+            Everything, // Default - Show all connections everywhere
+            None,       // Don't show any connections
+            Selected    // Show connections only when selected
         }
 
         #endregion
@@ -109,14 +109,16 @@ namespace PsychoGarden.TriggerEvents
         /// </summary>
         private HashSet<Object> GetPersistentTargetObjects()
         {
-            var targets = new HashSet<Object>();
+            HashSet<Object> targets = new();
             int count = GetPersistentEventCount();
 
             for (int i = 0; i < count; i++)
             {
                 Object target = GetPersistentTarget(i);
                 if (target != null)
+                {
                     targets.Add(target);
+                }
             }
             return targets;
         }
@@ -126,14 +128,16 @@ namespace PsychoGarden.TriggerEvents
         /// </summary>
         private List<(int index, Object target)> GetPersistentTargetEntries()
         {
-            var list = new List<(int, Object)>();
+            List<(int, Object)> list = new();
             int count = GetPersistentEventCount();
 
             for (int i = 0; i < count; i++)
             {
                 Object target = GetPersistentTarget(i);
                 if (target != null)
+                {
                     list.Add((i, target));
+                }
             }
             return list;
         }

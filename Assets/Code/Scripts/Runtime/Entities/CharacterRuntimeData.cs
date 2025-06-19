@@ -30,5 +30,6 @@ namespace NoFeedProtocol.Runtime.Entities
 
         public bool IsAlive => Health > 0;
         public bool HasReadyToAttack(int energyCost) => Energy >= energyCost;
+        public CharacterRuntimeData Clone() => new CharacterRuntimeData { Id = Id, Health = Health, Energy = Energy };
     }
 }

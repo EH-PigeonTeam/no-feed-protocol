@@ -17,6 +17,7 @@ namespace NoFeedProtocol.Runtime.Entities
 
         [ShowInInspector]
         public bool HasLastNode => LastNode.HasValue;
+        public int LastNodeIndex => Nodes[^1].Position.X;
 
         public GridPosition? LastNode
         {

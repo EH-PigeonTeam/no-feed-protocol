@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using NoFeedProtocol.Authoring.Items;
 using NoFeedProtocol.Persistence.Player;
+using Unity.VisualScripting;
 
 namespace NoFeedProtocol.Runtime.Entities
 {
@@ -42,7 +45,20 @@ namespace NoFeedProtocol.Runtime.Entities
 
         public bool CharactersAreAlive()
         {
-            return CharacterTop.Health > 0 || CharacterBottom.Health > 0;
+            return CharacterTop.IsAlive || CharacterBottom.IsAlive;
         }
+
+        public void AddItems(IEnumerable<Item> items) => Items.AddRange(items.Select(i => i.Id));
+        public void AddCoins(int coins) => Coins += coins;
+
+        public PlayerRuntimeData Clone() => new PlayerRuntimeData 
+        {
+            CharacterTop = CharacterTop.Clone(),
+            CharacterBottom = CharacterBottom.Clone(),
+            MaxShield = MaxShield,
+            CurrentShield = CurrentShield,
+            Coins = Coins,
+            Items = new List<string>(Items)
+        };
     }
 }
