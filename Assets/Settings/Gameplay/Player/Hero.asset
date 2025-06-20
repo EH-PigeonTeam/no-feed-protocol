@@ -17,8 +17,8 @@ MonoBehaviour:
     m_name: Heavy
     m_icon: {fileID: 467157201, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: 1103041419, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
-    m_description: An heavy armed guy, focussed on dealing AoE damage to the enemy
-      field
+    m_description: "An heavy armed guy, \nfocused on dealing AoE damage to the enemy
+      field"
     m_anim:
       m_idle: {fileID: 7400000, guid: 91ac7dce041b7574eb5d962cf76c144a, type: 2}
       m_attack: {fileID: 7400000, guid: be33278378d6ca84fa3bda954c4d24ec, type: 2}
@@ -44,8 +44,10 @@ MonoBehaviour:
     m_name: Assault
     m_icon: {fileID: 1955355303, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: -162991495, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
-    m_description: A fast, agile and deadly fighter, focussed on single target damage
-      it will storm the battlefield
+    m_description: 'A fast, agile and deadly fighter,
+
+      focused on single target
+      damage it will storm the battlefield'
     m_anim:
       m_idle: {fileID: 7400000, guid: 0b8f06f0630dde844ac11b2c57261f22, type: 2}
       m_attack: {fileID: 7400000, guid: 5783ca327098b6a47b556b7fa7258288, type: 2}
@@ -71,8 +73,8 @@ MonoBehaviour:
     m_name: Engineer
     m_icon: {fileID: 86781572, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: 934649307, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
-    m_description: A fast support unit, focussed on replenish the heroes shield points
-      and braking the enemy's
+    m_description: "A fast support unit, \nfocused on replenish the heroes shield
+      points and braking the enemy's"
     m_anim:
       m_idle: {fileID: 7400000, guid: 4847044766e5da447a95d9b1f9473c1a, type: 2}
       m_attack: {fileID: 7400000, guid: 2e01b0ab78db09648ab0cc4181c42630, type: 2}
@@ -102,8 +104,10 @@ MonoBehaviour:
     m_name: Medic
     m_icon: {fileID: -862002870, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
     m_icon2: {fileID: -2093050633, guid: 3f7b0b8515f9a2c41b12527f025d77b1, type: 3}
-    m_description: A slow support unit, it does not deal lots of damage, but is focussed
-      around healing its teammate and being a damage sponge thanks to its high durability
+    m_description: 'A slow support unit, it does not deal lots of damage,
+
+      but
+      is focused around healing its teammate and being a damage sponge'
     m_anim:
       m_idle: {fileID: 7400000, guid: 747f992ebf1b4ba4b8e555315e23ca4f, type: 2}
       m_attack: {fileID: 7400000, guid: e5a90fe321bc7d54bbf7421650be79ff, type: 2}
