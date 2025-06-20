@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_id: b4c10d58-7742-460f-9a27-b5c6354570f7
     m_name: Floppy Shield Module
     m_icon: {fileID: -602117906, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
+    m_description: Gives +5 to the shield max. capacity
     m_percent: 1
     m_rarity: 0
     m_price: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   - m_id: 75161033-8593-4025-baff-3f024301aaeb
     m_name: Worn Out Bandaid
     m_icon: {fileID: 16507664, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
+    m_description: Gives +5 to the characters Max Health
     m_percent: 1
     m_rarity: 0
     m_price: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
   - m_id: d9f8bbc3-1262-4da9-8ddb-2ed376719b24
     m_name: Low Voltage Battery
     m_icon: {fileID: 1438026312, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
+    m_description: Helps recharging the shields; +4 max shield points
     m_percent: 1
     m_rarity: 0
     m_price: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   - m_id: c9330567-5da2-481c-a6b7-9bb6e25faf4d
     m_name: Ace of Spades
     m_icon: {fileID: 21300000, guid: bbc65b3358d09534e8dbf65bc698a7e6, type: 3}
-    m_description: AAA
+    m_description: A gambler's lucky card, adds one wheel into the fight stage
     m_percent: 1
     m_rarity: 0
     m_price: 100
@@ -64,7 +64,7 @@ MonoBehaviour:
   - m_id: 16324191-b1d5-4469-a039-6dd2633c5d45
     m_name: Bayonet
     m_icon: {fileID: 21300000, guid: 9e37f70498e6d0745854d90e57e0534b, type: 3}
-    m_description: AAAAAAAAAAAAAAAAAA
+    m_description: Increases the characters Hp damage by 3 points
     m_percent: 1
     m_rarity: 0
     m_price: 444
@@ -76,7 +76,7 @@ MonoBehaviour:
   - m_id: e95f35ef-100b-4d18-bfc4-ad7196cf7c46
     m_name: Taser
     m_icon: {fileID: -600311580, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+    m_description: Gives +3 shield damage points
     m_percent: 1
     m_rarity: 0
     m_price: 4055
@@ -88,7 +88,7 @@ MonoBehaviour:
   - m_id: aede49c0-e5af-400a-886d-174546161df4
     m_name: HDD Shield Module
     m_icon: {fileID: 565239637, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
+    m_description: Enhances the max shield points by 10
     m_percent: 1
     m_rarity: 1
     m_price: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   - m_id: 45e3b3a6-77a9-470b-85cd-d10cd1dc49cf
     m_name: First Aid Bandages
     m_icon: {fileID: -1171012404, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
+    m_description: +10 health points, useful to stay healthy
     m_percent: 1
     m_rarity: 1
     m_price: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   - m_id: d156f4a7-754d-46ae-af39-cdbf01706753
     m_name: ' Thermal Viewer'
     m_icon: {fileID: 21300000, guid: e83ca51366cde2948a72d1d4d061b03b, type: 3}
-    m_description: ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+    m_description: Helps hitting enemy weak spots; +5 Hp damage
     m_percent: 1
     m_rarity: 1
     m_price: 40
@@ -124,7 +124,7 @@ MonoBehaviour:
   - m_id: 252e4a57-5fd3-4571-9374-c04ce3176124
     m_name: Medium Piercing Bullets
     m_icon: {fileID: 1585826229, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    m_description: Armor piercing bullets; +5 Shield damage
     m_percent: 1
     m_rarity: 1
     m_price: 150
@@ -136,7 +136,7 @@ MonoBehaviour:
   - m_id: 01199751-65f2-4078-a9ad-07337c5b9f94
     m_name: Crystalline Crystal
     m_icon: {fileID: 21300000, guid: 117da17865a062a498f21e458f93d6be, type: 3}
-    m_description: ggggggggggggggggggggggggggggggggggggggggggggggg
+    m_description: Shiny and precious stone, adds one wheel into the fight stage
     m_percent: 1
     m_rarity: 1
     m_price: 10
@@ -148,7 +148,7 @@ MonoBehaviour:
   - m_id: af8df9d6-9829-4f94-a877-20f1ce69c2d0
     m_name: SSD Shield Module
     m_icon: {fileID: 1275024661, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: ssdssdssd
+    m_description: SSD containing a shield enhancing software; +15 shield points
     m_percent: 1
     m_rarity: 2
     m_price: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   - m_id: 5b1078fe-2ad5-4bb1-83bd-a6bd059f6355
     m_name: Bottle of Pills
     m_icon: {fileID: -718224796, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
+    m_description: Powerful pills for sustaining illnesses, +15 Hp
     m_percent: 1
     m_rarity: 2
     m_price: 0
@@ -172,7 +172,8 @@ MonoBehaviour:
   - m_id: ddaff33e-a455-42dc-a6b2-c103936a7ba1
     m_name: Uranium Reactor
     m_icon: {fileID: 21300000, guid: e1894b926f8be424d8c307fa49dea890, type: 3}
-    m_description: hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    m_description: Powerful energy resource from before the attack, adds 1 wheel
+      into the fight stage
     m_percent: 1
     m_rarity: 2
     m_price: 985515
@@ -184,7 +185,7 @@ MonoBehaviour:
   - m_id: 3edfbbe1-923c-46b4-9a17-1a8c28555eec
     m_name: Superior Piercing Bullets
     m_icon: {fileID: -1434709237, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+    m_description: Enhanced version of the piercing bullets, Gives + 7 shield damage
     m_percent: 1
     m_rarity: 2
     m_price: 50
