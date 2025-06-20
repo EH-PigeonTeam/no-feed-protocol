@@ -202,7 +202,8 @@ MonoBehaviour:
   - m_id: 64f0df1f-1045-4068-a6c8-f89f48c62fbb
     m_name: Anticoagulant Bullets
     m_icon: {fileID: 21300000, guid: ceb44f0618c85b34b89a5cbcbd0ea72c, type: 3}
-    m_description: lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+    m_description: Anticoagulants bullets that help making the aliens weaker; +7
+      HP damage
     m_percent: 1
     m_rarity: 2
     m_price: 300
@@ -214,12 +215,64 @@ MonoBehaviour:
   - m_id: c45d192f-3adf-49e7-aed0-59482a21b058
     m_name: Super Stimulant
     m_icon: {fileID: 21300000, guid: 1be210aac19a374499b0fc80ee179449, type: 3}
-    m_description: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    m_description: Tested Stimulants thah emanate and legendary aura; -1 energy required
+      to attack
     m_percent: 1
     m_rarity: 3
-    m_price: 999
+    m_price: 300
     ability:
       m_trigger: 0
       m_effects:
       - m_statType: 4
         m_value: 1
+  - m_id: 7f122a17-2451-4f6b-927d-7396b3021d1d
+    m_name: Firewall USB Driver
+    m_icon: {fileID: 0}
+    m_description: Usb driver conatining a firewall that helps the heroes suit; +5
+      shield
+    m_percent: 1
+    m_rarity: 1
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 5
+  - m_id: 42f9515c-7db6-485a-b5db-0da0853388f5
+    m_name: Extra Efficient Armor Module
+    m_icon: {fileID: 0}
+    m_description: Module that enchances the combat acapbilities of the wearer, -1
+      energy required to attack
+    m_percent: 1
+    m_rarity: 0
+    m_price: 300
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 4
+        m_value: 1
+  - m_id: 6077f95a-86fe-438b-a9a4-2edf46ccd735
+    m_name: Energetic Snack
+    m_icon: {fileID: 0}
+    m_description: Energetic snack with anesthetic properties; +3 HP
+    m_percent: 1
+    m_rarity: 0
+    m_price: 20
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 3
+  - m_id: 76e27d06-7765-4830-af23-7de4e4579342
+    m_name: Energy Drink
+    m_icon: {fileID: 0}
+    m_description: Energy drink that permeate through the body and helps cooling
+      the heroes armor, +3 Shield
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 3
