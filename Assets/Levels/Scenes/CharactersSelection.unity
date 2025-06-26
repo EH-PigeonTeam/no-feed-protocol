@@ -987,7 +987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sono tizio che ha tanta voglia di esplodere quando ci\xF2 voglia"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1111,9 +1111,9 @@ MonoBehaviour:
           m_StringArgument: Run
           m_BoolArgument: 0
         m_CallState: 2
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!4 &305999056
 Transform:
   m_ObjectHideFlags: 0
@@ -1335,6 +1335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_priorityFromTop: 1
+  m_override: 0
 --- !u!1 &334443053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,7 +2325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sono tizio che ha tanta voglia di esplodere quando ci\xF2 voglia"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4302,9 +4303,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &1660327681
 GameObject:
   m_ObjectHideFlags: 0

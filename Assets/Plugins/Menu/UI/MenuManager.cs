@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 namespace PsychoGarden.UI
 {
@@ -61,5 +62,46 @@ namespace PsychoGarden.UI
         public virtual void Initialize() { }
         public virtual void OnEnable() { }
         public virtual void OnDispose() { }
+    }
+
+    public static class SceneObjectFinder
+    {
+        /// <summary>
+        /// Finds a GameObject with the specified name in the specified scene.
+        /// </summary>
+        public static GameObject FindInScene(string sceneName, string objectName)
+        {
+            Scene scene = SceneManager.GetSceneByName(sceneName);
+            if (!scene.isLoaded)
+            {
+                Debug.LogWarning($"Scene '{sceneName}' is not loaded.");
+                return null;
+            }
+
+            GameObject[] rootObjects = scene.GetRootGameObjects();
+            foreach (GameObject root in rootObjects)
+            {
+                GameObject found = FindInChildren(root.transform, objectName);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
+        }
+
+        private static GameObject FindInChildren(Transform parent, string name)
+        {
+            if (parent.name == name)
+                return parent.gameObject;
+
+            foreach (Transform child in parent)
+            {
+                GameObject result = FindInChildren(child, name);
+                if (result != null)
+                    return result;
+            }
+
+            return null;
+        }
     }
 }

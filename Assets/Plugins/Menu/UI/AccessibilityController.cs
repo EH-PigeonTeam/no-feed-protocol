@@ -47,6 +47,14 @@ namespace PsychoGarden.UI
 
         public override void Initialize()
         {
+            if (this.m_postProcessingVolume == null &&
+                (this.m_postProcessingVolume = SceneObjectFinder.FindInScene("CoreSystems", "Global Volume")
+                ?.GetComponent<Volume>()?.profile) == null)
+            {
+                Debug.LogError("Volume is missing!");
+                return;
+            }
+
             if (this.m_postProcessingVolume == null)
             {
                 Debug.LogError("PostProcessingVolume is missing!");

@@ -74,6 +74,14 @@ namespace PsychoGarden.UI
 
         public override void Initialize()
         {
+            if (this.m_volume == null &&
+                (this.m_volume = SceneObjectFinder.FindInScene("CoreSystems", "Global Volume")
+                ?.GetComponent<Volume>()?.profile) == null)
+            {
+                Debug.LogError("Volume is missing!");
+                return;
+            }
+
             // Load saved settings first
             this.LoadSettings();
 
@@ -154,7 +162,7 @@ namespace PsychoGarden.UI
         {
             if (this.m_volume != null && this.m_volume.TryGet<UnityEngine.Rendering.Universal.ColorAdjustments>(out var colorAdjustments))
             {
-                colorAdjustments.postExposure.value = Mathf.Lerp(-7f, 1f, this.m_brightness);
+                colorAdjustments.postExposure.value = Mathf.Lerp(-6f, 0.75f, this.m_brightness);
             }
         }
 
