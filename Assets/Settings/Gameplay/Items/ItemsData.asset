@@ -19,7 +19,7 @@ MonoBehaviour:
     m_description: Floppy module containing precious data; gives +5 shield
     m_percent: 1
     m_rarity: 0
-    m_price: 15
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects:
@@ -227,7 +227,7 @@ MonoBehaviour:
         m_value: 1
   - m_id: 7f122a17-2451-4f6b-927d-7396b3021d1d
     m_name: Firewall USB Driver
-    m_icon: {fileID: 0}
+    m_icon: {fileID: -1679251035, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Usb driver conatining a firewall that helps the heroes suit; +5
       shield
     m_percent: 1
@@ -253,7 +253,7 @@ MonoBehaviour:
         m_value: 1
   - m_id: 6077f95a-86fe-438b-a9a4-2edf46ccd735
     m_name: Energetic Snack
-    m_icon: {fileID: 0}
+    m_icon: {fileID: -2120451913, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Energetic snack with anesthetic properties; +3 HP
     m_percent: 1
     m_rarity: 0
@@ -276,3 +276,126 @@ MonoBehaviour:
       m_effects:
       - m_statType: 1
         m_value: 3
+  - m_id: 8775caa5-66aa-4538-bb8f-aa94d29caf1f
+    m_name: Patrioctic Sacrifice
+    m_icon: {fileID: 0}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects: []
+  - m_id: 09e1e951-1c35-43ce-a8b6-11ca440040d0
+    m_name: Stun Granade
+    m_icon: {fileID: -373387087, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
+    m_description: Stun granade that will disorient the enemies leaving them open
+      for attacks; +5 Hp damage
+    m_percent: 1
+    m_rarity: 1
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 3
+        m_value: 0
+  - m_id: 871cf3ef-a3fb-4db5-a5af-f522e9fce419
+    m_name: Alien Insecticide
+    m_icon: {fileID: 0}
+    m_description: Insecticide that will make poison the aliens weakening their defences;
+      +7 Shield Damage
+    m_percent: 1
+    m_rarity: 2
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 3
+        m_value: 7
+  - m_id: 7dae3fbc-6929-4330-88ac-fd791dc4d735
+    m_name: Militar Plate
+    m_icon: {fileID: 0}
+    m_description: Militar plate left by another human squad that wasn't lucky enough,
+      it's presence gives all the soldiers +20 Hp
+    m_percent: 1
+    m_rarity: 3
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 20
+  - m_id: d9515d4a-c3ab-4e7e-b7bc-84c560272ebb
+    m_name: Gambler's Coin
+    m_icon: {fileID: -892327898, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
+    m_description: The favourite coin of a Gambler; adds 1 wheel into the fight stage
+    m_percent: 1
+    m_rarity: 3
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 5
+        m_value: 1
+  - m_id: ef2fd874-b26f-4105-ac9d-cff48a957771
+    m_name: Heroic Medal
+    m_icon: {fileID: 0}
+    m_description: A medal that was used to reward heroes foun in a shop, now serves
+      as a energy storage for the suites; +15 Shield points
+    m_percent: 1
+    m_rarity: 3
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 15
+  - m_id: 4690d417-abf4-4720-a3be-67c18cf881fe
+    m_name: Tic Tae Toe
+    m_icon: {fileID: 0}
+    m_description: A paper sheet where a game of tic tae toe was played upon, its
+      sillyness makes you be more motivated; +15 Hp
+    m_percent: 1
+    m_rarity: 3
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 15
+  - m_id: 4924a4ac-be55-447f-9e8f-08aab621743e
+    m_name: War Pacemaker
+    m_icon: {fileID: -603025805, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
+    m_description: Pacemaker used to regulate soldiers heartbeats and make the more
+      steady on the battelfield; +10 Hp
+    m_percent: 1
+    m_rarity: 4
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 0
+        m_value: 10
+  - m_id: 6be3767d-8e98-466a-8a4c-309cca4c8794
+    m_name: War Defibrillator
+    m_icon: {fileID: -1392864507, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
+    m_description: Peacemaker used on battlefields to bring back soldiers on the
+      brink of Death, helps protecing the characters; +10 Shield points
+    m_percent: 1
+    m_rarity: 4
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects:
+      - m_statType: 1
+        m_value: 10
+  - m_id: b5a6c10c-277a-4d74-b2e6-b42852ef5f47
+    m_name: Hunting List
+    m_icon: {fileID: -1138925406, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
+    m_description: 
+    m_percent: 1
+    m_rarity: 0
+    m_price: 0
+    ability:
+      m_trigger: 0
+      m_effects: []
