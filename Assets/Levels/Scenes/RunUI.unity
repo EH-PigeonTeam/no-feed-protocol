@@ -1112,7 +1112,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    EditorOverrideGlobalSettings: 1
+    EditorOverrideGlobalSettings: 0
     EditorDisplayMode: 0
     EditorColor: {r: 0, g: 1, b: 0, a: 1}
   m_OnInactive:

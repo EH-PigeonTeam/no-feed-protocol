@@ -48,22 +48,22 @@ namespace Core.Selection_Characters
         {
             this.m_name.text = name;
             this.m_description.text = description;
-            this.m_health.SetValue(health, 100);
-            this.m_shield.SetValue(shield, 100);
-            this.m_attackShield.SetValue(attackShield, 100);
-            this.m_attack.SetValue(attack, 100);
-            this.m_chargePoints.SetValue(chargePoints, 10);
+            this.m_health.SetValue(health);
+            this.m_shield.SetValue(shield);
+            this.m_attackShield.SetValue(attackShield);
+            this.m_attack.SetValue(attack);
+            this.m_chargePoints.SetValue(chargePoints);
         }
 
         public void Display(CharacterData character)
         {
             this.m_name.text = character.Name;
             this.m_description.text = character.Description;
-            this.m_health.SetValue(character.MaxHealth, 200);
-            this.m_shield.SetValue(character.Shield, 200);
-            this.m_attackShield.SetValue(character.AttackPointsShield, 200);
-            this.m_attack.SetValue(character.AttackPoints, 200);
-            this.m_chargePoints.SetValue(character.EnergyRequired, 10);
+            this.m_health.SetValue(character.MaxHealth);
+            this.m_shield.SetValue(character.Shield);
+            this.m_attackShield.SetValue(character.AttackPointsShield);
+            this.m_attack.SetValue(character.AttackPoints);
+            this.m_chargePoints.SetValue(character.EnergyRequired);
         }
     }
 }

@@ -1,8 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
-using UnityEngine.Rendering;
-using UnityEditor.Tilemaps;
 
 namespace NoFeedProtocol.Runtime.UI
 {

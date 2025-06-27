@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Core.Selection_Characters
 {
@@ -9,29 +9,34 @@ namespace Core.Selection_Characters
     {
         [BoxGroup("Settings")]
         [FoldoutGroup("Settings/References")]
-        [Tooltip("The slider component")]
+        [Tooltip("Default text displayed on the stat label.")]
         [SerializeField, Required]
-        private Slider m_slider;
+        private string m_baseText = "00";
 
-#if UNITY_EDITOR
-        [FoldoutGroup("Settings/Debug")]
-        [Tooltip("The value of the slider")]
-        [SerializeField, Range(0f, 1f), OnValueChanged("SetFloat")]
-        private float m_value = 0f;
-#endif
+        [BoxGroup("Settings")]
+        [FoldoutGroup("Settings/References")]
+        [Tooltip("Text component displaying the stat value.")]
+        [SerializeField, Required]
+        private TMP_Text m_statLabel;
+
         private void Awake()
         {
-            this.m_slider.value = 0f;
+            if (this.m_statLabel != null)
+            {
+                this.m_statLabel.text = this.m_baseText;
+            }
         }
 
-        public void SetFloat(float value)
+        /// <summary>
+        /// Updates the stat label with the given value.
+        /// </summary>
+        /// <param name="value">The value to display.</param>
+        public void SetValue(float value)
         {
-            this.m_slider.value = value;
-        }
-
-        public void SetValue(int i, int max)
-        {
-            this.m_slider.value = i / (float)max;
+            if (this.m_statLabel != null)
+            {
+                this.m_statLabel.text = value.ToString("0");
+            }
         }
     }
 }
