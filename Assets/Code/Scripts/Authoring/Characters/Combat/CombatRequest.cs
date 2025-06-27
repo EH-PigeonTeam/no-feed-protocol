@@ -270,7 +270,7 @@ namespace NoFeedProtocol.Authoring.Characters.Combat
                                     var bottom = request.AttackerTeam.RuntimeData.CharacterBottom;
                                     var target = (top.Health <= bottom.Health && top.Health > 0) ? top : bottom;
 
-                                    int maxHealth = request.DefenderTeam.Resolver
+                                    int maxHealth = request.AttackerTeam.Resolver
                                                                   .GetById(target.Id)
                                                                   .MaxHealth
                                                     + hpBonus;
