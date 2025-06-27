@@ -17,7 +17,7 @@ MonoBehaviour:
     m_name: Floppy Shield Module
     m_icon: {fileID: -602117906, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Floppy module containing precious data; gives +5 shield
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 20
     ability:
@@ -29,7 +29,7 @@ MonoBehaviour:
     m_name: Worn Out Bandaid
     m_icon: {fileID: 16507664, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Worn out bandaid that helps with wounds; +5 HP
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 15
     ability:
@@ -41,7 +41,7 @@ MonoBehaviour:
     m_name: Low Voltage Battery
     m_icon: {fileID: 1438026312, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Battery that helps recharging armors; +4 shields
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 10
     ability:
@@ -53,7 +53,7 @@ MonoBehaviour:
     m_name: Ace of Spades
     m_icon: {fileID: 21300000, guid: bbc65b3358d09534e8dbf65bc698a7e6, type: 3}
     m_description: A gambler's loyal companion; adds 1 wheel into the fighting stage
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 100
     ability:
@@ -65,7 +65,7 @@ MonoBehaviour:
     m_name: Bayonet
     m_icon: {fileID: 21300000, guid: 9e37f70498e6d0745854d90e57e0534b, type: 3}
     m_description: Helps piercing into the aliens bodies; +3 HP damage
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 50
     ability:
@@ -78,7 +78,7 @@ MonoBehaviour:
     m_icon: {fileID: -600311580, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Stuns the enemies, helping detroying their protections; +3 shield
       damage
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 20
     ability:
@@ -90,7 +90,7 @@ MonoBehaviour:
     m_name: HDD Shield Module
     m_icon: {fileID: 565239637, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Hard drive with an updated software fo the heroes suits; +10 Shield
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 25
     ability:
@@ -102,7 +102,7 @@ MonoBehaviour:
     m_name: First Aid Bandages
     m_icon: {fileID: -1171012404, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Useful bandaids for treating bad wounds; +10 HP
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 0
     ability:
@@ -114,7 +114,7 @@ MonoBehaviour:
     m_name: ' Thermal Viewer'
     m_icon: {fileID: 21300000, guid: e83ca51366cde2948a72d1d4d061b03b, type: 3}
     m_description: Visor that helps hittin enemies weak spots; +5 Hp damage
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 40
     ability:
@@ -126,7 +126,7 @@ MonoBehaviour:
     m_name: Medium Piercing Bullets
     m_icon: {fileID: 1585826229, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Bullets that pierce through enemies scales; +5 Shield damage
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 150
     ability:
@@ -139,7 +139,7 @@ MonoBehaviour:
     m_icon: {fileID: 21300000, guid: 117da17865a062a498f21e458f93d6be, type: 3}
     m_description: Precious gem that shines brightly, adds 1 wheel into the fight
       stage
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 10
     ability:
@@ -154,7 +154,7 @@ MonoBehaviour:
 
       enhanching software
       for the suits, +15 Shield'
-    m_percent: 1
+    m_percent: 0.3
     m_rarity: 2
     m_price: 0
     ability:
@@ -166,7 +166,7 @@ MonoBehaviour:
     m_name: Bottle of Pills
     m_icon: {fileID: -718224796, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Pills that helps against illnesses; +15 HP
-    m_percent: 1
+    m_percent: 0.3
     m_rarity: 2
     m_price: 0
     ability:
@@ -179,7 +179,7 @@ MonoBehaviour:
     m_icon: {fileID: 21300000, guid: e1894b926f8be424d8c307fa49dea890, type: 3}
     m_description: Precious energy generator from before the attack; adds one wheel
       into the fight stage
-    m_percent: 1
+    m_percent: 0.3
     m_rarity: 2
     m_price: 985515
     ability:
@@ -191,7 +191,7 @@ MonoBehaviour:
     m_name: Superior Piercing Bullets
     m_icon: {fileID: -1434709237, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Enhanced version of the piercing bullets, +7 Shield damage
-    m_percent: 1
+    m_percent: 0.3
     m_rarity: 2
     m_price: 50
     ability:
@@ -204,7 +204,7 @@ MonoBehaviour:
     m_icon: {fileID: 21300000, guid: ceb44f0618c85b34b89a5cbcbd0ea72c, type: 3}
     m_description: Anticoagulants bullets that help making the aliens weaker; +7
       HP damage
-    m_percent: 1
+    m_percent: 0.3
     m_rarity: 2
     m_price: 300
     ability:
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_icon: {fileID: 21300000, guid: 1be210aac19a374499b0fc80ee179449, type: 3}
     m_description: Tested Stimulants thah emanate and legendary aura; -1 energy required
       to attack
-    m_percent: 1
+    m_percent: 0.1
     m_rarity: 3
     m_price: 300
     ability:
@@ -230,7 +230,7 @@ MonoBehaviour:
     m_icon: {fileID: -1679251035, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Usb driver conatining a firewall that helps the heroes suit; +5
       shield
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 0
     ability:
@@ -243,8 +243,8 @@ MonoBehaviour:
     m_icon: {fileID: 0}
     m_description: Module that enchances the combat acapbilities of the wearer, -1
       energy required to attack
-    m_percent: 1
-    m_rarity: 0
+    m_percent: 0.1
+    m_rarity: 3
     m_price: 300
     ability:
       m_trigger: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
     m_name: Energetic Snack
     m_icon: {fileID: -2120451913, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Energetic snack with anesthetic properties; +3 HP
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 20
     ability:
@@ -268,7 +268,7 @@ MonoBehaviour:
     m_icon: {fileID: 0}
     m_description: Energy drink that permeate through the body and helps cooling
       the heroes armor, +3 Shield
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 0
     m_price: 0
     ability:
@@ -280,7 +280,7 @@ MonoBehaviour:
     m_name: Patrioctic Sacrifice
     m_icon: {fileID: 0}
     m_description: 
-    m_percent: 1
+    m_percent: 0
     m_rarity: 0
     m_price: 0
     ability:
@@ -291,7 +291,7 @@ MonoBehaviour:
     m_icon: {fileID: -373387087, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Stun granade that will disorient the enemies leaving them open
       for attacks; +5 Hp damage
-    m_percent: 1
+    m_percent: 0.6
     m_rarity: 1
     m_price: 0
     ability:
@@ -304,7 +304,7 @@ MonoBehaviour:
     m_icon: {fileID: 0}
     m_description: Insecticide that will make poison the aliens weakening their defences;
       +7 Shield Damage
-    m_percent: 1
+    m_percent: 0.3
     m_rarity: 2
     m_price: 0
     ability:
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_icon: {fileID: 0}
     m_description: Militar plate left by another human squad that wasn't lucky enough,
       it's presence gives all the soldiers +20 Hp
-    m_percent: 1
+    m_percent: 0.1
     m_rarity: 3
     m_price: 0
     ability:
@@ -329,7 +329,7 @@ MonoBehaviour:
     m_name: Gambler's Coin
     m_icon: {fileID: -892327898, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: The favourite coin of a Gambler; adds 1 wheel into the fight stage
-    m_percent: 1
+    m_percent: 0.1
     m_rarity: 3
     m_price: 0
     ability:
@@ -342,7 +342,7 @@ MonoBehaviour:
     m_icon: {fileID: 0}
     m_description: A medal that was used to reward heroes foun in a shop, now serves
       as a energy storage for the suites; +15 Shield points
-    m_percent: 1
+    m_percent: 0.1
     m_rarity: 3
     m_price: 0
     ability:
@@ -355,7 +355,7 @@ MonoBehaviour:
     m_icon: {fileID: 0}
     m_description: A paper sheet where a game of tic tae toe was played upon, its
       sillyness makes you be more motivated; +15 Hp
-    m_percent: 1
+    m_percent: 0.1
     m_rarity: 3
     m_price: 0
     ability:
@@ -368,7 +368,7 @@ MonoBehaviour:
     m_icon: {fileID: -603025805, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
     m_description: Pacemaker used to regulate soldiers heartbeats and make the more
       steady on the battelfield; +10 Hp
-    m_percent: 1
+    m_percent: 0.8
     m_rarity: 4
     m_price: 0
     ability:
@@ -392,10 +392,15 @@ MonoBehaviour:
   - m_id: b5a6c10c-277a-4d74-b2e6-b42852ef5f47
     m_name: Hunting List
     m_icon: {fileID: -1138925406, guid: 7e533564ab516b8458535311f2a7a070, type: 3}
-    m_description: 
-    m_percent: 1
-    m_rarity: 0
+    m_description: List with aliens prey listed on them, havin an objective boosts
+      your will to fight; +15 Hp Damage +15 Shield Damage
+    m_percent: 0.1
+    m_rarity: 3
     m_price: 0
     ability:
       m_trigger: 0
-      m_effects: []
+      m_effects:
+      - m_statType: 2
+        m_value: 15
+      - m_statType: 3
+        m_value: 15
