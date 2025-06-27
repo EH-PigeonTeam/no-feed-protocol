@@ -14,6 +14,14 @@ namespace PsychoGarden.Utils
             AudioSpeakerMode.Mode7point1
         };
 
+        private static readonly List<string> AllowedSpeakerModesStrings = new()
+        {
+            "Mono",
+            "Stereo",
+            "5.1",
+            "7.1"
+        };
+
         public static void PopulateAudioSpeakerModeDropdown(TMP_Dropdown dropdown)
         {
             if (dropdown == null)
@@ -25,7 +33,7 @@ namespace PsychoGarden.Utils
             dropdown.ClearOptions();
 
             List<string> options = new();
-            foreach (var mode in AllowedSpeakerModes)
+            foreach (var mode in AllowedSpeakerModesStrings)
             {
                 options.Add(mode.ToString());
             }

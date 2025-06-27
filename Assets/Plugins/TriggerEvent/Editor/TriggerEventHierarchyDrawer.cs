@@ -91,7 +91,7 @@ namespace PsychoGarden.TriggerEvents
                     Object targetObj = triggerEvent.GetPersistentTarget(i);
                     if (targetObj == go || (targetObj is Component comp && comp.gameObject == go))
                     {
-                        Rect iconRect = new Rect(selectionRect.x - 18f, selectionRect.y + 1f, 16f, 16f);
+                        Rect iconRect = new Rect(selectionRect.x - 25f, selectionRect.y + 2f, 12f, 12f);
                         GUIContent icon = EditorGUIUtility.IconContent("BlendTree Icon");
                         Texture iconTexture = icon.image;
 
