@@ -542,7 +542,7 @@ MonoBehaviour:
       Rotation: {x: 0, y: 0, z: 0}
       Scale: {x: 1, y: 1, z: 1}
     m_uiCamera: {fileID: 330585545}
-    m_characterPrefab: {fileID: 7998539078406814515, guid: c388e9425c0523f4ba482817f03e62c6, type: 3}
+    m_characterPrefab: {fileID: 7398628233986826366, guid: f55a8eb401b93a3469244f3684a419e3, type: 3}
   m_inputHandler:
     rid: 83453609305178208
   m_aimingHandler:
@@ -1355,8 +1355,8 @@ GameObject:
   - component: {fileID: 612258986}
   - component: {fileID: 612258985}
   - component: {fileID: 612258984}
-  - component: {fileID: 612258988}
   - component: {fileID: 612258989}
+  - component: {fileID: 612258990}
   m_Layer: 5
   m_Name: Button | Return to Map
   m_TagString: Untagged
@@ -1440,22 +1440,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2127706303}
-        m_TargetAssemblyTypeName: NoFeedProtocol.Runtime.Logic.Loot.LootViewer, Assembly-CSharp
-        m_MethodName: AddLoot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 612258988}
-        m_TargetAssemblyTypeName: NoFeedProtocol.Runtime.Logic.Map.EncounterCompleted,
-          Assembly-CSharp
-        m_MethodName: LevelCompleted
+      - m_Target: {fileID: 612258990}
+        m_TargetAssemblyTypeName: FinishGame, Assembly-CSharp
+        m_MethodName: Finish
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1474,11 +1461,17 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Map
+          m_StringArgument: Menu
           m_BoolArgument: 0
         m_CallState: 2
   m_onHoverSound: 
   m_onClickSound: 
+  m_graphic: {fileID: 0}
+  m_normalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &612258986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,18 +1510,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612258982}
   m_CullTransparentMesh: 1
---- !u!114 &612258988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612258982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cf2991fe8691a147ad07d0271120e04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &612258989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,15 +1531,27 @@ MonoBehaviour:
   m_onClick:
     m_PersistentCalls:
       m_Calls: []
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
   m_onRelease:
     m_PersistentCalls:
       m_Calls: []
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &612258990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612258982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c30b3bca5975647ba4118fb6a76d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &665170917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,6 +3447,12 @@ MonoBehaviour:
         m_CallState: 2
   m_onHoverSound: 
   m_onClickSound: 
+  m_graphic: {fileID: 0}
+  m_normalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1552960884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4193,45 +4192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyDatabase: {fileID: 11400000, guid: c05bdbef92868a448a605bc9c13a871c, type: 2}
-  m_manualOverride: 0
-  m_overrideTop:
-    m_id: 
-    m_name: 
-    m_percent: 1
-    m_anim:
-      m_idle: {fileID: 0}
-      m_attack: {fileID: 0}
-      m_damage: {fileID: 0}
-      m_death: {fileID: 0}
-    m_maxHealth: 0
-    m_attackPointsShield: 0
-    m_attackPoints: 0
-    m_shield: 0
-    m_energyRequired: 1
-    m_combatBehavior:
-      m_triggers: []
-    m_aimingBehavior:
-      m_targetStrategy: 0
-      m_value: 0.5
-  m_overrideBottom:
-    m_id: 
-    m_name: 
-    m_percent: 1
-    m_anim:
-      m_idle: {fileID: 0}
-      m_attack: {fileID: 0}
-      m_damage: {fileID: 0}
-      m_death: {fileID: 0}
-    m_maxHealth: 0
-    m_attackPointsShield: 0
-    m_attackPoints: 0
-    m_shield: 0
-    m_energyRequired: 1
-    m_combatBehavior:
-      m_triggers: []
-    m_aimingBehavior:
-      m_targetStrategy: 0
-      m_value: 0.5
+  m_manualOverride: 1
+  m_overrideTop: fd06a3dd-ea46-4c54-83c8-71638ad9c387
+  m_overrideBottom: c46d1b66-fd89-4353-81d2-6a40dec3e956
 --- !u!1 &1832847047
 GameObject:
   m_ObjectHideFlags: 0
@@ -4587,9 +4550,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &2134476007
 GameObject:
   m_ObjectHideFlags: 0

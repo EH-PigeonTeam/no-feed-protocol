@@ -58,3 +58,8 @@ MonoBehaviour:
       sceneAsset: {fileID: 102900000, guid: c3b97c097275b61438dbc6d005240ce8, type: 3}
       sceneName: Rest
     m_loadMode: 1
+  - m_sceneName: Boss
+    m_scene:
+      sceneAsset: {fileID: 102900000, guid: c4d8a0acc4956f24695bf82d207c3348, type: 3}
+      sceneName: Battle Boss
+    m_loadMode: 1

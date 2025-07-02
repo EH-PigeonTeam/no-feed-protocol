@@ -71,10 +71,10 @@ MonoBehaviour:
     m_name: AreaAlien
     m_percent: 1
     m_anim:
-      m_idle: {fileID: 0}
-      m_attack: {fileID: 0}
-      m_damage: {fileID: 0}
-      m_death: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 0abef7f16f0de454db753749c388fdc6, type: 2}
+      m_attack: {fileID: 7400000, guid: 273c6a8ab653bd44faec8775fca431bc, type: 2}
+      m_damage: {fileID: 7400000, guid: 97677d0b2cff594418feaf9e637e3269, type: 2}
+      m_death: {fileID: 7400000, guid: 2b979670008d5684ca1e8c609e8a11da, type: 2}
     m_maxHealth: 25
     m_attackPointsShield: 20
     m_attackPoints: 20
@@ -98,10 +98,10 @@ MonoBehaviour:
     m_name: ShieldAlien
     m_percent: 1
     m_anim:
-      m_idle: {fileID: 0}
-      m_attack: {fileID: 0}
-      m_damage: {fileID: 0}
-      m_death: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 6435642945a849945a365b66b14d91f4, type: 2}
+      m_attack: {fileID: 7400000, guid: 212e613e54a2e8f448f1c2006dcd81e7, type: 2}
+      m_damage: {fileID: 7400000, guid: ee02b5c59fb747e42aa4b24ae510f7c9, type: 2}
+      m_death: {fileID: 7400000, guid: 881891d1a65341f458436b22fdda099a, type: 2}
     m_maxHealth: 30
     m_attackPointsShield: 35
     m_attackPoints: 20
@@ -129,10 +129,10 @@ MonoBehaviour:
     m_name: AlienMedic
     m_percent: 1
     m_anim:
-      m_idle: {fileID: 0}
-      m_attack: {fileID: 0}
-      m_damage: {fileID: 0}
-      m_death: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 161537a09cace224599fe06262bc1f8b, type: 2}
+      m_attack: {fileID: 7400000, guid: 64453617889e3334da8670a2b078b776, type: 2}
+      m_damage: {fileID: 7400000, guid: 4403bc7ddfc148244a6f4c4a398ed378, type: 2}
+      m_death: {fileID: 7400000, guid: 29eddfd3755456d4f888a07c4cd9acfe, type: 2}
     m_maxHealth: 20
     m_attackPointsShield: 20
     m_attackPoints: 10
@@ -160,10 +160,10 @@ MonoBehaviour:
     m_name: ThornAlien
     m_percent: 1
     m_anim:
-      m_idle: {fileID: 0}
-      m_attack: {fileID: 0}
-      m_damage: {fileID: 0}
-      m_death: {fileID: 0}
+      m_idle: {fileID: 7400000, guid: 8bb947ec0e534b04bba6cf0748a6b147, type: 2}
+      m_attack: {fileID: 7400000, guid: c80a59b7b4ba7234aa98aace0cac8f6c, type: 2}
+      m_damage: {fileID: 7400000, guid: 47b175154d951f84591ce3d07c68d7e2, type: 2}
+      m_death: {fileID: 7400000, guid: e4d7a71102a79ee40a351fa4adea6170, type: 2}
     m_maxHealth: 45
     m_attackPointsShield: 25
     m_attackPoints: 25
@@ -189,6 +189,42 @@ MonoBehaviour:
             m_overrideValue: 1
             m_value: 10
             m_modifier: 1
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: fd06a3dd-ea46-4c54-83c8-71638ad9c387
+    m_name: Boss 1
+    m_percent: 0
+    m_anim:
+      m_idle: {fileID: 7400000, guid: 5cb99aa8bd7579e4ebe4c69460c8e774, type: 2}
+      m_attack: {fileID: 7400000, guid: ff9030ed9c92b194595636afdc4c1165, type: 2}
+      m_damage: {fileID: 7400000, guid: bc0b415573413ff4b96663a5aef423d4, type: 2}
+      m_death: {fileID: 7400000, guid: cb214602485ce2745a82e5b1290ad3e0, type: 2}
+    m_maxHealth: 0
+    m_attackPointsShield: 0
+    m_attackPoints: 0
+    m_shield: 0
+    m_energyRequired: 1
+    m_combatBehavior:
+      m_triggers: []
+    m_aimingBehavior:
+      m_targetStrategy: 0
+      m_value: 0.5
+  - m_id: c46d1b66-fd89-4353-81d2-6a40dec3e956
+    m_name: Boss 2
+    m_percent: 0
+    m_anim:
+      m_idle: {fileID: 7400000, guid: 5cb99aa8bd7579e4ebe4c69460c8e774, type: 2}
+      m_attack: {fileID: 7400000, guid: ff9030ed9c92b194595636afdc4c1165, type: 2}
+      m_damage: {fileID: 7400000, guid: bc0b415573413ff4b96663a5aef423d4, type: 2}
+      m_death: {fileID: 7400000, guid: cb214602485ce2745a82e5b1290ad3e0, type: 2}
+    m_maxHealth: 0
+    m_attackPointsShield: 0
+    m_attackPoints: 0
+    m_shield: 0
+    m_energyRequired: 1
+    m_combatBehavior:
+      m_triggers: []
     m_aimingBehavior:
       m_targetStrategy: 0
       m_value: 0.5

@@ -3,6 +3,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using NoFeedProtocol.Authoring.Characters;
 using NoFeedProtocol.Runtime.Entities;
+using Code.Systems.Locator;
 
 namespace NoFeedProtocol.Runtime.Logic.Battle
 {
@@ -22,12 +23,12 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
         [ShowIf("m_manualOverride")]
         [BoxGroup("Override Selection")]
         [SerializeField]
-        private CharacterEnemyData m_overrideTop;
+        private string m_overrideTop;
 
         [ShowIf("m_manualOverride")]
         [BoxGroup("Override Selection")]
         [SerializeField]
-        private CharacterEnemyData m_overrideBottom;
+        private string m_overrideBottom;
 
         #endregion
 
@@ -38,13 +39,15 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
         /// </summary>
         public PlayerRuntimeData Generate()
         {
-            var top = m_manualOverride ? m_overrideTop : GetRandomCharacter();
-            var bottom = m_manualOverride ? m_overrideBottom : GetRandomCharacter(exclude: top);
+            CharactersEnemyData m_enemyDatabase = ServiceLocator.Get<CharactersEnemyData>();
+            var top = m_manualOverride ? m_enemyDatabase.GetById(m_overrideTop) : GetRandomCharacter();
+            var bottom = m_manualOverride ? m_enemyDatabase.GetById(m_overrideBottom) : GetRandomCharacter(exclude: top);
 
             return new PlayerRuntimeData
             {
                 CharacterTop = CreateRuntime(top),
                 CharacterBottom = CreateRuntime(bottom),
+
                 CurrentShield = top.Shield + bottom.Shield,
                 MaxShield = top.Shield + bottom.Shield,
                 Items = new() // No items for enemy by default
