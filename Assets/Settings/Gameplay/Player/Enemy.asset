@@ -200,13 +200,22 @@ MonoBehaviour:
       m_attack: {fileID: 7400000, guid: ff9030ed9c92b194595636afdc4c1165, type: 2}
       m_damage: {fileID: 7400000, guid: bc0b415573413ff4b96663a5aef423d4, type: 2}
       m_death: {fileID: 7400000, guid: cb214602485ce2745a82e5b1290ad3e0, type: 2}
-    m_maxHealth: 0
-    m_attackPointsShield: 0
-    m_attackPoints: 0
-    m_shield: 0
+    m_maxHealth: 100
+    m_attackPointsShield: 10
+    m_attackPoints: 10
+    m_shield: 100
     m_energyRequired: 1
     m_combatBehavior:
-      m_triggers: []
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
     m_aimingBehavior:
       m_targetStrategy: 0
       m_value: 0.5
@@ -218,13 +227,22 @@ MonoBehaviour:
       m_attack: {fileID: 7400000, guid: ff9030ed9c92b194595636afdc4c1165, type: 2}
       m_damage: {fileID: 7400000, guid: bc0b415573413ff4b96663a5aef423d4, type: 2}
       m_death: {fileID: 7400000, guid: cb214602485ce2745a82e5b1290ad3e0, type: 2}
-    m_maxHealth: 0
-    m_attackPointsShield: 0
-    m_attackPoints: 0
-    m_shield: 0
-    m_energyRequired: 1
+    m_maxHealth: 100
+    m_attackPointsShield: 10
+    m_attackPoints: 10
+    m_shield: 100
+    m_energyRequired: 4
     m_combatBehavior:
-      m_triggers: []
+      m_triggers:
+      - m_trigger: 0
+        m_actions:
+        - m_conditions: 0
+          m_value: 0
+          m_sequence:
+          - m_target: 2
+            m_overrideValue: 0
+            m_value: 0
+            m_modifier: 1
     m_aimingBehavior:
       m_targetStrategy: 0
       m_value: 0.5

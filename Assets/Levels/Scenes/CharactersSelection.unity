@@ -1043,8 +1043,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ad8363185ea5acd4ab25dcd16040f0fb, type: 2}
-  m_sharedMaterial: {fileID: -5784148903743002268, guid: ad8363185ea5acd4ab25dcd16040f0fb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 37e4067864cb97b479b398b42c3adc66, type: 2}
+  m_sharedMaterial: {fileID: -3558636858076378764, guid: 37e4067864cb97b479b398b42c3adc66, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2401,8 +2401,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 37e4067864cb97b479b398b42c3adc66, type: 2}
+  m_sharedMaterial: {fileID: -3558636858076378764, guid: 37e4067864cb97b479b398b42c3adc66, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4182,8 +4182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad8363185ea5acd4ab25dcd16040f0fb, type: 2}
+  m_sharedMaterial: {fileID: -5784148903743002268, guid: ad8363185ea5acd4ab25dcd16040f0fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5764,9 +5764,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 214006787}
     m_Modifications:
+    - target: {fileID: 2152114690702680459, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152114690702680459, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152114690702680459, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152114690702680459, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152114690702680459, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3905268066147980620, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
       propertyPath: m_Name
       value: Stat Slider | Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435136327846834291, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435136327846834291, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435136327846834291, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435136327846834291, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435136327846834291, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7161991556914439723, guid: 929f72f8da7849f4d91b9c64e7600b26, type: 3}
       propertyPath: m_Pivot.x
