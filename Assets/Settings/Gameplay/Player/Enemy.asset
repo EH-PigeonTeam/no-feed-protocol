@@ -71,10 +71,10 @@ MonoBehaviour:
     m_name: AreaAlien
     m_percent: 1
     m_anim:
-      m_idle: {fileID: 7400000, guid: 0abef7f16f0de454db753749c388fdc6, type: 2}
-      m_attack: {fileID: 7400000, guid: 273c6a8ab653bd44faec8775fca431bc, type: 2}
-      m_damage: {fileID: 7400000, guid: 97677d0b2cff594418feaf9e637e3269, type: 2}
-      m_death: {fileID: 7400000, guid: 2b979670008d5684ca1e8c609e8a11da, type: 2}
+      m_idle: {fileID: 7400000, guid: 01fc8a9c2213d6f47a17a8bbb4a54fb5, type: 2}
+      m_attack: {fileID: 7400000, guid: 95a174fba1bc9984dba92a3ee9a3c264, type: 2}
+      m_damage: {fileID: 7400000, guid: 2df6de4bb268a9f428bce4b01ee01ff3, type: 2}
+      m_death: {fileID: 7400000, guid: d7534fc3ec4c3e7459b57ebddab8bf9e, type: 2}
     m_maxHealth: 25
     m_attackPointsShield: 20
     m_attackPoints: 20
