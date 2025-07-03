@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using NoFeedProtocol.Authoring.Characters;
 using NoFeedProtocol.Runtime.Entities;
 using Code.Systems.Locator;
+using NoFeedProtocol.Runtime.Services.Characters;
 
 namespace NoFeedProtocol.Runtime.Logic.Battle
 {
@@ -39,7 +40,7 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
         /// </summary>
         public PlayerRuntimeData Generate()
         {
-            CharactersEnemyData m_enemyDatabase = ServiceLocator.Get<CharactersEnemyData>();
+            EnemyCharacterResolver m_enemyDatabase = ServiceLocator.Get<EnemyCharacterResolver>();
             var top = m_manualOverride ? m_enemyDatabase.GetById(m_overrideTop) : GetRandomCharacter();
             var bottom = m_manualOverride ? m_enemyDatabase.GetById(m_overrideBottom) : GetRandomCharacter(exclude: top);
 

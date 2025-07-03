@@ -14,10 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_audioClips:
   - m_audioClipName: MainMenu
-    m_audioClip: {fileID: 8300000, guid: 098f3cce1ac3453428e30ee68ecb77d6, type: 3}
+    m_audioClip: {fileID: 8300000, guid: acefa1a046e18be4a979ec3e351197d3, type: 3}
     m_audioGroup: 1
     m_volume: 1
   - m_audioClipName: ButtonClick
     m_audioClip: {fileID: 8300000, guid: 491fb1b46907be142a37e61e3cd0da16, type: 3}
     m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Boss
+    m_audioClip: {fileID: 8300000, guid: 0a61a1dedaf4d564f94cfb9cb48ff3c1, type: 3}
+    m_audioGroup: 1
+    m_volume: 1
+  - m_audioClipName: Fight
+    m_audioClip: {fileID: 8300000, guid: d6f0c2d725f70684ea07cf7dd084741f, type: 3}
+    m_audioGroup: 1
+    m_volume: 1
+  - m_audioClipName: Map
+    m_audioClip: {fileID: 8300000, guid: 13f212be386216f4c97866cc741910e2, type: 3}
+    m_audioGroup: 1
     m_volume: 1
