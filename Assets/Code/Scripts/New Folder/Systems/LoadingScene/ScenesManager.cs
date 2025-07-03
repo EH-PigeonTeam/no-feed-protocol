@@ -68,6 +68,7 @@ namespace Code.Systems.LoadingScene
             ChangeScene(new SceneData(sceneName, mode));
         }
 
+        [Button]
         public void LoadScenes(string[] sceneNames)
         {
             List<SceneData> sceneDatas = new();

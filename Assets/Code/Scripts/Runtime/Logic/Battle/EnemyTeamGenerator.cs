@@ -41,8 +41,8 @@ namespace NoFeedProtocol.Runtime.Logic.Battle
         public PlayerRuntimeData Generate()
         {
             EnemyCharacterResolver m_enemyDatabase = ServiceLocator.Get<EnemyCharacterResolver>();
-            var top = m_manualOverride ? m_enemyDatabase.GetById(m_overrideTop) : GetRandomCharacter();
-            var bottom = m_manualOverride ? m_enemyDatabase.GetById(m_overrideBottom) : GetRandomCharacter(exclude: top);
+            CharacterEnemyData top = m_manualOverride ? m_enemyDatabase.GetById(m_overrideTop) : GetRandomCharacter();
+            CharacterEnemyData bottom = m_manualOverride ? m_enemyDatabase.GetById(m_overrideBottom) : GetRandomCharacter(exclude: top);
 
             return new PlayerRuntimeData
             {

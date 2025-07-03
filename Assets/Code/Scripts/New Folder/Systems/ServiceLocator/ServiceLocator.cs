@@ -64,6 +64,7 @@ namespace Code.Systems.Locator
             if (m_services.ContainsKey(type))
             {
                 Debug.LogWarning($"Service of type {type.Name} is already registered. Overwriting.");
+                return;
             }
 
             m_services[type] = service;
