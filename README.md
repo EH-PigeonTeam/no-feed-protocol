@@ -72,31 +72,37 @@ These steps should allow you to copy a Unity project from GitHub, set it up in U
 [Download](https://github.com/EH-PigeonTeam/no-feed-protocol/releases/tag/V0.1.0)
 
 ## Credits
+
 ### Project Leadership
-Technical Director: Andrea Frigerio
-Creative Director: Alessandro Torbinio
-Lead Game Designer: Riccardo Ghilardotti
-Art Director: Augustos Pernas
+- **Technical Director**: Andrea Frigerio  
+- **Creative Director**: Alessandro Torbinio  
+- **Lead Game Designer**: Riccardo Ghilardotti  
+- **Art Director**: Augustos Pernas  
 
 ### Game Design
-Game Designer: Silvia Monfredoni
-Associate Game Designer: Simone Pacucci
+- **Game Designer**: Silvia Monfredoni  
+- **Associate Game Designer**: Simone Pacucci  
 
 ### Concept Art
-Lead Concept Artist: Giulia Tartaglia
-UI Concept Artist: Sara Peralti
-Environment Concept Artist: Salvatore Daniele
-Creature Concept Artists: Simone Vireca, Shanes Jae Tabisaura
-Associate Concept Artist: Luca Domanico
+- **Lead Concept Artist**: Giulia Tartaglia  
+- **UI Concept Artist**: Sara Peralti  
+- **Environment Concept Artist**: Salvatore Daniele  
+- **Creature Concept Artists**:  
+  - Simone Vireca  
+  - Shanes Jae Tabisaura  
+- **Associate Concept Artist**: Luca Domanico  
 
 ### 3D Art
-Lead 3D Artist: Jacopo Ciniltani
-3D Artist: Luca Borsi
+- **Lead 3D Artist**: Jacopo Ciniltani  
+- **3D Artist**: Luca Borsi  
 
 ### Audio
-Audio Designer: Silvia Monfredoni
+- **Audio Designer**: Silvia Monfredoni  
 
-Full end credits are available in-game.
+---
+
+**Developed by the Insert Coin Again team.**  
+Full scrolling credits available in-game.
 
 ## License
 This project is intended for educational and portfolio purposes only.
