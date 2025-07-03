@@ -168,15 +168,15 @@ MonoBehaviour:
   m_price: {fileID: 1326881756}
   m_cash: {fileID: 1236806607}
   m_description: {fileID: 353815063}
+  m_descriptionFadeOut: 0.33
+  m_descriptionFadeIn: 1
+  m_descriptionEase: 1
   m_textButtonBuy: {fileID: 1238238434}
   m_textButtonBuyDefault: Skip
   m_textButtonBuySelected: Buy
   m_itemPrefab: {fileID: 2234185445130501991, guid: 7c2bba9cb7a8bd04196a9a4429c1c676, type: 3}
   m_itemsParent: {fileID: 512570570}
   m_numberOfItems: 10
-  ItemsSelected: []
-  Cash: 0
-  Price: 0
 --- !u!114 &31308438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,15 +260,15 @@ MonoBehaviour:
   m_onClick:
     m_PersistentCalls:
       m_Calls: []
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
   m_onRelease:
     m_PersistentCalls:
       m_Calls: []
-    editorColor: {r: 0, g: 1, b: 0, a: 1}
-    editorShowConnections: 1
-    editorDisplayMode: 0
+    EditorOverrideGlobalSettings: 1
+    EditorDisplayMode: 0
+    EditorColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &142617103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +376,12 @@ MonoBehaviour:
         m_CallState: 2
   m_onHoverSound: 
   m_onClickSound: 
+  m_graphic: {fileID: 0}
+  m_normalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &142617106
 MonoBehaviour:
   m_ObjectHideFlags: 0
