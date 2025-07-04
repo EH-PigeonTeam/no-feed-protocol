@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NoFeedProtocol.Authoring.Items;
 using NoFeedProtocol.Persistence.Player;
-using Unity.VisualScripting;
+using UnityEngine;
 
 namespace NoFeedProtocol.Runtime.Entities
 {
@@ -21,12 +21,12 @@ namespace NoFeedProtocol.Runtime.Entities
         {
             return new PlayerSaveData
             {
-                CharacterTop = CharacterTop.ToSaveData(),
-                CharacterBottom = CharacterBottom.ToSaveData(),
-                MaxShield = MaxShield,
-                Shield = CurrentShield,
-                Coins = Coins,
-                OwnedItemIDs = new List<string>(Items)
+                CharacterTop = this.CharacterTop.ToSaveData(),
+                CharacterBottom = this.CharacterBottom.ToSaveData(),
+                MaxShield = this.MaxShield,
+                Shield = this.CurrentShield,
+                Coins = this.Coins,
+                OwnedItemIDs = new List<string>(this.Items)
             };
         }
 
@@ -51,14 +51,14 @@ namespace NoFeedProtocol.Runtime.Entities
         public void AddItems(IEnumerable<Item> items) => Items.AddRange(items.Select(i => i.Id));
         public void AddCoins(int coins) => Coins += coins;
 
-        public PlayerRuntimeData Clone() => new PlayerRuntimeData 
+        public PlayerRuntimeData Clone() => new PlayerRuntimeData
         {
-            CharacterTop = CharacterTop.Clone(),
-            CharacterBottom = CharacterBottom.Clone(),
-            MaxShield = MaxShield,
-            CurrentShield = CurrentShield,
-            Coins = Coins,
-            Items = new List<string>(Items)
+            CharacterTop = this.CharacterTop.Clone(),
+            CharacterBottom = this.CharacterBottom.Clone(),
+            MaxShield = this.MaxShield,
+            CurrentShield = this.CurrentShield,
+            Coins = this.Coins,
+            Items = new List<string>(this.Items)
         };
     }
 }

@@ -144,6 +144,7 @@ namespace NoFeedProtocol.Runtime.Logic.Data
             {
                 CharacterTop = characterTop,
                 CharacterBottom = characterBottom,
+                MaxShield = save.Run.Player.MaxShield,
                 CurrentShield = save.Run.Player.Shield,
                 Coins = save.Run.Player.Coins,
                 Items = new List<string>(save.Run.Player.OwnedItemIDs ?? new())
