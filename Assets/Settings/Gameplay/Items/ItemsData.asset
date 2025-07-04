@@ -31,7 +31,7 @@ MonoBehaviour:
     m_description: Worn out bandaid that helps with wounds; +5 HP
     m_percent: 0.85
     m_rarity: 0
-    m_price: 15
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects:
@@ -43,7 +43,7 @@ MonoBehaviour:
     m_description: Battery that helps recharging armors; +4 shields
     m_percent: 0.85
     m_rarity: 0
-    m_price: 10
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects:
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_description: A gambler's loyal companion; adds 1 wheel into the fighting stage
     m_percent: 0.85
     m_rarity: 0
-    m_price: 100
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects:
@@ -67,7 +67,7 @@ MonoBehaviour:
     m_description: Helps piercing into the aliens bodies; +3 HP damage
     m_percent: 0.85
     m_rarity: 0
-    m_price: 50
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects:
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_description: Hard drive with an updated software fo the heroes suits; +10 Shield
     m_percent: 0.65
     m_rarity: 1
-    m_price: 25
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -104,7 +104,7 @@ MonoBehaviour:
     m_description: Useful bandaids for treating bad wounds; +10 HP
     m_percent: 0.65
     m_rarity: 1
-    m_price: 0
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -116,7 +116,7 @@ MonoBehaviour:
     m_description: Visor that helps hittin enemies weak spots; +5 Hp damage
     m_percent: 0.65
     m_rarity: 1
-    m_price: 40
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -128,7 +128,7 @@ MonoBehaviour:
     m_description: Bullets that pierce through enemies scales; +5 Shield damage
     m_percent: 0.65
     m_rarity: 1
-    m_price: 150
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -141,7 +141,7 @@ MonoBehaviour:
       stage
     m_percent: 0.65
     m_rarity: 1
-    m_price: 10
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -156,7 +156,7 @@ MonoBehaviour:
       for the suits, +15 Shield'
     m_percent: 0.35
     m_rarity: 2
-    m_price: 0
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_description: Pills that helps against illnesses; +15 HP
     m_percent: 0.35
     m_rarity: 2
-    m_price: 0
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -181,7 +181,7 @@ MonoBehaviour:
       into the fight stage
     m_percent: 0.35
     m_rarity: 2
-    m_price: 985515
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -206,7 +206,7 @@ MonoBehaviour:
       HP damage
     m_percent: 0.35
     m_rarity: 2
-    m_price: 300
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -219,7 +219,7 @@ MonoBehaviour:
       to attack
     m_percent: 0.15
     m_rarity: 3
-    m_price: 300
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
@@ -232,7 +232,7 @@ MonoBehaviour:
       shield
     m_percent: 0.65
     m_rarity: 1
-    m_price: 0
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -245,7 +245,7 @@ MonoBehaviour:
       energy required to attack
     m_percent: 0.15
     m_rarity: 3
-    m_price: 300
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
@@ -270,7 +270,7 @@ MonoBehaviour:
       the heroes armor, +3 Shield
     m_percent: 0.85
     m_rarity: 0
-    m_price: 0
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects:
@@ -282,7 +282,7 @@ MonoBehaviour:
     m_description: 
     m_percent: 0
     m_rarity: 0
-    m_price: 0
+    m_price: 20
     ability:
       m_trigger: 0
       m_effects: []
@@ -293,7 +293,7 @@ MonoBehaviour:
       for attacks; +5 Hp damage
     m_percent: 0.65
     m_rarity: 1
-    m_price: 0
+    m_price: 30
     ability:
       m_trigger: 0
       m_effects:
@@ -306,7 +306,7 @@ MonoBehaviour:
       +7 Shield Damage
     m_percent: 0.35
     m_rarity: 2
-    m_price: 0
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -319,7 +319,7 @@ MonoBehaviour:
       it's presence gives all the soldiers +20 Hp
     m_percent: 0.15
     m_rarity: 3
-    m_price: 0
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
@@ -331,7 +331,7 @@ MonoBehaviour:
     m_description: The favourite coin of a Gambler; adds 1 wheel into the fight stage
     m_percent: 0.15
     m_rarity: 3
-    m_price: 0
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
@@ -344,7 +344,7 @@ MonoBehaviour:
       as a energy storage for the suites; +15 Shield points
     m_percent: 0.15
     m_rarity: 3
-    m_price: 0
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
@@ -357,7 +357,7 @@ MonoBehaviour:
       sillyness makes you be more motivated; +15 Hp
     m_percent: 0.15
     m_rarity: 3
-    m_price: 0
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
@@ -370,7 +370,7 @@ MonoBehaviour:
       steady on the battelfield; +10 Hp
     m_percent: 0.85
     m_rarity: 4
-    m_price: 0
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -383,7 +383,7 @@ MonoBehaviour:
       brink of Death, helps protecing the characters; +10 Shield points
     m_percent: 1
     m_rarity: 4
-    m_price: 0
+    m_price: 50
     ability:
       m_trigger: 0
       m_effects:
@@ -396,7 +396,7 @@ MonoBehaviour:
       your will to fight; +15 Hp Damage +15 Shield Damage
     m_percent: 0.15
     m_rarity: 3
-    m_price: 0
+    m_price: 70
     ability:
       m_trigger: 0
       m_effects:
