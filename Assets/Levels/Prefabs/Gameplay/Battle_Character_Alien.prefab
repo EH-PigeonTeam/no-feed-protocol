@@ -269,8 +269,28 @@ PrefabInstance:
       value: -2.9559999
       objectReference: {fileID: 0}
     - target: {fileID: 4480013846654034545, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+      propertyPath: m_margin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480013846654034545, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+      propertyPath: m_margin.z
+      value: 0.1240451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480013846654034545, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 37e4067864cb97b479b398b42c3adc66, type: 2}
+    - target: {fileID: 4480013846654034545, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3558636858076378764, guid: 37e4067864cb97b479b398b42c3adc66, type: 2}
+    - target: {fileID: 4480013846654034545, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480013846654034545, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5088136963946481306, guid: ad69afc34265d1b4da1ad2f3ed6d7721, type: 3}
       propertyPath: m_LocalScale.x
