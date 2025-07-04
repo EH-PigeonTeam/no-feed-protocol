@@ -5996,7 +5996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045ff5ab1d35d3646826214177754290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_coinsRange: {x: 10, y: 100}
+  m_coinsRange: {x: 20, y: 100}
   m_itemDropCount: {x: 0, y: 1}
   m_itemsData: {fileID: 11400000, guid: 4fa9d393c646ca64798dfc74aadd2d7c, type: 2}
   m_commonWeightRange: {x: 1, y: 0.5}
