@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -6197,88 +6197,88 @@ MonoBehaviour:
     <size=120%><i>by
     Insert Coin Again</i></size>
 
-    
+
 
     <line-height=300%>
 
-    
+
 
     <size=150%><b>TECHNICAL
     DIRECTOR</b></size>
 
     <size=120%>Andrea Frigerio</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>LEAD
     GAME DESIGNER</b></size>
 
     <size=120%>Riccardo Ghilardotti</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>GAMEPLAY
     DIRECTOR</b></size>
 
     <size=120%>Alessandro Torbinio</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>ART
     DIRECTOR</b></size>
 
     <size=120%>Augustos Pernas</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>LEAD
     CONCEPT ARTIST</b></size>
 
     <size=120%>Giulia Tartaglia</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>UI
     CONCEPT ARTIST</b></size>
 
     <size=120%>Sara Peralti</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>ENVIRONMENT
     CONCEPT ARTIST</b></size>
 
     <size=120%>Salvatore Daniele</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>CREATURE
     CONCEPT ARTISTS</b></size>
@@ -6288,55 +6288,55 @@ MonoBehaviour:
     <size=120%>Shanes
     Jae Tabisaura</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>ASSOCIATE
     CONCEPT ARTIST</b></size>
 
     <size=120%>Luca Domanico</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>LEAD
     3D ARTIST</b></size>
 
     <size=120%>Jacopo Ciniltani</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>3D
     ARTIST</b></size>
 
     <size=120%>Luca Borsi</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>AUDIO
     DESIGNER</b></size>
 
     <size=120%>Silvia Monfredoni</size>
 
-    
+
 
     <line-height=150%>
 
-    
+
 
     <size=150%><b>ASSOCIATE
     GAME DESIGNER</b></size>
@@ -8049,6 +8049,14 @@ PrefabInstance:
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_Interactable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
+      propertyPath: m_onClickSound
+      value: Click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
+      propertyPath: m_onHoverSound
+      value: Hover
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_onClickColor.a

@@ -168,8 +168,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_onHoverSound: 
-  m_onClickSound: 
+  m_onHoverSound: Hover
+  m_onClickSound: Click
+  m_graphic: {fileID: 0}
+  m_normalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_targetVisual: {fileID: 614077299847226590}
   m_hoverVisual: {fileID: 7196749615106944085}
   m_activeVisual: {fileID: 289200394411930813}

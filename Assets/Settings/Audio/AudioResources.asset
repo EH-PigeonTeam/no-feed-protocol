@@ -17,10 +17,6 @@ MonoBehaviour:
     m_audioClip: {fileID: 8300000, guid: acefa1a046e18be4a979ec3e351197d3, type: 3}
     m_audioGroup: 1
     m_volume: 1
-  - m_audioClipName: ButtonClick
-    m_audioClip: {fileID: 8300000, guid: 491fb1b46907be142a37e61e3cd0da16, type: 3}
-    m_audioGroup: 2
-    m_volume: 1
   - m_audioClipName: Boss
     m_audioClip: {fileID: 8300000, guid: 0a61a1dedaf4d564f94cfb9cb48ff3c1, type: 3}
     m_audioGroup: 1
@@ -32,4 +28,56 @@ MonoBehaviour:
   - m_audioClipName: Map
     m_audioClip: {fileID: 8300000, guid: 13f212be386216f4c97866cc741910e2, type: 3}
     m_audioGroup: 1
+    m_volume: 1
+  - m_audioClipName: Click
+    m_audioClip: {fileID: 8300000, guid: 36d83ab0d2bf80a408647402f74a7e3e, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Hover
+    m_audioClip: {fileID: 8300000, guid: 6c6382b39c067eb46927a8be3f2363c2, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Lock
+    m_audioClip: {fileID: 8300000, guid: cfde61229a7353747bb69c034411999f, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Spin
+    m_audioClip: {fileID: 8300000, guid: 550703ba9acdc594083c20356f65f169, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Win
+    m_audioClip: {fileID: 8300000, guid: 8e6bf3e7287d60547917a93045b18355, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Lose
+    m_audioClip: {fileID: 8300000, guid: 3ac5da9e9e467594699fe62f8f86a051, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Assault
+    m_audioClip: {fileID: 8300000, guid: 2ecbed9662152d246bc1509883ec32b5, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Bomber
+    m_audioClip: {fileID: 8300000, guid: 10bd20e181045604d9464d348bc1c5d8, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Engineer
+    m_audioClip: {fileID: 8300000, guid: 2df4eab7c44fe394c9d9b2e8cddb050c, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Medic
+    m_audioClip: {fileID: 8300000, guid: 693e048ffed0c6c469bda58b247cbb84, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Boss
+    m_audioClip: {fileID: 8300000, guid: 7be6e1ce02c1e29468bf68dedc9435b4, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Alien
+    m_audioClip: {fileID: 8300000, guid: 632ab59f71be71a44a10ab8dd53d7f76, type: 3}
+    m_audioGroup: 2
+    m_volume: 1
+  - m_audioClipName: Alien_Death
+    m_audioClip: {fileID: 8300000, guid: 1f8dac5eaffca014db13de489577fab5, type: 3}
+    m_audioGroup: 2
     m_volume: 1

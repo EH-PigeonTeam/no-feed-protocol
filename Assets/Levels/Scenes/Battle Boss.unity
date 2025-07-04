@@ -4362,6 +4362,7 @@ GameObject:
   - component: {fileID: 681039506}
   - component: {fileID: 681039508}
   - component: {fileID: 681039507}
+  - component: {fileID: 681039509}
   m_Layer: 5
   m_Name: '- Lose screen'
   m_TagString: Untagged
@@ -4424,6 +4425,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &681039509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681039504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23384ea52b66d645a58c607381a4e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioName: Lose
+  m_playOnEnable: 1
 --- !u!1 &702797900
 GameObject:
   m_ObjectHideFlags: 0
@@ -4692,8 +4707,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
+      propertyPath: m_graphic
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_Transition
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
+      propertyPath: m_onClickSound
+      value: Spin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
+      propertyPath: m_onHoverSound
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6138676562782979855, guid: 56b267c314612544b9fef0426c369698, type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
@@ -10031,6 +10058,7 @@ GameObject:
   - component: {fileID: 2127706304}
   - component: {fileID: 2127706303}
   - component: {fileID: 2127706305}
+  - component: {fileID: 2127706306}
   m_Layer: 5
   m_Name: '- Win screen'
   m_TagString: Untagged
@@ -10161,6 +10189,20 @@ MonoBehaviour:
     EditorOverrideGlobalSettings: 1
     EditorDisplayMode: 0
     EditorColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &2127706306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127706298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23384ea52b66d645a58c607381a4e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioName: Win
+  m_playOnEnable: 1
 --- !u!1 &2134476007
 GameObject:
   m_ObjectHideFlags: 0

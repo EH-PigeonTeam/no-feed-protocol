@@ -277,8 +277,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_onHoverSound: 
-  m_onClickSound: 
+  m_onHoverSound: Hover
+  m_onClickSound: Click
   m_graphic: {fileID: 0}
   m_normalColor: {r: 1, g: 1, b: 1, a: 1}
   m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1044,8 +1044,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_onHoverSound: 
-  m_onClickSound: 
+  m_onHoverSound: Hover
+  m_onClickSound: Click
   m_graphic: {fileID: 0}
   m_normalColor: {r: 1, g: 1, b: 1, a: 1}
   m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1367,8 +1367,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_onHoverSound: 
-  m_onClickSound: 
+  m_onHoverSound: Hover
+  m_onClickSound: Click
   m_graphic: {fileID: 0}
   m_normalColor: {r: 1, g: 1, b: 1, a: 1}
   m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2425,8 +2425,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_onHoverSound: 
-  m_onClickSound: 
+  m_onHoverSound: Hover
+  m_onClickSound: Click
   m_graphic: {fileID: 0}
   m_normalColor: {r: 1, g: 1, b: 1, a: 1}
   m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
