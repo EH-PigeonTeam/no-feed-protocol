@@ -5246,7 +5246,7 @@ MonoBehaviour:
     m_dropdownScreenMode: {fileID: 1461136419}
     m_dropdownQuality: {fileID: 941279899}
     m_dropdownFrameRate: {fileID: 235764009}
-    m_sliderBrightness: {fileID: 0}
+    m_sliderBrightness: {fileID: 1423375373}
     m_volume: {fileID: 0}
   m_accessibilitySettings:
     m_dropdownColorBlindMode: {fileID: 1161716734}
@@ -5815,6 +5815,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1423375373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4647651666665121421, guid: a88c2c21c1d11b8449629010ddbaa62c, type: 3}
+  m_PrefabInstance: {fileID: 309914888}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1428191636
 GameObject:
   m_ObjectHideFlags: 0
@@ -7921,7 +7932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 42.645233, y: -61.15}
+  m_AnchoredPosition: {x: 42.645233, y: -61.149994}
   m_SizeDelta: {x: -270.19, y: 36.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1768868386
