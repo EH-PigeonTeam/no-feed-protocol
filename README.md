@@ -69,7 +69,7 @@ These steps should allow you to copy a Unity project from GitHub, set it up in U
 
 ### Release
 
-[Download](https://github.com/EH-PigeonTeam/no-feed-protocol/releases/tag/V0.1.0)
+[Download](https://github.com/EH-PigeonTeam/no-feed-protocol/releases/tag/V0.1.2)
 
 ## Credits
 
