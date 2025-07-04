@@ -15,7 +15,7 @@ MonoBehaviour:
   m_characters:
   - m_id: ebba0cbc-7800-484d-8f0f-2d5dbd627819
     m_name: BaseAlien
-    m_percent: 1
+    m_percent: 0
     m_anim:
       m_idle: {fileID: 7400000, guid: 42b6d18e5661597498ba0daeabe32b1e, type: 2}
       m_attack: {fileID: 7400000, guid: 3c0d25a9c486f094fbf6c78d28e6dc9e, type: 2}
@@ -42,7 +42,7 @@ MonoBehaviour:
       m_value: 0.5
   - m_id: 164672be-5332-4b3f-8854-9ab0d21bf7fb
     m_name: BaseAlien+
-    m_percent: 1
+    m_percent: 0
     m_anim:
       m_idle: {fileID: 7400000, guid: bdc0d8f058a598b46a11d2abaddca854, type: 2}
       m_attack: {fileID: 7400000, guid: c2176c7feff316945a4dc595eaf7a5cd, type: 2}
