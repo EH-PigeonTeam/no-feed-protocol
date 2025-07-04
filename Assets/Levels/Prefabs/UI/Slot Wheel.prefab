@@ -248,6 +248,12 @@ MonoBehaviour:
       m_Calls: []
   m_onHoverSound: 
   m_onClickSound: 
+  m_graphic: {fileID: 0}
+  m_normalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_display: {fileID: 4878719246630123132}
   m_wheelObject: {fileID: 4680162835435140628}
   m_wheelObjectActive: {fileID: 6064657979443980567}
@@ -322,7 +328,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6743090570990411289}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6179c00e8309b7345ba4b2cb54f5f130, type: 3}
   m_Name: 

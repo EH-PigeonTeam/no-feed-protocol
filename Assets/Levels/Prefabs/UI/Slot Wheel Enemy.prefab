@@ -52,7 +52,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4680162835435140628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6064657979443980567}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -164,7 +164,6 @@ GameObject:
   - component: {fileID: 697316736904783953}
   - component: {fileID: 4509288822809719997}
   - component: {fileID: 5480081186105747092}
-  - component: {fileID: -5137258148028208183}
   m_Layer: 5
   m_Name: Slot Wheel Enemy
   m_TagString: Untagged
@@ -248,6 +247,12 @@ MonoBehaviour:
       m_Calls: []
   m_onHoverSound: 
   m_onClickSound: 
+  m_graphic: {fileID: 0}
+  m_normalColor: {r: 1, g: 1, b: 1, a: 1}
+  m_highlightedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_display: {fileID: 4878719246630123132}
   m_wheelObject: {fileID: 4680162835435140628}
   m_wheelObjectActive: {fileID: 6064657979443980567}
@@ -265,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -315,18 +320,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 0.5
---- !u!114 &-5137258148028208183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6743090570990411289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6179c00e8309b7345ba4b2cb54f5f130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6879566773284335800
 GameObject:
   m_ObjectHideFlags: 0
